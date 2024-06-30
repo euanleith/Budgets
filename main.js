@@ -7,7 +7,8 @@ async function main() {
 
     // todo currently negatives are going down, overlapping items beneath them
     groupsStackedBar(budgets, groupings);
-    partyGroupingsStackedBar(budgets, partyGroupings);
+    statusSumStackedBar(budgets, partyGroupings);
+    statusStackedBar(budgets, partyGroupings, 'To remove');
     policiesStackedBar(budgets);
     policiesTable(budgets);
 }
@@ -59,39 +60,76 @@ function groupsStackedBar(budgets, groupings) {
 // yaxis: cost
 // traces: sum of each status for each party: [[{party1status1: sum}, {party1status2: sum}, ...], [{party2status1: sum}, ...], ...]
 //  or [[{party1status1: sum}, {party2status1: sum}, ...], [{party1status2: sum}, ...], ...] // todo this would require predefining statuses
-function partyGroupingsStackedBar(budgets, partyGroupings) {
+function statusSumStackedBar(budgets, partyGroupings) {
     let traces = []
     let statuses = []
-    let allStatuses = [] // todo or predefine statuses
+    let statusNames = [] // todo or predefine statuses
     for (let col = 1; col < partyGroupings[0].length; col++) {
         statuses[col-1] = {}
         for (let row = 1; row < partyGroupings.length; row++) {
             let statusName = JSON.parse(partyGroupings[row][col])['status']
             if (!(statusName in statuses[col-1])) {
                 statuses[col-1][statusName] = 0
-                if (!allStatuses.includes(statusName)) {
-                    allStatuses.push(statusName)
+                if (!statusNames.includes(statusName)) {
+                    statusNames.push(statusName)
                 }
             }
             statuses[col-1][statusName] += parseInt(budgets[row][col])
         }
     }
+
     let policies = fields(partyGroupings)
     let parties = titles(partyGroupings)
-    for (let i in allStatuses) {
-        if (allStatuses[i] == 'Removing') continue // todo figure out negatives
+    for (let i in statusNames) {
+        let statusTotalCosts = statuses.map(a => a[statusNames[i]])
+        if (statusNames[i] == 'Removing' || statusTotalCosts.every(a => a == 0)) continue; // todo figure out negatives
         let name = statuses[0][i]
         traces.push({
             x: parties,
-            y: statuses.map(a => a[allStatuses[i]]),
+            y: statusTotalCosts,
             type: 'bar',
-            name: allStatuses[i], // todo remove where none exist
+            name: statusNames[i], // todo remove where none exist
             textposition: 'bottom'
         });
     }
     plotStackedBar(traces, 'graph2', title='Split of cost by status', xaxis='Parties', yaxis='Cost (€)')
 }
 
+// todo with predefined statuses, could set default status=statusNames and allow for displaying of multiple custom statuses instead of just one
+function statusStackedBar(budgets, partyGroupings, status) {
+    let traces = []
+    let statuses = []
+    let statusNames = [] // todo or predefine statuses
+    for (let col = 1; col < partyGroupings[0].length; col++) {
+        statuses[col-1] = {}
+        for (let row = 1; row < partyGroupings.length; row++) {
+            let statusName = JSON.parse(partyGroupings[row][col])['status']
+            if (statusName == status) {
+                statuses[col-1][budgets[row][0]] = parseInt(budgets[row][col])
+            }
+        }
+    }
+
+    let policies = []
+    for (let i = 0; i < statuses.length; i++) {
+        for (let key in statuses[i]) {
+            if (!policies.includes(key)) policies.push(key)
+        }
+    }
+
+    let parties = titles(partyGroupings)
+    for (let i in policies) {
+        let name = statuses[0][i]
+        traces.push({
+            x: parties,
+            y: statuses.map(a => a[policies[i]]),
+            type: 'bar',
+            name: policies[i],
+            textposition: 'bottom'
+        });
+    }
+    plotStackedBar(traces, 'graph5', title="Split of cost by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
+}
 
 
 function policiesStackedBar(budgets) {
