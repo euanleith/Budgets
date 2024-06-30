@@ -2,15 +2,16 @@ main();
 
 async function main() {
     let budgets = await read('budgets.csv')
-    let groupings = await read('groupings.csv')
+    let groupings = await read('groupings.csv') // todo rename grouping_by_policy
     let partyGroupings = await read('grouping_by_party.csv') // todo name
 
     // todo currently negatives are going down, overlapping items beneath them
-    groupsStackedBar(budgets, groupings);
-    statusSumStackedBar(budgets, partyGroupings);
-    statusStackedBar(budgets, partyGroupings, 'To remove');
-    policiesStackedBar(budgets);
-    policiesTable(budgets);
+    groupsStackedBar(budgets, groupings, 'graph1');
+    statusSumStackedBar(budgets, partyGroupings, 'graph2');
+    //statusStackedBar(budgets, partyGroupings, 'To remove', 'graph3');
+    //statusStackedBar(budgets, partyGroupings, 'Removing', 'graph4');
+    policiesStackedBar(budgets, 'graph5');
+    policiesTable(budgets, 'graph6');
 }
 
 function plotStackedBar(traces, div, title='', xaxis='', yaxis='') {
@@ -41,7 +42,7 @@ function plotStackedBar(traces, div, title='', xaxis='', yaxis='') {
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
 }
 
-function groupsStackedBar(budgets, groupings) {
+function groupsStackedBar(budgets, groupings, div) {
     let grouped = sumGroups(budgets, groupings)
     let traces = []
     for (let group in Object.values(grouped)[0]) {
@@ -53,50 +54,47 @@ function groupsStackedBar(budgets, groupings) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, 'graph1', title='Split of cost by manual groupings', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title='Split of cost by manual groupings', xaxis='Parties', yaxis='Cost (€)')
 }
 
-// xaxis: parties
-// yaxis: cost
-// traces: sum of each status for each party: [[{party1status1: sum}, {party1status2: sum}, ...], [{party2status1: sum}, ...], ...]
-//  or [[{party1status1: sum}, {party2status1: sum}, ...], [{party1status2: sum}, ...], ...] // todo this would require predefining statuses
-function statusSumStackedBar(budgets, partyGroupings) {
+function statusSumStackedBar(budgets, partyGroupings, div) {
     let traces = []
-    let statuses = []
+    let statuses = {}
     let statusNames = [] // todo or predefine statuses
-    for (let col = 1; col < partyGroupings[0].length; col++) {
-        statuses[col-1] = {}
+    for (let col = 3; col < partyGroupings[0].length; col++) { // todo don't hardcode
         for (let row = 1; row < partyGroupings.length; row++) {
-            let statusName = JSON.parse(partyGroupings[row][col])['status']
-            if (!(statusName in statuses[col-1])) {
-                statuses[col-1][statusName] = 0
+            let party = partyGroupings[row][1]
+            let statusName = partyGroupings[row][col]
+            if (!(party in statuses)) {
+                statuses[party] = {}
+            }
+            if (!(statusName in statuses[party])) {
+                statuses[party][statusName] = 0
                 if (!statusNames.includes(statusName)) {
                     statusNames.push(statusName)
                 }
             }
-            statuses[col-1][statusName] += parseInt(budgets[row][col])
+            statuses[party][statusName] += parseInt(partyGroupings[row][2]) // todo don't hardcode
         }
     }
 
     let policies = fields(partyGroupings)
-    let parties = titles(partyGroupings)
     for (let i in statusNames) {
-        let statusTotalCosts = statuses.map(a => a[statusNames[i]])
-        if (statusNames[i] == 'Removing' || statusTotalCosts.every(a => a == 0)) continue; // todo figure out negatives
-        let name = statuses[0][i]
+        let statusTotalCosts = Object.values(statuses).map(a => a[statusNames[i]])
         traces.push({
-            x: parties,
+            x: Object.keys(statuses),
             y: statusTotalCosts,
             type: 'bar',
-            name: statusNames[i], // todo remove where none exist
+            name: statusNames[i],
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, 'graph2', title='Split of cost by status', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title='Split of cost by status', xaxis='Parties', yaxis='Cost (€)')
 }
 
 // todo with predefined statuses, could set default status=statusNames and allow for displaying of multiple custom statuses instead of just one
-function statusStackedBar(budgets, partyGroupings, status) {
+//  though would these be sums or split into policies?
+function statusStackedBar(budgets, partyGroupings, status, div) {
     let traces = []
     let statuses = []
     let statusNames = [] // todo or predefine statuses
@@ -128,11 +126,11 @@ function statusStackedBar(budgets, partyGroupings, status) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, 'graph5', title="Split of cost by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title="Split of cost by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
 }
 
 
-function policiesStackedBar(budgets) {
+function policiesStackedBar(budgets, div) {
     let traces = []
     let policies = fields(budgets)
     let parties = titles(budgets)
@@ -145,11 +143,11 @@ function policiesStackedBar(budgets) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, 'graph3', title='Split by policy', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title='Split by policy', xaxis='Parties', yaxis='Cost (€)')
 }
 
 // todo add commas and change to €000
-function policiesTable(budgets) {
+function policiesTable(budgets, div) {
     let vals = values(budgets)
     vals = vals[0].map((val, index) => vals.map(row => row[index]))
     var data = [{
@@ -172,6 +170,6 @@ function policiesTable(budgets) {
             x: 0.05
         },
     };
-    Plotly.newPlot('graph4', data, layout, {displayModeBar: false});
+    Plotly.newPlot(div, data, layout, {displayModeBar: false});
 }
 

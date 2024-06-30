@@ -43,6 +43,8 @@ function parse(str) {
     return arr;
 }
 
+// function toObj(arr) {} // todo add ?
+
 function titles(arr) {
     return arr[0].slice(1,arr.length);
 }
