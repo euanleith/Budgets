@@ -104,3 +104,22 @@ function sumGroups(arr, groups) { // todo add parameter 'group' (e.g. current/ca
     }
     return res
 }
+
+function getUniqueFromBreadthOrderedCol(data, col) {
+    let res = []
+    for (let i = 1; i < data.length; i++) {
+        if (data[i][col] != res[res.length-1]) {
+            res.push(data[i][col])
+        }
+    }
+    return res
+}
+
+function getUniqueFromDepthOrderedCol(data, col) {
+    let res = []
+    for (let i = 1; i < data.length; i++) {
+        if (data[i][col] == res[0]) break
+        res.push(data[i][col])
+    }
+    return res
+}
