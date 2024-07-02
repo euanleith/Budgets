@@ -99,8 +99,24 @@ function sumGroups(arr, groups) { // todo add parameter 'group' (e.g. current/ca
             if (!res[arr[0][i]][groups[iGroups][1]]) {
                 res[arr[0][i]][groups[iGroups][1]] = 0
             }
-            res[arr[0][i]][groups[iGroups][1]] += parseInt(arr[j][i]) // {title: {group: sum}}
+            if (parseInt(arr[j][i]) >= 0) { // todo figure out how to deal with negatives
+                res[arr[0][i]][groups[iGroups][1]] += parseInt(arr[j][i]) // {title: {group: sum}}
+            }
         }
+    }
+    return res
+}
+
+// todo name - this is for grouping_by_party structure
+function sumFromDepthOrderedCol(data, orderCol, sumCol) {
+    let res = []
+    let iGroup = 0;
+    for (let i = 1, iGroup = 0; i < data.length; i++, iGroup++) {
+        if (data[i][orderCol] == data[1][orderCol]) {
+            iGroup = 0
+        }
+        if (!res[iGroup]) res[iGroup] = 0
+        res[iGroup] += parseInt(data[i][sumCol])
     }
     return res
 }

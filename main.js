@@ -10,6 +10,7 @@ async function main() {
     statusSumStackedBar(partyGroupings, 'graph2');
     //statusStackedBar(budgets, partyGroupings, 'To remove', 'graph3');
     //statusStackedBar(budgets, partyGroupings, 'Removing', 'graph4');
+    currentCapitalStackedBar(partyGroupings, 'graph7');
     policiesStackedBar(partyGroupings, 'graph5');
     policiesTable(partyGroupings, 'graph6');
 }
@@ -54,28 +55,26 @@ function groupsStackedBar(budgets, groupings, div) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, div, title='Split of cost by manual groupings', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title='Split of expenditure by manual groupings', xaxis='Parties', yaxis='Cost (€)')
 }
 
 function statusSumStackedBar(partyGroupings, div) {
     let traces = []
     let statuses = {}
     let statusNames = [] // todo or predefine statuses
-    for (let col = 3; col < partyGroupings[0].length; col++) { // todo don't hardcode
-        for (let row = 1; row < partyGroupings.length; row++) {
-            let party = partyGroupings[row][1]
-            let statusName = partyGroupings[row][col]
-            if (!(party in statuses)) {
-                statuses[party] = {}
-            }
-            if (!(statusName in statuses[party])) {
-                statuses[party][statusName] = 0
-                if (!statusNames.includes(statusName)) {
-                    statusNames.push(statusName)
-                }
-            }
-            statuses[party][statusName] += parseInt(partyGroupings[row][2]) // todo don't hardcode
+    for (let row = 1; row < partyGroupings.length; row++) {
+        let party = partyGroupings[row][1]
+        let statusName = partyGroupings[row][3]
+        if (!(party in statuses)) {
+            statuses[party] = {}
         }
+        if (!(statusName in statuses[party])) {
+            statuses[party][statusName] = 0
+            if (!statusNames.includes(statusName)) {
+                statusNames.push(statusName)
+            }
+        }
+        statuses[party][statusName] += parseInt(partyGroupings[row][2]) // todo don't hardcode
     }
 
     let policies = fields(partyGroupings)
@@ -90,7 +89,7 @@ function statusSumStackedBar(partyGroupings, div) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, div, title='Split of cost by status', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title='Split of expenditure by status', xaxis='Parties', yaxis='Cost (€)')
 }
 
 // todo with predefined statuses, could set default status=statusNames and allow for displaying of multiple custom statuses instead of just one
@@ -127,7 +126,34 @@ function statusStackedBar(partyGroupings, status, div) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, div, title="Split of cost by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title="Split of expenditure by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
+}
+
+// todo graphs for current/capital;
+//  stack of current and capital
+//      maybe also do this one excluding local authority housing?
+//          would i be able to allow the user to manually remove individual policies for this?
+//  stacked column of current and capital side by side with each individual policy still visible
+//  'to remove' policies by current/capital
+//      same for 'new', and any other if they seem interesting
+function currentCapitalStackedBar(budgets, div) {
+    let current = sumFromDepthOrderedCol(budgets, 1, 4) // todo don't hardcode
+    let capital = sumFromDepthOrderedCol(budgets, 1, 5) // todo don't hardcode
+
+    let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
+    let data = [current, capital]
+    let names = ['Current', 'Capital']
+    let traces = []
+    for (let i = 0; i < data.length; i++) {
+        traces.push({
+            x: parties,
+            y: data[i],
+            type: 'bar',
+            name: names[i],
+            textposition: 'bottom'
+        });
+    }
+    plotStackedBar(traces, div, title='Current vs. Capital expenditure', xaxis='Parties', yaxis='Cost (€)')
 }
 
 
@@ -156,7 +182,7 @@ function policiesStackedBar(budgets, div) {
             textposition: 'bottom'
         });
     }
-    plotStackedBar(traces, div, title='Split by policy', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(traces, div, title='Split of expenditure by policy', xaxis='Parties', yaxis='Cost (€)')
 }
 
 function policiesTable(budgets, div) {
