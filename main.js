@@ -5,6 +5,9 @@ async function main() {
     let groupings = await read('groupings.csv') // todo rename grouping_by_policy
     let partyGroupings = await read('grouping_by_party.csv') // todo name
 
+    let titles = (partyGroupings)
+
+
     // todo currently negatives are going down, overlapping items beneath them
     groupsStackedBar(budgets, groupings, 'graph1');
     statusSumStackedBar(partyGroupings, 'graph2');
@@ -16,6 +19,7 @@ async function main() {
 }
 
 function plotStackedBar(traces, div, title='', xaxis='', yaxis='') {
+    div = document.getElementById(div);
     var layout = {
         title: {
             text: title,
@@ -38,21 +42,60 @@ function plotStackedBar(traces, div, title='', xaxis='', yaxis='') {
                 size: 10
             },
             traceorder: 'normal'
-        }
+        },
+        hovermode: 'closest'
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
+    div.once('plotly_afterplot', () => addLegendHoverWidget(div));
+}
+
+function addLegendHoverWidget(div) {
+    var d3 = Plotly.d3;
+    var widget = d3.select(div);
+    var legendLayer = widget.selectAll('g.legend');
+    var items = legendLayer.selectAll('g.traces');
+
+    var tooltip = d3.selectAll('.legendTooltip');
+
+    legendLayer.selectAll('.tooltip').remove();
+
+    // todo want to be able to click on the popup to expand it / go to definition page
+    items.on('mouseover', async function (d) {
+        //await new Promise(resolve => setTimeout(resolve, 750)) // todo add delay
+        tooltip.transition()
+            .duration(200)
+            .style("opacity", 1);
+
+        tooltip.html(d[0].trace.name) // todo replace with defintions
+
+        // todo if goes off the page swap direction
+        var matrix = this.getScreenCTM()
+            .translate(this.getAttribute("cx"), this.getAttribute("cy"));
+        let xPos = d3.event.pageX - (7*parseInt(tooltip.style('width'))/8)
+        let yPos = window.pageYOffset + matrix.f - parseInt(tooltip.style('height')) - d[0].lineHeight
+        tooltip.style("left", xPos + "px")
+            .style("top", yPos + "px");
+    });
+
+    items.on('mouseout', () => {
+        tooltip.transition()
+            .duration(500)
+            .style("opacity", 0);
+    })
 }
 
 function groupsStackedBar(budgets, groupings, div) {
     let grouped = sumGroups(budgets, groupings)
     let traces = []
     for (let group in Object.values(grouped)[0]) {
+        let groupCosts = Object.values(grouped).map(a => a[group])
         traces.push({
             x: Object.keys(grouped),
-            y: Object.values(grouped).map(a => a[group]),
+            y: groupCosts,
             type: 'bar',
             name: group,
-            textposition: 'bottom'
+            textposition: 'bottom',
+            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(traces, div, title='Split of expenditure by manual groupings', xaxis='Parties', yaxis='Cost (€)')
@@ -86,7 +129,8 @@ function statusSumStackedBar(partyGroupings, div) {
             y: statusTotalCosts,
             type: 'bar',
             name: statusNames[i],
-            textposition: 'bottom'
+            textposition: 'bottom',
+            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(traces, div, title='Split of expenditure by status', xaxis='Parties', yaxis='Cost (€)')
@@ -123,7 +167,8 @@ function statusStackedBar(partyGroupings, status, div) {
             y: statuses.map(a => a[policies[i]]),
             type: 'bar',
             name: policies[i],
-            textposition: 'bottom'
+            textposition: 'bottom',
+            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(traces, div, title="Split of expenditure by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
@@ -150,7 +195,8 @@ function currentCapitalStackedBar(budgets, div) {
             y: data[i],
             type: 'bar',
             name: names[i],
-            textposition: 'bottom'
+            textposition: 'bottom',
+            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(traces, div, title='Current vs. Capital expenditure', xaxis='Parties', yaxis='Cost (€)')
@@ -179,7 +225,8 @@ function policiesStackedBar(budgets, div) {
             y: costs[i],
             type: 'bar',
             name: policies[i],
-            textposition: 'bottom'
+            textposition: 'bottom',
+            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(traces, div, title='Split of expenditure by policy', xaxis='Parties', yaxis='Cost (€)')

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="plotly-2.32.0.min.js" charset="utf-8"></script>
+    <!--script src="plotly-2.32.0.min.js" charset="utf-8"></script> todo this doesn't include d3?-->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     <script src="csv.js"></script>
-    <script src="main.js"></script>
+
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <h1>Comparing housing budgets of Irish political parties</h1>
 <p id="test"></p>
+<div id="g1"></div>
+<div id="g2"></div>
 <div id="graph1"></div>
 <div id="graph2"></div>
 <div id="graph3"></div>
@@ -18,5 +22,10 @@
 <b>----Raw data----</b>
 <div id="graph5"></div>
 <div id="graph6"></div>
+
+<div class="legendTooltip"></div>
+
+<script src="main.js"></script>
+
 </body>
 </html>
