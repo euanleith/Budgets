@@ -37,7 +37,7 @@ A.35 SECURE TENANCY AFFORDABLE RENTAL SCHEME (STAR),mydefinition,Policy
 A.36 OTHER SERVICES,mydefinition,Policy
 Admin,mydefinition,Grouping
 Local Authority Housing,mydefinition,Grouping
-Cost Rental,mydefinition,Grouping
+Cost rental,mydefinition,Grouping
 Government subsidised private existing housing (rents/mortgages),mydefinition,Grouping
 Government funded new build social housing,mydefinition,Grouping
 Communal facilities,mydefinition,Grouping
@@ -52,10 +52,11 @@ Government subsidised new build private housing,mydefinition,Grouping
 PPP new build,mydefinition,Grouping
 Ukraine,mydefinition,Grouping
 Other,mydefinition,Grouping
+Infrastructure,mydefinition,Grouping
 Existing,Policies that have been proposed by incumbent party(s),Status
 To reduce,Policies that have been planned for expenditure reduction in the future,Status
 To remove,Policies that have been planned for removal in the future,Status
-Removing,Policies that are to be removed,Status
+Removing,"Policies that are to be removed. (Note that this isn't an increase in income, just a lack of expenditure)",Status
 Not proposed,Policies that have not been proposed by this party,Status
 Proposed,Policies that have been proposed but not yet costed,Status
 New,Policies that have not been proposed by the incumbent party(s),Status

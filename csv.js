@@ -99,7 +99,7 @@ function sumTitles(arr) {
     return res
 }
 
-function sumGroups(arr, groups) { // todo add parameter 'group' (e.g. current/capital, groupings, etc.)
+function sumGroups(arr, groups, ignoreNegatives=false) { // todo add parameter 'group' (e.g. current/capital, groupings, etc.)
     let res = {}
     for (let i = 1; i < arr[0].length; i++) { // for each title
         res[arr[0][i]] = {}
@@ -108,8 +108,9 @@ function sumGroups(arr, groups) { // todo add parameter 'group' (e.g. current/ca
             if (!res[arr[0][i]][groups[iGroups][1]]) {
                 res[arr[0][i]][groups[iGroups][1]] = 0
             }
-            if (parseInt(arr[j][i]) >= 0) { // todo figure out how to deal with negatives
-                res[arr[0][i]][groups[iGroups][1]] += parseInt(arr[j][i]) // {title: {group: sum}}
+            let val = parseInt(arr[j][i])
+            if (!ignoreNegatives || val > 0) {
+                res[arr[0][i]][groups[iGroups][1]] += val // {title: {group: sum}}
             }
         }
     }
@@ -117,7 +118,7 @@ function sumGroups(arr, groups) { // todo add parameter 'group' (e.g. current/ca
 }
 
 // todo name - this is for grouping_by_party structure
-function sumFromDepthOrderedCol(data, orderCol, sumCol) {
+function sumFromDepthOrderedCol(data, orderCol, sumCol, ignoreNegatives=false) {
     let res = []
     let iGroup = 0;
     for (let i = 1, iGroup = 0; i < data.length; i++, iGroup++) {
@@ -125,7 +126,10 @@ function sumFromDepthOrderedCol(data, orderCol, sumCol) {
             iGroup = 0
         }
         if (!res[iGroup]) res[iGroup] = 0
-        res[iGroup] += parseInt(data[i][sumCol])
+        let val = parseInt(data[i][sumCol])
+        if (!ignoreNegatives || val > 0) {
+            res[iGroup] += val
+        }
     }
     return res
 }

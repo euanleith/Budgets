@@ -6,7 +6,6 @@ async function main() {
     let partyGroupings = await read('grouping_by_party.csv') // todo name
     let definitions = parseDefinitions(await read('definitions.csv'))
 
-    // todo currently negatives are going down, overlapping items beneath them
     groupsStackedBar(budgets, groupings, definitions, 'graph1');
     statusSumStackedBar(partyGroupings, definitions, 'graph2');
     //statusStackedBar(budgets, partyGroupings, 'To remove', 'graph3');
@@ -27,7 +26,7 @@ function parseDefinitions(data) {
     return res
 }
 
-function plotStackedBar(groupings, traces, div, title='', xaxis='', yaxis='', legendTitle='') {
+function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='') {
     div = document.getElementById(div);
     var layout = {
         title: {
@@ -55,22 +54,20 @@ function plotStackedBar(groupings, traces, div, title='', xaxis='', yaxis='', le
             },
             traceorder: 'normal'
         },
-        hovermode: 'closest'
+        hovermode: 'closest',
+        barmode: 'relative'
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
-    div.once('plotly_afterplot', () => addLegendHoverWidget(div, groupings));
+    div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
 }
 
 // todo shouldn't have to include definitions as parameter
 function addLegendHoverWidget(div, definitions) {
     var d3 = Plotly.d3;
-    var widget = d3.select(div);
-    var legendLayer = widget.selectAll('g.legend');
-    var items = legendLayer.selectAll('g.traces');
-
+    var items = d3.select(div)
+        .selectAll('g.legend')
+        .selectAll('g.traces');
     var tooltip = d3.selectAll('.legendTooltip');
-
-    legendLayer.selectAll('.tooltip').remove(); // todo is this necessary
 
     // todo want to be able to click on the popup to expand it / go to definition page
     items.on('mouseover', async function (d) {
@@ -98,7 +95,7 @@ function addLegendHoverWidget(div, definitions) {
 }
 
 function groupsStackedBar(budgets, groupings, definitions, div) {
-    let grouped = sumGroups(budgets, groupings)
+    let grouped = sumGroups(budgets, groupings, ignoreNegatives=true)
     let traces = []
     for (let group in Object.values(grouped)[0]) {
         let groupCosts = Object.values(grouped).map(a => a[group])
@@ -142,7 +139,6 @@ function statusSumStackedBar(partyGroupings, definitions, div) {
 
     let policies = fields(partyGroupings)
     for (let i in statusNames) {
-        // todo remove 0's and negatives
         let statusTotalCosts = Object.values(statuses).map(a => a[statusNames[i]])
         traces.push({
             x: Object.keys(statuses),
@@ -216,8 +212,8 @@ function statusStackedBar(partyGroupings, definitions, status, div) {
 //  'to remove' policies by current/capital
 //      same for 'new', and any other if they seem interesting
 function currentCapitalStackedBar(budgets, definitions, div) {
-    let current = sumFromDepthOrderedCol(budgets, 1, 4) // todo don't hardcode
-    let capital = sumFromDepthOrderedCol(budgets, 1, 5) // todo don't hardcode
+    let current = sumFromDepthOrderedCol(budgets, 1, 4, ignoreNegatives=true) // todo don't hardcode
+    let capital = sumFromDepthOrderedCol(budgets, 1, 5, ignoreNegatives=true) // todo don't hardcode
 
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
     let data = [current, capital]
@@ -254,7 +250,10 @@ function policiesStackedBar(budgets, definitions, div) {
             currentPolicy = budgets[row][0] // todo don't hardcode
             costs[++iPolicy] = []
         }
-        costs[iPolicy].push(budgets[row][2]) // todo don't hardcode
+        let cost = budgets[row][2] // todo don't hardcode
+        if (cost > 0) {
+            costs[iPolicy].push(cost)
+        }
     }
 
     let traces = []
