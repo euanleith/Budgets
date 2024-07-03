@@ -8,8 +8,8 @@ async function main() {
 
     groupsStackedBar(budgets, groupings, definitions, 'graph1');
     statusSumStackedBar(partyGroupings, definitions, 'graph2');
-    //statusStackedBar(budgets, partyGroupings, 'To remove', 'graph3');
-    //statusStackedBar(budgets, partyGroupings, 'Removing', 'graph4');
+    statusStackedBar(partyGroupings, definitions, 'To remove', 'graph3');
+    statusStackedBar(partyGroupings, definitions, 'Removing', 'graph4');
     currentCapitalStackedBar(partyGroupings, definitions, 'graph7');
     policiesStackedBar(partyGroupings, definitions, 'graph5');
     policiesTable(partyGroupings, 'graph6');
@@ -163,44 +163,42 @@ function statusSumStackedBar(partyGroupings, definitions, div) {
 //  though would these be sums or split into policies?
 function statusStackedBar(partyGroupings, definitions, status, div) {
     let traces = []
-    let statuses = []
-    let statusNames = [] // todo or predefine statuses
-    for (let col = 1; col < partyGroupings[0].length; col++) {
-        statuses[col-1] = {}
-        for (let row = 1; row < partyGroupings.length; row++) {
-            let statusName = JSON.parse(partyGroupings[row][col])['status']
-            if (statusName == status) {
-                statuses[col-1][budgets[row][0]] = parseInt(budgets[row][col])
-            }
+    let statuses = {}
+    for (let row = 1; row < partyGroupings.length; row++) {
+        let party = partyGroupings[row][1]
+        let statusName = partyGroupings[row][3]
+        if (!(party in statuses)) {
+            statuses[party] = {}
+        }
+        if (statusName == status) {
+            statuses[party][partyGroupings[row][0]] = parseInt(partyGroupings[row][2]) // todo don't hardcode
         }
     }
 
     let policies = []
-    for (let i = 0; i < statuses.length; i++) {
-        for (let key in statuses[i]) {
-            if (!policies.includes(key)) policies.push(key)
+    for (let party in statuses) {
+        for (let policy in statuses[party]) {
+            if (!policies.includes(policy)) policies.push(policy)
         }
     }
 
-    let parties = titles(partyGroupings)
     for (let i in policies) {
-        let name = statuses[0][i]
         traces.push({
-            x: parties,
-            y: statuses.map(a => a[policies[i]]),
+            x: Object.keys(statuses),
+            y: Object.values(statuses).map(a => a[policies[i]]),
             type: 'bar',
             name: policies[i],
             textposition: 'bottom',
             hovertemplate: '€%{y}'
         });
     }
-    plotStackedBar(definitions['Status'],
+    plotStackedBar(definitions['Policy'],
         traces,
         div,
         title="Split of expenditure by policy status '" + status + "'",
         xaxis='Parties',
         yaxis='Cost (€)',
-        legendTitle='Status'
+        legendTitle='Policy'
     )
 }
 
