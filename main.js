@@ -239,7 +239,6 @@ function currentCapitalStackedBar(budgets, definitions, div) {
     )
 }
 
-
 function policiesStackedBar(budgets, definitions, div) {
     // note this is assuming data is ordered by policy
     let costs = []
@@ -253,6 +252,8 @@ function policiesStackedBar(budgets, definitions, div) {
         let cost = budgets[row][2] // todo don't hardcode
         if (cost > 0) {
             costs[iPolicy].push(cost)
+        } else {
+            costs[iPolicy].push(0)
         }
     }
 
