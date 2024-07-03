@@ -63,16 +63,25 @@ function values(arr) {
 
 function fieldVals(arr, field) {
     let res = []
-    let i = fieldIndex(arr, field)
+    let i = getIndex(arr, field, 0)
     for (let j = 1; j < arr[i].length; j++) {
         res.push(arr[i][j]);
     }
     return res
 }
 
-function fieldIndex(arr, field) {
+function getIndex(arr, val) {
     for (let i = 1; i < arr.length; i++) {
-        if (arr[i][0] == field) return i;
+        for (let j = 0; j < arr[i].length; j++) {
+            if (arr[i][j] == val) return i;
+        }
+    }
+    return -1;
+}
+
+function getIndex(arr, val, col) {
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i][col] == val) return i;
     }
     return -1;
 }
@@ -95,7 +104,7 @@ function sumGroups(arr, groups) { // todo add parameter 'group' (e.g. current/ca
     for (let i = 1; i < arr[0].length; i++) { // for each title
         res[arr[0][i]] = {}
         for (let j = 1; j < arr.length; j++) { // for each field
-            iGroups = fieldIndex(groups, arr[j][0])
+            iGroups = getIndex(groups, arr[j][0], 0)
             if (!res[arr[0][i]][groups[iGroups][1]]) {
                 res[arr[0][i]][groups[iGroups][1]] = 0
             }

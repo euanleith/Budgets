@@ -1,0 +1,63 @@
+Name,Definition,Type
+A.1 ADMINISTRATION,mydefinition,Policy
+A.2 ADMINISTRATION - NON PAY,mydefinition,Policy
+A.3 LOCAL AUTHORITY HOUSING,mydefinition,Policy
+A.4 SOCIAL HOUSING CURRENT EXPENDITURE PROGRAMME,mydefinition,Policy
+A.5 RENTAL ACCOMMODATION SCHEME,mydefinition,Policy
+A.6 HOUSING ASSISTANCE PAYMENT SCHEME,mydefinition,Policy
+A.7 CAPITAL ASSISTANCE SCHEME,mydefinition,Policy
+A.8 CAPITAL LOANS & SUBSIDY SCHEME,mydefinition,Policy
+A.9 COMMUNAL FACILITIES,mydefinition,Policy
+A.10 MORTGAGE TO RENT,mydefinition,Policy
+A.11 CAPITAL ADVANCE LEASING FACILITY,mydefinition,Policy
+A.12 TRAVELLER ACCOMMODATION & SUPPORT,mydefinition,Policy
+A.13 ACCOMMODATION FOR HOMELESS,mydefinition,Policy
+A.14 HOUSING FOR PEOPLE WITH A DISABILITY & OLDER PEOPLE,mydefinition,Policy
+A.15 ESTATE REGENERATION AND REFURBISHMENT,mydefinition,Policy
+A.16 ENERGY EFFICIENCY - RETROFITTING,mydefinition,Policy
+A.17 REPAIR AND LEASING SCHEME,mydefinition,Policy
+A.18 PRIVATE HOUSING GRANTS,mydefinition,Policy
+A.19 MORTGAGE ALLOWANCES,mydefinition,Policy
+A.20 AFFORDABLE HOUSING/SHARED OWNERSHIP SUBSIDY,mydefinition,Policy
+A.21 LOCAL INFRASTRUCTURE HOUSING ACTIVATION FUND,mydefinition,Policy
+A.22 DEFECTIVE HOMES REMEDIATION - CASH LIMITED,mydefinition,Policy
+A.23 HOUSING & SUSTAINABLE COMMUNITIES AGENCY,mydefinition,Policy
+A.24 RESIDENTIAL TENANCIES BOARD,mydefinition,Policy
+A.25 RENTED ACCOMMODATION INSPECTION,mydefinition,Policy
+A.26 APPROVED HOUSING BODIES REGULATORY AUTHORITY,mydefinition,Policy
+A.27 PLANNED MAINTENANCE/VOIDS,mydefinition,Policy
+A.28 COST RENTAL EQUITY LOAN,mydefinition,Policy
+A.29 DISABLED PERSONS GRANT SCHEME/IMPROVEMENTS/REMEDIALS,mydefinition,Policy
+A.30 FIRST HOME SCHEME,mydefinition,Policy
+A.31 AFFORDABLE HOUSING FUND,mydefinition,Policy
+A.32 CROÍ CÓNAITHE FUND,mydefinition,Policy
+A.33 SOCIAL HOUSING PPP PROGRAMME,mydefinition,Policy
+A.34 UKRAINE MEASURES,mydefinition,Policy
+A.35 SECURE TENANCY AFFORDABLE RENTAL SCHEME (STAR),mydefinition,Policy
+A.36 OTHER SERVICES,mydefinition,Policy
+Admin,mydefinition,Grouping
+Local Authority Housing,mydefinition,Grouping
+Cost Rental,mydefinition,Grouping
+Government subsidised private existing housing (rents/mortgages),mydefinition,Grouping
+Government funded new build social housing,mydefinition,Grouping
+Communal facilities,mydefinition,Grouping
+Government funded new build social housing,mydefinition,Grouping
+Disadvantaged/vulnerable groups,mydefinition,Grouping
+Environment,mydefinition,Grouping
+Voids,mydefinition,Grouping
+Disadvantaged/vulnerable groups,mydefinition,Grouping
+Affordable purchase,mydefinition,Grouping
+Defects,mydefinition,Grouping
+Government subsidised new build private housing,mydefinition,Grouping
+PPP new build,mydefinition,Grouping
+Ukraine,mydefinition,Grouping
+Other,mydefinition,Grouping
+Existing,Policies that have been proposed by incumbent party(s),Status
+To reduce,Policies that have been planned for expenditure reduction in the future,Status
+To remove,Policies that have been planned for removal in the future,Status
+Removing,Policies that are to be removed,Status
+Not proposed,Policies that have not been proposed by this party,Status
+Proposed,Policies that have been proposed but not yet costed,Status
+New,Policies that have not been proposed by the incumbent party(s),Status
+Current,"A single-use purchase (e.g. paying rent, buying groceries).",Terms
+Capital,"The creation or purchasing of an asset where value is maintained or accrued over time (e.g. buying a house, purchasing stock in a company).",Terms

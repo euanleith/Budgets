@@ -4,21 +4,30 @@ async function main() {
     let budgets = await read('budgets.csv')
     let groupings = await read('groupings.csv') // todo rename grouping_by_policy
     let partyGroupings = await read('grouping_by_party.csv') // todo name
-
-    let titles = (partyGroupings)
-
+    let definitions = parseDefinitions(await read('definitions.csv'))
 
     // todo currently negatives are going down, overlapping items beneath them
-    groupsStackedBar(budgets, groupings, 'graph1');
-    statusSumStackedBar(partyGroupings, 'graph2');
+    groupsStackedBar(budgets, groupings, definitions, 'graph1');
+    statusSumStackedBar(partyGroupings, definitions, 'graph2');
     //statusStackedBar(budgets, partyGroupings, 'To remove', 'graph3');
     //statusStackedBar(budgets, partyGroupings, 'Removing', 'graph4');
-    currentCapitalStackedBar(partyGroupings, 'graph7');
-    policiesStackedBar(partyGroupings, 'graph5');
+    currentCapitalStackedBar(partyGroupings, definitions, 'graph7');
+    policiesStackedBar(partyGroupings, definitions, 'graph5');
     policiesTable(partyGroupings, 'graph6');
 }
 
-function plotStackedBar(traces, div, title='', xaxis='', yaxis='') {
+// todo generalise and move to csv.js?
+function parseDefinitions(data) {
+    let res = {}
+    // res: {type: {name: definition}}
+    for (let i = 1; i < data.length; i++) {
+        if (!res[data[i][2]]) res[data[i][2]] = {}
+        res[data[i][2]][data[i][0]] = data[i][1]
+    }
+    return res
+}
+
+function plotStackedBar(groupings, traces, div, title='', xaxis='', yaxis='', legendTitle='') {
     div = document.getElementById(div);
     var layout = {
         title: {
@@ -41,15 +50,19 @@ function plotStackedBar(traces, div, title='', xaxis='', yaxis='') {
             font: {
                 size: 10
             },
+            title: {
+                text: legendTitle
+            },
             traceorder: 'normal'
         },
         hovermode: 'closest'
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
-    div.once('plotly_afterplot', () => addLegendHoverWidget(div));
+    div.once('plotly_afterplot', () => addLegendHoverWidget(div, groupings));
 }
 
-function addLegendHoverWidget(div) {
+// todo shouldn't have to include definitions as parameter
+function addLegendHoverWidget(div, definitions) {
     var d3 = Plotly.d3;
     var widget = d3.select(div);
     var legendLayer = widget.selectAll('g.legend');
@@ -57,7 +70,7 @@ function addLegendHoverWidget(div) {
 
     var tooltip = d3.selectAll('.legendTooltip');
 
-    legendLayer.selectAll('.tooltip').remove();
+    legendLayer.selectAll('.tooltip').remove(); // todo is this necessary
 
     // todo want to be able to click on the popup to expand it / go to definition page
     items.on('mouseover', async function (d) {
@@ -66,7 +79,7 @@ function addLegendHoverWidget(div) {
             .duration(200)
             .style("opacity", 1);
 
-        tooltip.html(d[0].trace.name) // todo replace with defintions
+        tooltip.html(definitions[d[0].trace.name])
 
         // todo if goes off the page swap direction
         var matrix = this.getScreenCTM()
@@ -84,7 +97,7 @@ function addLegendHoverWidget(div) {
     })
 }
 
-function groupsStackedBar(budgets, groupings, div) {
+function groupsStackedBar(budgets, groupings, definitions, div) {
     let grouped = sumGroups(budgets, groupings)
     let traces = []
     for (let group in Object.values(grouped)[0]) {
@@ -98,10 +111,17 @@ function groupsStackedBar(budgets, groupings, div) {
             hovertemplate: '€%{y}'
         });
     }
-    plotStackedBar(traces, div, title='Split of expenditure by manual groupings', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(definitions['Grouping'],
+        traces,
+        div,
+        title='Split of expenditure by manual groupings',
+        xaxis='Parties',
+        yaxis='Cost (€)',
+        legendTitle='Groupings'
+    )
 }
 
-function statusSumStackedBar(partyGroupings, div) {
+function statusSumStackedBar(partyGroupings, definitions, div) {
     let traces = []
     let statuses = {}
     let statusNames = [] // todo or predefine statuses
@@ -133,12 +153,19 @@ function statusSumStackedBar(partyGroupings, div) {
             hovertemplate: '€%{y}'
         });
     }
-    plotStackedBar(traces, div, title='Split of expenditure by status', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(definitions['Status'],
+        traces,
+        div,
+        title='Split of expenditure by policy status',
+        xaxis='Parties',
+        yaxis='Cost (€)',
+        legendTitle='Status'
+    )
 }
 
 // todo with predefined statuses, could set default status=statusNames and allow for displaying of multiple custom statuses instead of just one
 //  though would these be sums or split into policies?
-function statusStackedBar(partyGroupings, status, div) {
+function statusStackedBar(partyGroupings, definitions, status, div) {
     let traces = []
     let statuses = []
     let statusNames = [] // todo or predefine statuses
@@ -171,7 +198,14 @@ function statusStackedBar(partyGroupings, status, div) {
             hovertemplate: '€%{y}'
         });
     }
-    plotStackedBar(traces, div, title="Split of expenditure by status '" + status + "'", xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(definitions['Status'],
+        traces,
+        div,
+        title="Split of expenditure by policy status '" + status + "'",
+        xaxis='Parties',
+        yaxis='Cost (€)',
+        legendTitle='Status'
+    )
 }
 
 // todo graphs for current/capital;
@@ -181,7 +215,7 @@ function statusStackedBar(partyGroupings, status, div) {
 //  stacked column of current and capital side by side with each individual policy still visible
 //  'to remove' policies by current/capital
 //      same for 'new', and any other if they seem interesting
-function currentCapitalStackedBar(budgets, div) {
+function currentCapitalStackedBar(budgets, definitions, div) {
     let current = sumFromDepthOrderedCol(budgets, 1, 4) // todo don't hardcode
     let capital = sumFromDepthOrderedCol(budgets, 1, 5) // todo don't hardcode
 
@@ -199,11 +233,18 @@ function currentCapitalStackedBar(budgets, div) {
             hovertemplate: '€%{y}'
         });
     }
-    plotStackedBar(traces, div, title='Current vs. Capital expenditure', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(definitions['Terms'],
+        traces,
+        div,
+        title='Current vs. Capital expenditure',
+        xaxis='Parties',
+        yaxis='Cost (€)',
+        legendTitle='Expenditure type'
+    )
 }
 
 
-function policiesStackedBar(budgets, div) {
+function policiesStackedBar(budgets, definitions, div) {
     // note this is assuming data is ordered by policy
     let costs = []
     let currentPolicy = ""
@@ -229,7 +270,15 @@ function policiesStackedBar(budgets, div) {
             hovertemplate: '€%{y}'
         });
     }
-    plotStackedBar(traces, div, title='Split of expenditure by policy', xaxis='Parties', yaxis='Cost (€)')
+    plotStackedBar(
+        definitions,
+        traces,
+        div,
+        title='Split of expenditure by policy',
+        xaxis='Parties',
+        yaxis='Cost (€)',
+        legendTitle='Policy'
+    )
 }
 
 function policiesTable(budgets, div) {
