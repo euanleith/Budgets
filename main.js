@@ -7,7 +7,7 @@ async function main() {
     let definitions = parseDefinitions(await read('definitions.csv'))
 
     sumsStackedBar(partyGroupings, 'graph9');
-    groupsStackedBar(budgets, groupings, definitions, 'graph1'); // todo shouldn't use budgets
+    groupsStackedBar(partyGroupings, groupings, definitions, 'graph1'); // todo shouldn't use budgets
     statusSumStackedBar(partyGroupings, definitions, 'graph2');
     statusStackedBar(partyGroupings, definitions, 'To remove', 'graph3');
     statusStackedBar(partyGroupings, definitions, 'Removing', 'graph4');
@@ -47,7 +47,7 @@ function sumsStackedBar(groupings, div) {
     let labels = []
     const formatter = Intl.NumberFormat("en", {
         notation: "compact" ,
-        minimumFractionDigits: 5
+        minimumFractionDigits: 5 // plotly default
     });
     Object.values(sums).forEach((sum) => {
         labels.push(formatter.format(sum))
@@ -64,16 +64,17 @@ function sumsStackedBar(groupings, div) {
 }
 
 function groupsStackedBar(budgets, groupings, definitions, div) {
-    let grouped = sumGroups(budgets, groupings, ignoreNegatives=true)
+    let grouped = sumGroups2(budgets, groupings, ignoreNegatives=true)
+    let parties = getUniqueFromDepthOrderedCol(budgets, 1)
+    let sortedKeys = sortKeysByAvgVals(grouped, parties.length)
     let traces = []
-    for (let group in Object.values(grouped)[0]) {
-        let groupCosts = Object.values(grouped).map(a => a[group])
+    for (let i in sortedKeys) {
         // todo all of this plotly config stuff should in in plotStackedBar
         traces.push({
-            x: Object.keys(grouped),
-            y: groupCosts,
+            x: parties,
+            y: grouped[sortedKeys[i]],
             type: 'bar',
-            name: group,
+            name: sortedKeys[i],
             textposition: 'bottom',
             hovertemplate: '€%{y}'
         });
@@ -86,6 +87,63 @@ function groupsStackedBar(budgets, groupings, definitions, div) {
         yaxis='Cost (€)',
         legendTitle='Groupings'
     )
+}
+
+// todo i wanted to be able to sort traces
+//  and my solution involved changing the structure of the traces
+//  but now if i want to sort other traces, i have to change their structure too,
+//  and have this be the standard structure then i guess.
+//  also the structure itself isn't great, as its order is implied externally
+//  (i.e. the values are arrays ordered by party, but the order of the parties themselves isn't in the object)
+//  also it assumes that the data is already ordered properly in the csv file
+
+// todo name
+// todo generalise names then move to csv
+// output format: {'grouping1': [cost1, cost2, ...], 'grouping2': [...], ...}
+// where order of values corresponds to order of parties (i.e. [FFG, SF, ...]) todo assuming these are ordered
+function sumGroups2(data, grouping, ignoreNegatives=false, col=2) {
+    let res = {}
+    let current = {name: '', grouping: '', index: 1} // todo current policy
+    for (let iData = 1, iParty = 0; iData < data.length; iData++, iParty++) {
+        let next = data[iData][0]
+        if (next != current.name) {
+            current.name = next
+            current.grouping = grouping[current.index++][col]
+            iParty = 0
+        }
+        if (!res[current.grouping]) res[current.grouping] = []
+        if (!res[current.grouping][iParty]) res[current.grouping][iParty] = 0
+        let val = parseInt(data[iData][2])
+        if (!ignoreNegatives || val > 0) {
+            res[current.grouping][iParty] += val
+        }
+    }
+    return res
+}
+
+// sorts an object by its average values
+// where object is of structure {key1: [num1, num2, ...], key2: [...], ...}
+// e.g. {key1: [1,1], key2: [1,3,5], key3: [2,2]} returns {key2: [1,3,5], key3: [2,2], key1: [1,1]}
+function sortByAvgVals(obj, len) {
+    return Object.fromEntries(
+        Object.entries(obj).sort(([,a],[,b]) =>
+            (b.reduce((c,d)=>c+d)/len) - (a.reduce((c,d)=>c+d)/len)
+        )
+    )
+}
+
+// returns list of keys of an object sorted by its average values
+function sortKeysByAvgVals(obj, len) {
+    return Object.keys(obj).sort((a,b) => {
+        return (obj[b].reduce((c,d)=>c+d)/len) - (obj[a].reduce((c,d)=>c+d)/len)
+    })
+}
+
+// returns list of keys of an object sorted by its values
+function sortKeysByVals(obj) {
+    return Object.keys(obj).sort((a,b) => {
+        return (obj[b] - obj[a])
+    })
 }
 
 function statusSumStackedBar(partyGroupings, definitions, div) {
@@ -125,7 +183,8 @@ function statusSumStackedBar(partyGroupings, definitions, div) {
         title='Split of expenditure by policy status',
         xaxis='Parties',
         yaxis='Cost (€)',
-        legendTitle='Status'
+        legendTitle='Status',
+        colorScheme=['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
     )
 }
 

@@ -32,7 +32,7 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
 }
 
-function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='') {
+function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[]) {
     div = document.getElementById(div);
     var layout = {
         title: {
@@ -61,7 +61,8 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             traceorder: 'normal'
         },
         hovermode: 'closest',
-        barmode: 'relative'
+        barmode: 'relative',
+        colorway : colorScheme
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));

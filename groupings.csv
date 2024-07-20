@@ -1,46 +1,46 @@
-,Grouping
-A.1 ADMINISTRATION,Admin
-A.2 ADMINISTRATION - NON PAY,Admin
-A.3 LOCAL AUTHORITY HOUSING,Local Authority Housing
-A.4 SOCIAL HOUSING CURRENT EXPENDITURE PROGRAMME,Cost rental
-A.5 RENTAL ACCOMMODATION SCHEME,Government subsidised private existing housing (rents/mortgages)
-A.6 HOUSING ASSISTANCE PAYMENT SCHEME,Government subsidised private existing housing (rents/mortgages)
-A.7 CAPITAL ASSISTANCE SCHEME,Government funded new build social housing
-A.8 CAPITAL LOANS & SUBSIDY SCHEME,Cost rental
-A.9 COMMUNAL FACILITIES,Communal facilities
-A.10 MORTGAGE TO RENT,Cost rental
-A.11 CAPITAL ADVANCE LEASING FACILITY,Government funded new build social housing
-A.12 TRAVELLER ACCOMMODATION & SUPPORT,Disadvantaged/vulnerable groups
-A.13 ACCOMMODATION FOR HOMELESS,Disadvantaged/vulnerable groups
-A.14 HOUSING FOR PEOPLE WITH A DISABILITY & OLDER PEOPLE,Disadvantaged/vulnerable groups
-A.15 ESTATE REGENERATION AND REFURBISHMENT,Government funded new build social housing
-A.16 ENERGY EFFICIENCY - RETROFITTING,Environment
-A.17 REPAIR AND LEASING SCHEME,Voids
-A.18 PRIVATE HOUSING GRANTS,Disadvantaged/vulnerable groups
-A.19 MORTGAGE ALLOWANCES,Affordable purchase
-A.20 AFFORDABLE HOUSING/SHARED OWNERSHIP SUBSIDY,Affordable purchase
-A.21 LOCAL INFRASTRUCTURE HOUSING ACTIVATION FUND,Infrastructure
-A.22 DEFECTIVE HOMES REMEDIATION - CASH LIMITED,Defects
-A.23 HOUSING & SUSTAINABLE COMMUNITIES AGENCY,Admin
-A.24 RESIDENTIAL TENANCIES BOARD,Admin
-A.25 RENTED ACCOMMODATION INSPECTION,Admin
-A.26 APPROVED HOUSING BODIES REGULATORY AUTHORITY,Admin
-A.27 PLANNED MAINTENANCE/VOIDS,Voids
-A.28 COST RENTAL EQUITY LOAN,Cost rental
-A.29 DISABLED PERSONS GRANT SCHEME/IMPROVEMENTS/REMEDIALS,Disadvantaged/vulnerable groups
-A.30 FIRST HOME SCHEME,Cost rental
-A.31 AFFORDABLE HOUSING FUND,Cost rental
-A.32 CROÍ CÓNAITHE FUND,Government subsidised new build private housing
-A.33 SOCIAL HOUSING PPP PROGRAMME,PPP new build
-A.34 UKRAINE MEASURES,Ukraine
-A.35 SECURE TENANCY AFFORDABLE RENTAL SCHEME (STAR),Cost rental
-A.36 OTHER SERVICES,Other
-Social Housing Stock Response Maintenance Fund,Defects
-Establish Solar PV Scheme for local authority homes,Environment
-Participative planning pilot scheme,Disadvantaged/vulnerable groups
-Tenant empowerment and participation fund,Disadvantaged/vulnerable groups
-Disability inclusion fund,Disadvantaged/vulnerable groups
-New 'Housing First for Families' programme,Disadvantaged/vulnerable groups
-Direct state investment in student accomodation,Cost rental
-Create fund to compulsory purchase and renovate derelict houses,Voids
-Set up state construction company,Government funded new build social housing
+,Grouping,Fewer
+A.1 ADMINISTRATION,Admin,Other
+A.2 ADMINISTRATION - NON PAY,Admin,Other
+A.3 LOCAL AUTHORITY HOUSING,Local Authority Housing,New build / acquisition social housing
+A.4 SOCIAL HOUSING CURRENT EXPENDITURE PROGRAMME,Cost rental,Cost rental / Affordable purchase
+A.5 RENTAL ACCOMMODATION SCHEME,Government subsidised private existing housing (rents/mortgages),Government subsidised private existing housing (rents/mortgages)
+A.6 HOUSING ASSISTANCE PAYMENT SCHEME,Government subsidised private existing housing (rents/mortgages),Government subsidised private existing housing (rents/mortgages)
+A.7 CAPITAL ASSISTANCE SCHEME,Government funded new build social housing,New build / acquisition social housing
+A.8 CAPITAL LOANS & SUBSIDY SCHEME,Cost rental,Cost rental / Affordable purchase
+A.9 COMMUNAL FACILITIES,Communal facilities,Other
+A.10 MORTGAGE TO RENT,Cost rental,Cost rental / Affordable purchase
+A.11 CAPITAL ADVANCE LEASING FACILITY,Government funded new build social housing,New build / acquisition social housing
+A.12 TRAVELLER ACCOMMODATION & SUPPORT,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+A.13 ACCOMMODATION FOR HOMELESS,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+A.14 HOUSING FOR PEOPLE WITH A DISABILITY & OLDER PEOPLE,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+A.15 ESTATE REGENERATION AND REFURBISHMENT,Government funded new build social housing,New build / acquisition social housing
+A.16 ENERGY EFFICIENCY - RETROFITTING,Environment,Environment
+A.17 REPAIR AND LEASING SCHEME,Voids,Voids
+A.18 PRIVATE HOUSING GRANTS,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+A.19 MORTGAGE ALLOWANCES,Affordable purchase,Cost rental / Affordable purchase
+A.20 AFFORDABLE HOUSING/SHARED OWNERSHIP SUBSIDY,Affordable purchase,Cost rental / Affordable purchase
+A.21 LOCAL INFRASTRUCTURE HOUSING ACTIVATION FUND,Infrastructure,Other
+A.22 DEFECTIVE HOMES REMEDIATION - CASH LIMITED,Defects,Defects
+A.23 HOUSING & SUSTAINABLE COMMUNITIES AGENCY,Admin,Other
+A.24 RESIDENTIAL TENANCIES BOARD,Admin,Other
+A.25 RENTED ACCOMMODATION INSPECTION,Admin,Other
+A.26 APPROVED HOUSING BODIES REGULATORY AUTHORITY,Admin,Other
+A.27 PLANNED MAINTENANCE/VOIDS,Voids,Voids
+A.28 COST RENTAL EQUITY LOAN,Cost rental,Cost rental / Affordable purchase
+A.29 DISABLED PERSONS GRANT SCHEME/IMPROVEMENTS/REMEDIALS,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+A.30 FIRST HOME SCHEME,Cost rental,Cost rental / Affordable purchase
+A.31 AFFORDABLE HOUSING FUND,Cost rental,Cost rental / Affordable purchase
+A.32 CROÍ CÓNAITHE FUND,Government subsidised new build private housing,Government subsidised new build private housing
+A.33 SOCIAL HOUSING PPP PROGRAMME,PPP new build,PPP new build
+A.34 UKRAINE MEASURES,Ukraine,Disadvantaged/vulnerable groups
+A.35 SECURE TENANCY AFFORDABLE RENTAL SCHEME (STAR),Cost rental,Cost rental / Affordable purchase
+A.36 OTHER SERVICES,Other,Other
+Social Housing Stock Response Maintenance Fund,Defects,Defects
+Establish Solar PV Scheme for local authority homes,Environment,Environment
+Participative planning pilot scheme,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+Tenant empowerment and participation fund,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+Disability inclusion fund,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+New 'Housing First for Families' programme,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
+Direct state investment in student accomodation,Cost rental,Cost rental / Affordable purchase
+Create fund to compulsory purchase and renovate derelict houses,Voids,Voids
+Set up state construction company,State construction company,State construction company

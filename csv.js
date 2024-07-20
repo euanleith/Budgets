@@ -99,18 +99,18 @@ function sumTitles(arr) {
     return res
 }
 
-function sumGroups(arr, groups, ignoreNegatives=false) { // todo add parameter 'group' (e.g. current/capital, groupings, etc.)
+function sumGroups(arr, groups, ignoreNegatives=false, col=2) { // todo add parameter 'group' (e.g. current/capital, groupings, etc.)
     let res = {}
     for (let i = 1; i < arr[0].length; i++) { // for each title
         res[arr[0][i]] = {}
         for (let j = 1; j < arr.length; j++) { // for each field
             iGroups = getIndex(groups, arr[j][0], 0)
-            if (!res[arr[0][i]][groups[iGroups][1]]) {
-                res[arr[0][i]][groups[iGroups][1]] = 0
+            if (!res[arr[0][i]][groups[iGroups][col]]) {
+                res[arr[0][i]][groups[iGroups][col]] = 0
             }
             let val = parseInt(arr[j][i])
             if (!ignoreNegatives || val > 0) {
-                res[arr[0][i]][groups[iGroups][1]] += val // {title: {group: sum}}
+                res[arr[0][i]][groups[iGroups][col]] += val // {title: {group: sum}}
             }
         }
     }
