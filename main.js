@@ -66,15 +66,14 @@ function sumsStackedBar(groupings, div) {
 function groupsStackedBar(budgets, groupings, definitions, div) {
     let grouped = sumGroups2(budgets, groupings, ignoreNegatives=true)
     let parties = getUniqueFromDepthOrderedCol(budgets, 1)
-    let sortedKeys = sortKeysByAvgVals(grouped, parties.length)
     let traces = []
-    for (let i in sortedKeys) {
+    for (let group in grouped) {
         // todo all of this plotly config stuff should in in plotStackedBar
         traces.push({
             x: parties,
-            y: grouped[sortedKeys[i]],
+            y: grouped[group],
             type: 'bar',
-            name: sortedKeys[i],
+            name: group,
             textposition: 'bottom',
             hovertemplate: '€%{y}'
         });
@@ -89,16 +88,7 @@ function groupsStackedBar(budgets, groupings, definitions, div) {
     )
 }
 
-// todo i wanted to be able to sort traces
-//  and my solution involved changing the structure of the traces
-//  but now if i want to sort other traces, i have to change their structure too,
-//  and have this be the standard structure then i guess.
-//  also the structure itself isn't great, as its order is implied externally
-//  (i.e. the values are arrays ordered by party, but the order of the parties themselves isn't in the object)
-//  also it assumes that the data is already ordered properly in the csv file
-
-// todo name
-// todo generalise names then move to csv
+// todo replace with old format
 // output format: {'grouping1': [cost1, cost2, ...], 'grouping2': [...], ...}
 // where order of values corresponds to order of parties (i.e. [FFG, SF, ...]) todo assuming these are ordered
 function sumGroups2(data, grouping, ignoreNegatives=false, col=2) {
@@ -145,6 +135,8 @@ function sortKeysByVals(obj) {
         return (obj[b] - obj[a])
     })
 }
+
+
 
 function statusSumStackedBar(partyGroupings, definitions, div) {
     let traces = []

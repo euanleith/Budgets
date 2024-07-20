@@ -34,6 +34,7 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
 
 function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[]) {
     div = document.getElementById(div);
+    sortTraces(traces)
     var layout = {
         title: {
             text: title,
@@ -66,6 +67,19 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
+}
+
+// sort traces by avg of y values
+function sortTraces(traces) {
+    traces.sort((a,b) => arrAvg(b.y) - arrAvg(a.y))
+}
+
+function arrSum(arr) {
+    return arr.reduce((c,d)=>c+d || 0)
+}
+
+function arrAvg(arr) {
+    return arrSum(arr) / arr.length
 }
 
 // todo shouldn't have to include definitions as parameter
