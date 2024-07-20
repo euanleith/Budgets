@@ -1,18 +1,28 @@
 main();
 
 async function main() {
-    let budgets = await read('budgets.csv')
+    let budgets = await read('budgets.csv') //  todo remove
     let groupings = await read('groupings.csv') // todo rename grouping_by_policy
     let partyGroupings = await read('grouping_by_party.csv') // todo name
     let definitions = parseDefinitions(await read('definitions.csv'))
 
-    groupsStackedBar(budgets, groupings, definitions, 'graph1');
+    sumsStackedBar(partyGroupings, 'graph9');
+    groupsStackedBar(budgets, groupings, definitions, 'graph1'); // todo shouldn't use budgets
     statusSumStackedBar(partyGroupings, definitions, 'graph2');
     statusStackedBar(partyGroupings, definitions, 'To remove', 'graph3');
     statusStackedBar(partyGroupings, definitions, 'Removing', 'graph4');
-    currentCapitalStackedBar(partyGroupings, definitions, 'graph7');
+    currentCapitalStackedBar(partyGroupings, definitions, 'graph8');
     policiesStackedBar(partyGroupings, definitions, 'graph5');
+    //policiesStackedBar2(partyGroupings, definitions, 'graph7');
     policiesTable(partyGroupings, 'graph6');
+
+    addDropdown(['option1', 'option2', 'option3'],
+        groupsStackedBar,
+        budgets,
+        groupings,
+        definitions,
+        'graph1'
+    );
 }
 
 // todo generalise and move to csv.js?
@@ -26,72 +36,31 @@ function parseDefinitions(data) {
     return res
 }
 
-function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='') {
-    div = document.getElementById(div);
-    var layout = {
-        title: {
-            text: title,
-            x: 0.05
-        },
-        xaxis: {
-            title: {
-                text: xaxis,
-            },
-        },
-        yaxis: {
-            title: {
-                text: yaxis,
-            }
-        },
-        autosize: true,
-        barmode: 'stack',
-        legend: {
-            font: {
-                size: 10
-            },
-            title: {
-                text: legendTitle
-            },
-            traceorder: 'normal'
-        },
-        hovermode: 'closest',
-        barmode: 'relative'
-    };
-    Plotly.newPlot(div, traces, layout, {displayModeBar: false});
-    div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
-}
+function sumsStackedBar(groupings, div) {
+    let sums = {};
+    for (let i = 1; i < groupings.length; i++) {
+        let party = groupings[i][1]
+        if (!(party in sums)) sums[party] = 0
+        sums[party] += parseInt(groupings[i][2])
+    }
 
-// todo shouldn't have to include definitions as parameter
-function addLegendHoverWidget(div, definitions) {
-    var d3 = Plotly.d3;
-    var items = d3.select(div)
-        .selectAll('g.legend')
-        .selectAll('g.traces');
-    var tooltip = d3.selectAll('.legendTooltip');
-
-    // todo want to be able to click on the popup to expand it / go to definition page
-    items.on('mouseover', async function (d) {
-        //await new Promise(resolve => setTimeout(resolve, 750)) // todo add delay
-        tooltip.transition()
-            .duration(200)
-            .style("opacity", 1);
-
-        tooltip.html(definitions[d[0].trace.name])
-
-        // todo if goes off the page swap direction
-        var matrix = this.getScreenCTM()
-            .translate(this.getAttribute("cx"), this.getAttribute("cy"));
-        let xPos = d3.event.pageX - (7*parseInt(tooltip.style('width'))/8)
-        let yPos = window.pageYOffset + matrix.f - parseInt(tooltip.style('height')) - d[0].lineHeight
-        tooltip.style("left", xPos + "px")
-            .style("top", yPos + "px");
+    let labels = []
+    const formatter = Intl.NumberFormat("en", {
+        notation: "compact" ,
+        minimumFractionDigits: 5
     });
-
-    items.on('mouseout', () => {
-        tooltip.transition()
-            .duration(500)
-            .style("opacity", 0);
+    Object.values(sums).forEach((sum) => {
+        labels.push(formatter.format(sum))
     })
+
+    plotBar(div,
+        Object.keys(sums),
+        Object.values(sums),
+        labels=labels,
+        title='Total cost for each party',
+        xaxis='Parties',
+        yaxis='Total cost (€)'
+    );
 }
 
 function groupsStackedBar(budgets, groupings, definitions, div) {
@@ -99,6 +68,7 @@ function groupsStackedBar(budgets, groupings, definitions, div) {
     let traces = []
     for (let group in Object.values(grouped)[0]) {
         let groupCosts = Object.values(grouped).map(a => a[group])
+        // todo all of this plotly config stuff should in in plotStackedBar
         traces.push({
             x: Object.keys(grouped),
             y: groupCosts,
@@ -266,6 +236,77 @@ function policiesStackedBar(budgets, definitions, div) {
             name: policies[i],
             textposition: 'bottom',
             hovertemplate: '€%{y}'
+        });
+    }
+    plotStackedBar(
+        definitions,
+        traces,
+        div,
+        title='Split of expenditure by policy',
+        xaxis='Parties',
+        yaxis='Cost (€)',
+        legendTitle='Policy'
+    )
+}
+
+// todo all of these array/csv functions should be generalised
+// todo name
+function policiesStackedBar2(budgets, definitions, div) {
+    // note this is assuming data is ordered by policy
+    let costs = []
+    let currentPolicy = ""
+    let iPolicy = -1
+    for (let row = 1; row < budgets.length; row++) {
+        if (budgets[row][0] != currentPolicy) { // todo don't hardcode
+            currentPolicy = budgets[row][0] // todo don't hardcode
+            costs[++iPolicy] = []
+        }
+        let cost = budgets[row][2] // todo don't hardcode
+        if (cost > 0) {
+            costs[iPolicy].push(cost)
+        } else {
+            costs[iPolicy].push(0)
+        }
+    }
+
+    // todo maybe have colours = {type: colour}, then marker: {color: colours[partyGroupings[i][iType]]
+    //  where iType = 3 for status, 4/5 for current/capital, etc.
+    //  current/capital is annoying :')
+    //  also will have to move groupings.csv to grouping_by_party.csv
+    //  todo then have to sort policies by grouping :')
+    //      won't this will be weird if the policies keep bouncing around then?
+    //  todo also have to change legend aaaaa
+    //  maybe should make a separate function for this
+
+    let groupingCol = 3 // todo get from dropdown
+    let groupingNames = getUniqueFromCol(budgets, groupingCol)
+
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max)
+    }
+    let groupingColours = {}
+    for (let i in groupingNames) {
+        groupingColours[groupingNames[i]] = 'rgb(' + getRandomInt(256) + ',' + getRandomInt(256) + ',' + getRandomInt(256) + ')' // todo ew
+    }
+
+    let traces = []
+    let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
+    let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
+    for (let i = 0; i < policies.length; i++) {
+        let colours = []
+        for (let j = 0; j < parties.length; j++) {
+            colours.push(groupingColours[budgets[j+i*parties.length+1][groupingCol]]) // todo this is such a roundabout way of doing indexing
+        }
+        traces.push({
+            x: parties,
+            y: costs[i],
+            type: 'bar',
+            name: policies[i],
+            textposition: 'bottom',
+            hovertemplate: '€%{y}',
+            marker: {
+                color: colours
+            }
         });
     }
     plotStackedBar(

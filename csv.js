@@ -152,3 +152,13 @@ function getUniqueFromDepthOrderedCol(data, col) {
     }
     return res
 }
+
+function getUniqueFromCol(data, col) {
+    let res = []
+    for (let i = 1; i < data.length; i++) {
+        if (!res.includes(data[i][col])) {
+            res.push(data[i][col])
+        }
+    }
+    return res
+}
