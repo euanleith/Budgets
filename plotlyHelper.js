@@ -127,7 +127,7 @@ function sortGroupedTraces(traces) {
 }
 
 function arrSum(arr) {
-    return arr.reduce((c,d)=>parseInt(c)+parseInt(d) || 0)
+    return arr.reduce((c,d)=>parseInt(c)+parseInt(d), 0)
 }
 
 function arrAvg(arr) {
@@ -175,5 +175,5 @@ function addDropdown(options, divBuilder, ...args) {
         currentOption.text = options[i];
         selector.appendChild(currentOption);
     }
-    selector.addEventListener('change', () => divBuilder(...args), false);
+    selector.addEventListener('change', () => divBuilder(selector.value, ...args), false);
 }

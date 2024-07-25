@@ -7,7 +7,7 @@ async function main() {
     let definitions = parseDefinitions(await read('definitions.csv'))
 
     sumsStackedBar(partyGroupings, 'sumsBar');
-    groupsStackedBar(partyGroupings, groupings, definitions, 'groupingBar'); // todo shouldn't use budgets
+    groupsStackedBar(partyGroupings, groupings, definitions, 'groupingBar');
     // todo add graph with all REV items which are in grouping 'new social housing'
     statusSumStackedBar(partyGroupings, definitions, 'statusBar');
     statusStackedBar(partyGroupings, definitions, 'To remove', 'toRemoveBar');
@@ -15,15 +15,14 @@ async function main() {
     // todo should probably add 'new' one too
     currentCapitalStackedBar(partyGroupings, definitions, 'currentCapitalBar');
     policiesStackedBar(partyGroupings, definitions, 'policiesBar');
-    policiesStackedBar2(partyGroupings, definitions, 'graph7');
+    policiesStackedBar2('Groupings', partyGroupings, definitions, 'colouredGroupingsBar');
     policiesTable(partyGroupings, 'policiesTable');
 
-    addDropdown(['option1', 'option2', 'option3'],
-        groupsStackedBar,
-        budgets,
-        groupings,
+    addDropdown(['Groupings', 'Status'],
+        policiesStackedBar2,
+        partyGroupings,
         definitions,
-        'graph1'
+        'colouredGroupingsBar'
     );
 }
 
@@ -263,7 +262,7 @@ function policiesStackedBar(budgets, definitions, div) {
 
 // todo all of these array/csv functions should be generalised
 // todo name
-function policiesStackedBar2(budgets, definitions, div) {
+function policiesStackedBar2(grouping, budgets, definitions, div) {
     // note this is assuming data is ordered by policy
     let costs = []
     let currentPolicy = ""
@@ -281,27 +280,9 @@ function policiesStackedBar2(budgets, definitions, div) {
         }
     }
 
-    // todo maybe have colours = {type: colour}, then marker: {color: colours[partyGroupings[i][iType]]
-    //  where iType = 3 for status, 4/5 for current/capital, etc.
-    //  current/capital is annoying :')
-    //      could change data to have column current/capital which elements either current or capital, then have cost column, so would have 2 columns for each policy
-    //      idk ill worry about this later this isnt the most important part
-    //  also will have to move groupings.csv to grouping_by_party.csv
-    //  todo then have to sort policies by grouping :')
-    //      won't this will be weird if the policies keep bouncing around then?
-    //  todo also have to change legend aaaaa
-    //  maybe should make a separate function for this
-
-    let groupingCol = 6 // todo get from dropdown
-    let groupingNames = getUniqueFromCol(budgets, groupingCol)
-
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * max)
-    }
-    let groupingColours = {}
-    for (let i in groupingNames) {
-        groupingColours[groupingNames[i]] = 'rgb(' + getRandomInt(256) + ',' + getRandomInt(256) + ',' + getRandomInt(256) + ')' // todo ew
-    }
+    let groupingCol = getColFromName(budgets, grouping)
+    let groups = getUniqueFromCol(budgets, groupingCol)
+    let groupingColours = generateGroupingColours(groups)
 
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
@@ -342,6 +323,17 @@ function policiesStackedBar2(budgets, definitions, div) {
         yaxis='Cost (€)',
         legendTitle='Grouping'
     )
+}
+
+function generateGroupingColours(groups) {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max)
+    }
+    let groupingColours = {}
+    for (let i in groups) {
+        groupingColours[groups[i]] = 'rgb(' + getRandomInt(256) + ',' + getRandomInt(256) + ',' + getRandomInt(256) + ')' // todo ew
+    }
+    return groupingColours
 }
 
 function policiesTable(budgets, div) {

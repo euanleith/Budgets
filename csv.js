@@ -162,3 +162,10 @@ function getUniqueFromCol(data, col) {
     }
     return res
 }
+
+function getColFromName(data, name) {
+    for (let i = 0; i < data.length; i++) {
+        if (data[0][i] == name) return i
+    }
+    return -1
+}
