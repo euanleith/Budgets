@@ -34,7 +34,37 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
 
 function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[]) {
     div = document.getElementById(div);
-    sortTraces(traces)
+
+    for (let i in traces) {
+        traces[i].type = 'bar'
+        traces[i].textposition = 'bottom'
+        if (traces[i].marker) { // todo move colour to here
+            traces[i].marker.line = {
+                width: 0.5
+            }
+        }
+        if (!traces[i].hovertemplate) traces[i].hovertemplate = '€%{y}' // todo get rid of this eventually
+        else {
+            // todo when hovertemplate is too long the hover item's position moves from the top of the trace to above the mouse...
+            // plotly's 'hoverformat' doesn't allow for 'B = billion' notation, so have to do manually
+            const formatter = Intl.NumberFormat("en", {
+                notation: "compact" ,
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 5
+            });
+            // todo or could have separate hover templates for policy and grouping?
+            // todo idk how to format this well...
+            traces[i].hovertemplate = 'Policy: ' + traces[i].hovertemplate +
+                '<br>Grouping total: €' +
+                    formatter.format(groupSum(traces, traces[i].legendgroup)) +
+                    ' - ' + traces[i].name +
+                '</br><extra></extra>'
+        }
+
+    }
+
+    sortGroupedTraces(traces)
+
     var layout = {
         title: {
             text: title,
@@ -50,7 +80,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 text: yaxis,
             }
         },
-        autosize: true,
+        autosize: false,
         barmode: 'stack',
         legend: {
             font: {
@@ -59,7 +89,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             title: {
                 text: legendTitle
             },
-            traceorder: 'normal'
+            traceorder: 'normal',
         },
         hovermode: 'closest',
         barmode: 'relative',
@@ -69,13 +99,35 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
 }
 
+// todo maybe have global var groupSums {group1: sum, group2: sum, ...} ?
+//  this would be okay as long as no two groups have the same name
+//  though makes this no longer a static class, if that matters
+//      i could store the var in main.js instead if i want that...
+let groupSums = {}
+function groupSum(traces, group) {
+    if (!(group in groupSums)) {
+        // todo i think theres a more efficient way of doing this
+        groupSums[group] = traces.filter(trace => trace.legendgroup === group).reduce((acc, val) => acc + arrSum(val.y), 0)
+    }
+    return groupSums[group]
+}
+
 // sort traces by avg of y values
 function sortTraces(traces) {
     traces.sort((a,b) => arrAvg(b.y) - arrAvg(a.y))
 }
 
+// sort traces by avg of y values and by legendgroup
+function sortGroupedTraces(traces) {
+    traces.sort((a,b) => {
+        totalA = groupSum(traces, a.legendgroup)
+        totalB = groupSum(traces, b.legendgroup)
+        return totalB - totalA
+    })
+}
+
 function arrSum(arr) {
-    return arr.reduce((c,d)=>c+d || 0)
+    return arr.reduce((c,d)=>parseInt(c)+parseInt(d) || 0)
 }
 
 function arrAvg(arr) {

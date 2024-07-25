@@ -6,15 +6,17 @@ async function main() {
     let partyGroupings = await read('grouping_by_party.csv') // todo name
     let definitions = parseDefinitions(await read('definitions.csv'))
 
-    sumsStackedBar(partyGroupings, 'graph9');
-    groupsStackedBar(partyGroupings, groupings, definitions, 'graph1'); // todo shouldn't use budgets
-    statusSumStackedBar(partyGroupings, definitions, 'graph2');
-    statusStackedBar(partyGroupings, definitions, 'To remove', 'graph3');
-    statusStackedBar(partyGroupings, definitions, 'Removing', 'graph4');
-    currentCapitalStackedBar(partyGroupings, definitions, 'graph8');
-    policiesStackedBar(partyGroupings, definitions, 'graph5');
-    //policiesStackedBar2(partyGroupings, definitions, 'graph7');
-    policiesTable(partyGroupings, 'graph6');
+    sumsStackedBar(partyGroupings, 'sumsBar');
+    groupsStackedBar(partyGroupings, groupings, definitions, 'groupingBar'); // todo shouldn't use budgets
+    // todo add graph with all REV items which are in grouping 'new social housing'
+    statusSumStackedBar(partyGroupings, definitions, 'statusBar');
+    statusStackedBar(partyGroupings, definitions, 'To remove', 'toRemoveBar');
+    statusStackedBar(partyGroupings, definitions, 'Removing', 'removingBar'); // todo maybe combine this with 'to remove'
+    // todo should probably add 'new' one too
+    currentCapitalStackedBar(partyGroupings, definitions, 'currentCapitalBar');
+    policiesStackedBar(partyGroupings, definitions, 'policiesBar');
+    policiesStackedBar2(partyGroupings, definitions, 'graph7');
+    policiesTable(partyGroupings, 'policiesTable');
 
     addDropdown(['option1', 'option2', 'option3'],
         groupsStackedBar,
@@ -45,9 +47,11 @@ function sumsStackedBar(groupings, div) {
     }
 
     let labels = []
+    // plotly's 'hoverformat' doesn't allow for 'B = billion' notation, so have to do manually
     const formatter = Intl.NumberFormat("en", {
         notation: "compact" ,
-        minimumFractionDigits: 5 // plotly default
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 5
     });
     Object.values(sums).forEach((sum) => {
         labels.push(formatter.format(sum))
@@ -57,9 +61,9 @@ function sumsStackedBar(groupings, div) {
         Object.keys(sums),
         Object.values(sums),
         labels=labels,
-        title='Total cost for each party',
+        title='Total expenditure by party',
         xaxis='Parties',
-        yaxis='Total cost (€)'
+        yaxis='Cost (€)'
     );
 }
 
@@ -68,20 +72,16 @@ function groupsStackedBar(budgets, groupings, definitions, div) {
     let parties = getUniqueFromDepthOrderedCol(budgets, 1)
     let traces = []
     for (let group in grouped) {
-        // todo all of this plotly config stuff should in in plotStackedBar
         traces.push({
             x: parties,
             y: grouped[group],
-            type: 'bar',
             name: group,
-            textposition: 'bottom',
-            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(definitions['Grouping'],
         traces,
         div,
-        title='Split of expenditure by manual groupings',
+        title='Split of expenditure by party',
         xaxis='Parties',
         yaxis='Cost (€)',
         legendTitle='Groupings'
@@ -91,7 +91,7 @@ function groupsStackedBar(budgets, groupings, definitions, div) {
 // todo replace with old format
 // output format: {'grouping1': [cost1, cost2, ...], 'grouping2': [...], ...}
 // where order of values corresponds to order of parties (i.e. [FFG, SF, ...]) todo assuming these are ordered
-function sumGroups2(data, grouping, ignoreNegatives=false, col=2) {
+function sumGroups2(data, grouping, ignoreNegatives=false, col=3) {
     let res = {}
     let current = {name: '', grouping: '', index: 1} // todo current policy
     for (let iData = 1, iParty = 0; iData < data.length; iData++, iParty++) {
@@ -110,33 +110,6 @@ function sumGroups2(data, grouping, ignoreNegatives=false, col=2) {
     }
     return res
 }
-
-// sorts an object by its average values
-// where object is of structure {key1: [num1, num2, ...], key2: [...], ...}
-// e.g. {key1: [1,1], key2: [1,3,5], key3: [2,2]} returns {key2: [1,3,5], key3: [2,2], key1: [1,1]}
-function sortByAvgVals(obj, len) {
-    return Object.fromEntries(
-        Object.entries(obj).sort(([,a],[,b]) =>
-            (b.reduce((c,d)=>c+d)/len) - (a.reduce((c,d)=>c+d)/len)
-        )
-    )
-}
-
-// returns list of keys of an object sorted by its average values
-function sortKeysByAvgVals(obj, len) {
-    return Object.keys(obj).sort((a,b) => {
-        return (obj[b].reduce((c,d)=>c+d)/len) - (obj[a].reduce((c,d)=>c+d)/len)
-    })
-}
-
-// returns list of keys of an object sorted by its values
-function sortKeysByVals(obj) {
-    return Object.keys(obj).sort((a,b) => {
-        return (obj[b] - obj[a])
-    })
-}
-
-
 
 function statusSumStackedBar(partyGroupings, definitions, div) {
     let traces = []
@@ -163,10 +136,7 @@ function statusSumStackedBar(partyGroupings, definitions, div) {
         traces.push({
             x: Object.keys(statuses),
             y: statusTotalCosts,
-            type: 'bar',
             name: statusNames[i],
-            textposition: 'bottom',
-            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(definitions['Status'],
@@ -207,10 +177,7 @@ function statusStackedBar(partyGroupings, definitions, status, div) {
         traces.push({
             x: Object.keys(statuses),
             y: Object.values(statuses).map(a => a[policies[i]]),
-            type: 'bar',
             name: policies[i],
-            textposition: 'bottom',
-            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(definitions['Policy'],
@@ -242,10 +209,7 @@ function currentCapitalStackedBar(budgets, definitions, div) {
         traces.push({
             x: parties,
             y: data[i],
-            type: 'bar',
             name: names[i],
-            textposition: 'bottom',
-            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(definitions['Terms'],
@@ -283,10 +247,7 @@ function policiesStackedBar(budgets, definitions, div) {
         traces.push({
             x: parties,
             y: costs[i],
-            type: 'bar',
             name: policies[i],
-            textposition: 'bottom',
-            hovertemplate: '€%{y}'
         });
     }
     plotStackedBar(
@@ -323,13 +284,15 @@ function policiesStackedBar2(budgets, definitions, div) {
     // todo maybe have colours = {type: colour}, then marker: {color: colours[partyGroupings[i][iType]]
     //  where iType = 3 for status, 4/5 for current/capital, etc.
     //  current/capital is annoying :')
+    //      could change data to have column current/capital which elements either current or capital, then have cost column, so would have 2 columns for each policy
+    //      idk ill worry about this later this isnt the most important part
     //  also will have to move groupings.csv to grouping_by_party.csv
     //  todo then have to sort policies by grouping :')
     //      won't this will be weird if the policies keep bouncing around then?
     //  todo also have to change legend aaaaa
     //  maybe should make a separate function for this
 
-    let groupingCol = 3 // todo get from dropdown
+    let groupingCol = 6 // todo get from dropdown
     let groupingNames = getUniqueFromCol(budgets, groupingCol)
 
     function getRandomInt(max) {
@@ -343,31 +306,41 @@ function policiesStackedBar2(budgets, definitions, div) {
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
+    let legendGroupings = []
     for (let i = 0; i < policies.length; i++) {
-        let colours = []
-        for (let j = 0; j < parties.length; j++) {
-            colours.push(groupingColours[budgets[j+i*parties.length+1][groupingCol]]) // todo this is such a roundabout way of doing indexing
+        let groupings = {}
+        for (let j = 0; j < costs[i].length; j++) {
+            let group = budgets[j+i*costs[i].length+1][groupingCol] // todo this is such a roundabout way of doing indexing
+            if (!(group in groupings)) groupings[group] = new Array(costs[i].length)
+            groupings[group][j] = costs[i][j]
         }
-        traces.push({
-            x: parties,
-            y: costs[i],
-            type: 'bar',
-            name: policies[i],
-            textposition: 'bottom',
-            hovertemplate: '€%{y}',
-            marker: {
-                color: colours
+        for (let group in groupings) {
+            // todo move plotly specific stuff to plotlyHelper.js
+            traces.push({
+                x: parties,
+                y: groupings[group],
+                name: group,
+                hovertemplate: '€%{y} - ' + policies[i], // todo also show total sum for grouping... maybe could do after traces is fully created? like traces[i].hovertemplate = traces[i].hovertemplate + sum(traces[i].grouping)
+                marker: {
+                    color: groupingColours[group]
+                },
+                legendgroup: group,
+            });
+            if (legendGroupings.includes(group)) {
+                traces[traces.length-1].showlegend = false
+            } else {
+                legendGroupings.push(group)
             }
-        });
+        }
     }
     plotStackedBar(
         definitions,
         traces,
         div,
-        title='Split of expenditure by policy',
+        title='Split of expenditure by grouping',
         xaxis='Parties',
         yaxis='Cost (€)',
-        legendTitle='Policy'
+        legendTitle='Grouping'
     )
 }
 
