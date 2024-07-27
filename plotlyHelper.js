@@ -168,12 +168,34 @@ function addLegendHoverWidget(div, definitions) {
 }
 
 function addDropdown(options, divBuilder, ...args) {
-    let selector = document.querySelector('.groupingdata')
+    let dropdown = document.querySelector('.groupingdata')
 
     for (var i = 0; i < options.length;  i++) {
         var currentOption = document.createElement('option');
         currentOption.text = options[i];
-        selector.appendChild(currentOption);
+        dropdown.appendChild(currentOption);
     }
-    selector.addEventListener('change', () => divBuilder(selector.value, ...args), false);
+    dropdown.addEventListener('change', () => divBuilder(selector.value, ...args), false);
+}
+
+function addArrowButtons(options, divBuilder, ...args) {
+    let prev = document.querySelector("#prevArrow")
+    let next = document.querySelector("#nextArrow")
+    let graphIndex = 0;
+
+    function onClickArrow(divBuilder, grouping, ...args) {
+        document.querySelector('.groupingdata').value = grouping
+        divBuilder(grouping, ...args)
+    }
+
+    prev.addEventListener('click', () => {
+        if (graphIndex > 0) {
+            onClickArrow(divBuilder, options[--graphIndex], ...args)
+        }
+    })
+    next.addEventListener('click', () => {
+        if (graphIndex < options.length-1) {
+            onClickArrow(divBuilder, options[++graphIndex], ...args)
+        }
+    })
 }

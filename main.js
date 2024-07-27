@@ -18,7 +18,15 @@ async function main() {
     policiesStackedBar2('Groupings', partyGroupings, definitions, 'colouredGroupingsBar');
     policiesTable(partyGroupings, 'policiesTable');
 
-    addDropdown(['Groupings', 'Status'],
+    let graphs = ['Groupings', 'Status']
+    addDropdown(graphs,
+        policiesStackedBar2,
+        partyGroupings,
+        definitions,
+        'colouredGroupingsBar'
+    );
+
+    addArrowButtons(graphs,
         policiesStackedBar2,
         partyGroupings,
         definitions,
@@ -318,7 +326,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
         definitions,
         traces,
         div,
-        title='Split of expenditure by grouping',
+        title='Split of expenditure by ' + grouping,
         xaxis='Parties',
         yaxis='Cost (€)',
         legendTitle='Grouping'
