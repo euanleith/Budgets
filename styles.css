@@ -9,3 +9,18 @@ div.legendTooltip {
     pointer-events: none;
     display: block;
 }
+
+#outer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+#descriptions {
+/*    margin-left: 20%;*/
+/*    margin-right: 20%*/
+    overflow-y: scroll;
+    height:450px;
+    margin-left: 2%;
+    margin-right: 2%;
+}

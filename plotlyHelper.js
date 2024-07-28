@@ -32,7 +32,7 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
 }
 
-function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[]) {
+function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[], hiddenLabels=[]) {
     div = document.getElementById(div);
 
     for (let i in traces) {
@@ -43,6 +43,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 width: 0.5
             }
         }
+        if (hiddenLabels.includes(traces[i].name)) traces[i].visible = 'legendonly'
         if (!traces[i].hovertemplate) traces[i].hovertemplate = '€%{y}' // todo get rid of this eventually
         else {
             // todo when hovertemplate is too long the hover item's position moves from the top of the trace to above the mouse...
@@ -68,7 +69,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     var layout = {
         title: {
             text: title,
-            x: 0.05
+            x: 0.05,
         },
         xaxis: {
             title: {
@@ -82,20 +83,25 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         },
         autosize: false,
         barmode: 'stack',
+        margin: {
+            l: 50,
+            r: 250,
+        },
         legend: {
             font: {
                 size: 10
             },
             title: {
-                text: legendTitle
+                text: legendTitle,
             },
             traceorder: 'normal',
         },
         hovermode: 'closest',
         barmode: 'relative',
-        colorway : colorScheme
+        colorway: colorScheme
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
+
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
 }
 
@@ -167,15 +173,22 @@ function addLegendHoverWidget(div, definitions) {
     })
 }
 
+function getIndexOfKey(obj, key, val) {
+    return obj.findIndex((elem) => elem[key] === val)
+}
+
 function addDropdown(options, divBuilder, ...args) {
     let dropdown = document.querySelector('.groupingdata')
 
     for (var i = 0; i < options.length;  i++) {
         var currentOption = document.createElement('option');
-        currentOption.text = options[i];
+        currentOption.text = options[i].name;
         dropdown.appendChild(currentOption);
     }
-    dropdown.addEventListener('change', () => divBuilder(selector.value, ...args), false);
+    dropdown.addEventListener('change', () => divBuilder(
+        options[getIndexOfKey(options, 'name', dropdown.value)],...args),
+    );
+    // todo this will mess up arrow button index
 }
 
 function addArrowButtons(options, divBuilder, ...args) {
@@ -183,19 +196,15 @@ function addArrowButtons(options, divBuilder, ...args) {
     let next = document.querySelector("#nextArrow")
     let graphIndex = 0;
 
-    function onClickArrow(divBuilder, grouping, ...args) {
-        document.querySelector('.groupingdata').value = grouping
-        divBuilder(grouping, ...args)
-    }
 
     prev.addEventListener('click', () => {
         if (graphIndex > 0) {
-            onClickArrow(divBuilder, options[--graphIndex], ...args)
+            divBuilder(options[--graphIndex], ...args)
         }
     })
     next.addEventListener('click', () => {
         if (graphIndex < options.length-1) {
-            onClickArrow(divBuilder, options[++graphIndex], ...args)
+            divBuilder(options[++graphIndex], ...args)
         }
     })
 }

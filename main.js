@@ -15,16 +15,23 @@ async function main() {
     // todo should probably add 'new' one too
     currentCapitalStackedBar(partyGroupings, definitions, 'currentCapitalBar');
     policiesStackedBar(partyGroupings, definitions, 'policiesBar');
-    policiesStackedBar2('Groupings', partyGroupings, definitions, 'colouredGroupingsBar');
     policiesTable(partyGroupings, 'policiesTable');
 
-    let graphs = ['Groupings', 'Status']
-    addDropdown(graphs,
-        policiesStackedBar2,
-        partyGroupings,
-        definitions,
-        'colouredGroupingsBar'
-    );
+    let graphs = [
+        {name: 'Groupings', startHidden: [], title: 'Split of expenditure by grouping', descriptionId: 'groupingsBarDescription'},
+        {name: 'Status', startHidden: [], title: 'Split of expenditure by policy status', descriptionId: 'statusBarDescription'},
+        {name: 'Status', startHidden: ['Existing', 'New'], title: 'Split of expenditure by policies being reduced/removed', descriptionId: 'removePoliciesDescription'},
+        {name: 'Status', startHidden: ['Existing', 'To remove', 'Removing', 'To reduce', 'Reducing'], title: 'Split of expenditure by new policies', descriptionId: 'newPoliciesDescription'},
+    ]
+    policiesStackedBar2(graphs[0], partyGroupings, definitions, 'colouredGroupingsBar')
+
+    // todo idk if should keep, removing for now
+//    addDropdown(graphs,
+//        policiesStackedBar2,
+//        partyGroupings,
+//        definitions,
+//        'colouredGroupingsBar'
+//    );
 
     addArrowButtons(graphs,
         policiesStackedBar2,
@@ -288,7 +295,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
         }
     }
 
-    let groupingCol = getColFromName(budgets, grouping)
+    let groupingCol = getColFromName(budgets, grouping.name)
     let groups = getUniqueFromCol(budgets, groupingCol)
     let groupingColours = generateGroupingColours(groups)
 
@@ -326,11 +333,18 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
         definitions,
         traces,
         div,
-        title='Split of expenditure by ' + grouping,
+        title=grouping.title,
         xaxis='Parties',
         yaxis='Cost (€)',
-        legendTitle='Grouping'
+        legendTitle=grouping.name,
+        colorScheme=[],
+        hiddenLabels=grouping.startHidden
     )
+
+    for (let description of document.querySelector('#descriptions').children) {
+        description.style.display = 'none'
+    }
+    document.querySelector('#' + grouping.descriptionId).style.display = 'block'
 }
 
 function generateGroupingColours(groups) {
