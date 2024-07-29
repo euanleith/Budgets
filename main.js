@@ -18,10 +18,11 @@ async function main() {
     policiesTable(partyGroupings, 'policiesTable');
 
     let graphs = [
+        {name: 'Total', startHidden: [], title: 'Total expenditure by party', descriptionId: 'totalsDescription'},
         {name: 'Groupings', startHidden: [], title: 'Split of expenditure by grouping', descriptionId: 'groupingsBarDescription'},
-        {name: 'Status', startHidden: [], title: 'Split of expenditure by policy status', descriptionId: 'statusBarDescription'},
         {name: 'Status', startHidden: ['Existing', 'New'], title: 'Split of expenditure by policies being reduced/removed', descriptionId: 'removePoliciesDescription'},
         {name: 'Status', startHidden: ['Existing', 'To remove', 'Removing', 'To reduce', 'Reducing'], title: 'Split of expenditure by new policies', descriptionId: 'newPoliciesDescription'},
+        {name: 'Status', startHidden: [], title: 'Split of expenditure by policy status', descriptionId: 'statusBarDescription'},
     ]
     policiesStackedBar2(graphs[0], partyGroupings, definitions, 'colouredGroupingsBar')
 
@@ -275,9 +276,19 @@ function policiesStackedBar(budgets, definitions, div) {
     )
 }
 
+function setDescription(grouping) {
+    for (let description of document.querySelector('#descriptions').children) {
+        description.style.display = 'none'
+    }
+    document.querySelector('#' + grouping.descriptionId).style.display = 'block'
+}
+
 // todo all of these array/csv functions should be generalised
 // todo name
 function policiesStackedBar2(grouping, budgets, definitions, div) {
+    setDescription(grouping)
+    if (grouping.name == 'Total') return sumsStackedBar(budgets, div) // todo maybe not a good way of doing this
+
     // note this is assuming data is ordered by policy
     let costs = []
     let currentPolicy = ""
@@ -297,7 +308,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
 
     let groupingCol = getColFromName(budgets, grouping.name)
     let groups = getUniqueFromCol(budgets, groupingCol)
-    let groupingColours = generateGroupingColours(groups)
+    let groupingColours = getGroupingColours(groups)
 
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
@@ -341,10 +352,6 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
         hiddenLabels=grouping.startHidden
     )
 
-    for (let description of document.querySelector('#descriptions').children) {
-        description.style.display = 'none'
-    }
-    document.querySelector('#' + grouping.descriptionId).style.display = 'block'
 }
 
 function generateGroupingColours(groups) {
@@ -354,6 +361,15 @@ function generateGroupingColours(groups) {
     let groupingColours = {}
     for (let i in groups) {
         groupingColours[groups[i]] = 'rgb(' + getRandomInt(256) + ',' + getRandomInt(256) + ',' + getRandomInt(256) + ')' // todo ew
+    }
+    return groupingColours
+}
+
+// todo can i move this to plotlyHelper?
+function getGroupingColours(groups) {
+    groupingColours = {}
+    for (let i in groups) {
+        groupingColours[groups[i]] = colorScheme2[i]
     }
     return groupingColours
 }

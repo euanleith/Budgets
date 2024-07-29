@@ -32,6 +32,22 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
 }
 
+let colorScheme2 = [
+    '#ebac23',
+    '#b80058',
+    '#008cf9',
+    '#006e00',
+    '#00bbad',
+    '#d163e6',
+    '#b24502',
+    '#ff9287',
+    '#5954d6',
+    '#00c6f8',
+    '#878500',
+    '#00a76c',
+    '#bdbdbd',
+]
+
 function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[], hiddenLabels=[]) {
     div = document.getElementById(div);
 
@@ -40,7 +56,8 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         traces[i].textposition = 'bottom'
         if (traces[i].marker) { // todo move colour to here
             traces[i].marker.line = {
-                width: 0.5
+                width: 0.05,
+                color: '#fff'
             }
         }
         if (hiddenLabels.includes(traces[i].name)) traces[i].visible = 'legendonly'
@@ -57,7 +74,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             // todo idk how to format this well...
             traces[i].hovertemplate = 'Policy: ' + traces[i].hovertemplate +
                 '<br>Grouping total: €' +
-                    formatter.format(groupSum(traces, traces[i].legendgroup)) +
+                    formatter.format(groupSum(traces, traces[i].legendgroup)) + // todo this is wrong, its currently showing total across all parties
                     ' - ' + traces[i].name +
                 '</br><extra></extra>'
         }
@@ -98,7 +115,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         },
         hovermode: 'closest',
         barmode: 'relative',
-        colorway: colorScheme
+        colorway: colorScheme2,
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
 
@@ -195,7 +212,6 @@ function addArrowButtons(options, divBuilder, ...args) {
     let prev = document.querySelector("#prevArrow")
     let next = document.querySelector("#nextArrow")
     let graphIndex = 0;
-
 
     prev.addEventListener('click', () => {
         if (graphIndex > 0) {
