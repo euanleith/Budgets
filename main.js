@@ -17,12 +17,13 @@ async function main() {
     policiesStackedBar(partyGroupings, definitions, 'policiesBar');
     policiesTable(partyGroupings, 'policiesTable');
 
+    // todo should probably structure this as a class
     let graphs = [
-        {name: 'Total', startHidden: [], title: 'Total expenditure by party', descriptionId: 'totalsDescription'},
-        {name: 'Groupings', startHidden: [], title: 'Split of expenditure by grouping', descriptionId: 'groupingsBarDescription'},
-        {name: 'Status', startHidden: ['Existing', 'New'], title: 'Split of expenditure by policies being reduced/removed', descriptionId: 'removePoliciesDescription'},
-        {name: 'Status', startHidden: ['Existing', 'To remove', 'Removing', 'To reduce', 'Reducing'], title: 'Split of expenditure by new policies', descriptionId: 'newPoliciesDescription'},
-        {name: 'Status', startHidden: [], title: 'Split of expenditure by policy status', descriptionId: 'statusBarDescription'},
+        {name: 'Total', startHidden: [], ignoreNegatives: true, title: 'Total expenditure by party', subtitle: 'The total housing expenditure proposed by each party.', descriptionId: 'totalsDescription'},
+        {name: 'Groupings', startHidden: [], ignoreNegatives: true, title: 'Split of expenditure', subtitle: 'The proposed expenditure towards housing policies, split into groups.', descriptionId: 'groupingsBarDescription'},
+        {name: 'Status', startHidden: ['Existing', 'New'], ignoreNegatives: false, title: 'Policies being reduced/removed', subtitle: 'Policies which opposition parties have proposed removal or a reduction in spending.', descriptionId: 'removePoliciesDescription'},
+        {name: 'Status', startHidden: ['Existing', 'To remove', 'Removing', 'To reduce', 'Reducing'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'},
+        {name: 'Status', startHidden: [], ignoreNegatives: false, title: 'Split of expenditure by policy status', subtitle: 'The proposed expenditure towards housing policies, sorted by status.', descriptionId: 'statusBarDescription'},
     ]
     policiesStackedBar2(graphs[0], partyGroupings, definitions, 'colouredGroupingsBar')
 
@@ -287,6 +288,9 @@ function setDescription(grouping) {
 // todo name
 function policiesStackedBar2(grouping, budgets, definitions, div) {
     setDescription(grouping)
+    document.getElementById('chartTitle').innerHTML = grouping.title
+    document.getElementById('chartSubtitle').innerHTML = grouping.subtitle
+
     if (grouping.name == 'Total') return sumsStackedBar(budgets, div) // todo maybe not a good way of doing this
 
     // note this is assuming data is ordered by policy
@@ -299,7 +303,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
             costs[++iPolicy] = []
         }
         let cost = budgets[row][2] // todo don't hardcode
-        if (cost > 0) {
+        if (!grouping.ignoreNegatives || cost > 0) {
             costs[iPolicy].push(cost)
         } else {
             costs[iPolicy].push(0)

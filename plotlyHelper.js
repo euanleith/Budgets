@@ -12,10 +12,6 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
     div = document.getElementById(div);
 
     var layout = {
-        title: {
-            text: title,
-            x: 0.05
-        },
         xaxis: {
             title: {
                 text: xaxis,
@@ -25,6 +21,10 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
             title: {
                 text: yaxis,
             }
+        },
+        margin: {
+            t: 0,
+            // todo add margin to right equal to max length of legend. or just run this chart in plotStackedBar too
         },
         autosize: true,
         hovermode: 'closest',
@@ -84,10 +84,6 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     sortGroupedTraces(traces)
 
     var layout = {
-        title: {
-            text: title,
-            x: 0.05, // todo move this to centre of page?
-        },
         xaxis: {
             title: {
                 text: xaxis,
@@ -103,6 +99,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         margin: {
             l: 50,
             r: 250,
+            t: 0
         },
         legend: {
             font: {
@@ -111,6 +108,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             title: {
                 text: legendTitle,
             },
+            // todo actually maybe i want this on the left now that description is on the right, so graph is centered and close to both
             traceorder: 'normal',
         },
         hovermode: 'closest',
