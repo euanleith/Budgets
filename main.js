@@ -53,7 +53,7 @@ function parseDefinitions(data) {
 function sumsStackedBar(groupings, div) {
     let sums = {};
     for (let i = 1; i < groupings.length; i++) {
-        let party = groupings[i][1]
+        let party = wrap(groupings[i][1], 12)
         if (!(party in sums)) sums[party] = 0
         sums[party] += parseInt(groupings[i][2])
     }
@@ -114,6 +114,7 @@ function currentCapitalStackedBar(budgets, definitions, div) {
     let capital = sumFromDepthOrderedCol(budgets, 1, 5, ignoreNegatives=true) // todo don't hardcode
 
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
+    parties = parties.map((elem) => wrap(elem, 12))
     let data = [current, capital]
     let names = ['Current', 'Capital']
     let traces = []
@@ -155,6 +156,7 @@ function policiesStackedBar(budgets, definitions, div) {
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
+    parties = parties.map((elem) => wrap(elem, 12))
     for (let i = 0; i < policies.length; i++) {
         traces.push({
             x: parties,
@@ -178,6 +180,25 @@ function setDescription(grouping) {
         description.style.display = 'none'
     }
     document.querySelector('#' + grouping.descriptionId).style.display = 'block'
+}
+
+function wrap(str, len, br='<br>') {
+    words = str.split(' ')
+    let wrapped = []
+    let row = words[0]
+
+    for (var i = 1; i < words.length; i++) {
+        console.log(wrapped + ' & ' + row + ' ' + row.length + ' ' + words[i].length)
+        if (row.length + words[i].length > len) {
+            wrapped += row + br
+            row = words[i]
+        } else {
+            row += ' ' + words[i]
+        }
+    }
+    wrapped += row
+    console.log(wrapped)
+    return wrapped
 }
 
 // todo all of these array/csv functions should be generalised
@@ -213,6 +234,8 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
+    parties = parties.map((elem) => wrap(elem, 12))
+    console.log(parties)
     let legendGroupings = []
     for (let i = 0; i < policies.length; i++) {
         let groupings = {}
