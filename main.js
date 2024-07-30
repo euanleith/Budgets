@@ -184,7 +184,7 @@ function setDescription(grouping) {
 function policiesStackedBar2(grouping, budgets, definitions, div) {
     setDescription(grouping)
     document.getElementById('chartTitle').innerHTML = grouping.title
-    document.getElementById('chartSubtitle').innerHTML = grouping.subtitle
+//    document.getElementById('chartSubtitle').innerHTML = grouping.subtitle // todo removing for now
 
     if (grouping.name == 'Total') return sumsStackedBar(budgets, div) // todo maybe not a good way of doing this
 

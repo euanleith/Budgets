@@ -10,7 +10,7 @@ div.legendTooltip {
     display: block;
 }
 
-#outer {
+.horizontalStack {
     width: 100%;
     display: flex;
     align-items: center;

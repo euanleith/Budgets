@@ -16,13 +16,15 @@
 <!--<div class="control-row">
     Grouping: <select class="groupingdata"></select>
 </div>-->
-<h2 id="chartTitle" style="text-align: center"></h2>
+<div class="horizontalStack">
+    <button id="prevArrow" style="margin: 10px">&#11013;</button>
+    <h2 id="chartTitle" style="text-align: center; display: flex; justify-content: center; width: 200px"></h2>
+    <button id="nextArrow" style="margin: 10px">&#x2B95;</button>
+</div>
 <p id="chartSubtitle" style="text-align: center"></p> <!--todo maybe not necessary-->
 
-<div id="outer">
-    <button id="prevArrow">&#11013;</button>
+<div class="horizontalStack">
     <div id="colouredGroupingsBar" style="height: 10%"></div>
-    <button id="nextArrow">&#x2B95;</button>
     <div id="descriptions" style="flex-grow: 1;">
         <div id="totalsDescription" style="display:none">
             <p>All of the opposition parties are proposing increases in housing expenditure.</p>
