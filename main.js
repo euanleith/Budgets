@@ -1,4 +1,5 @@
 main();
+enumerateCitations()
 
 async function main() {
     let budgets = await read('budgets.csv') //  todo remove
@@ -309,3 +310,13 @@ function policiesTable(budgets, div) {
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
 }
 
+function enumerateCitations() {
+    var citations = document.getElementsByClassName('citation')
+    let hrefIds = {}
+    let cnt = 1
+    for (let i = 0; i < citations.length; i++) {
+        let href = citations[i].href
+        if (!(href in hrefIds)) hrefIds[href] = cnt++
+        citations[i].innerHTML = ('[' + hrefIds[href] + ']').sup()
+    }
+}
