@@ -211,14 +211,20 @@ function addArrowButtons(options, divBuilder, ...args) {
     let next = document.querySelector("#nextArrow")
     let graphIndex = 0;
 
+    prev.style.visibility='hidden'
+
     prev.addEventListener('click', () => {
         if (graphIndex > 0) {
             divBuilder(options[--graphIndex], ...args)
+            next.style.visibility='visible'
+            if (graphIndex == 0) prev.style.visibility='hidden'
         }
     })
     next.addEventListener('click', () => {
         if (graphIndex < options.length-1) {
             divBuilder(options[++graphIndex], ...args)
+            prev.style.visibility='visible'
+            if (graphIndex == options.length-2) next.style.visibility='hidden'
         }
     })
 }
