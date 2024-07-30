@@ -206,6 +206,24 @@ function addDropdown(options, divBuilder, ...args) {
     // todo this will mess up arrow button index
 }
 
+function prevEvent(prev, next, graphIndex, options, divBuilder, ...args) {
+    if (graphIndex > 0) {
+        divBuilder(options[--graphIndex], ...args)
+        next.style.visibility='visible'
+    }
+    if (graphIndex == 0) prev.style.visibility='hidden'
+    return graphIndex
+}
+
+function nextEvent(prev, next, graphIndex, options, divBuilder, ...args) {
+    if (graphIndex < options.length-1) {
+        divBuilder(options[++graphIndex], ...args)
+        prev.style.visibility='visible'
+    }
+    if (graphIndex == options.length-1) next.style.visibility='hidden'
+    return graphIndex
+}
+
 function addArrowButtons(options, divBuilder, ...args) {
     let prev = document.querySelector("#prevArrow")
     let next = document.querySelector("#nextArrow")
@@ -214,17 +232,28 @@ function addArrowButtons(options, divBuilder, ...args) {
     prev.style.visibility='hidden'
 
     prev.addEventListener('click', () => {
-        if (graphIndex > 0) {
-            divBuilder(options[--graphIndex], ...args)
-            next.style.visibility='visible'
-            if (graphIndex == 0) prev.style.visibility='hidden'
-        }
+            graphIndex = prevEvent(prev, next, graphIndex, options, divBuilder, ...args)
     })
     next.addEventListener('click', () => {
-        if (graphIndex < options.length-1) {
-            divBuilder(options[++graphIndex], ...args)
-            prev.style.visibility='visible'
-            if (graphIndex == options.length-1) next.style.visibility='hidden'
+            graphIndex = nextEvent(prev, next, graphIndex, options, divBuilder, ...args)
+    })
+
+    var mouseOn = false;
+    document.getElementById('mainChart').onmouseover = function() {
+        console.log('mouseover');
+        mouseOn = true;
+    }
+    document.getElementById('mainChart').onmouseleave = function() {
+        console.log('mouseleave');
+        mouseOn = false;
+    }
+    document.addEventListener("keydown", function(event) {
+        if (mouseOn) {
+            if (event.key === 'ArrowRight') {
+                graphIndex = nextEvent(prev, next, graphIndex, options, divBuilder, ...args)
+            } else if (event.key === 'ArrowLeft') {
+                graphIndex = prevEvent(prev, next, graphIndex, options, divBuilder, ...args)
+            }
         }
     })
 }
