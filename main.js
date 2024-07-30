@@ -17,7 +17,7 @@ async function main() {
         {name: 'Total', startHidden: [], ignoreNegatives: true, title: 'Total expenditure by party', subtitle: 'The total housing expenditure proposed by each party.', descriptionId: 'totalsDescription'},
         {name: 'Groupings', startHidden: [], ignoreNegatives: true, title: 'Split of expenditure', subtitle: 'The proposed expenditure towards housing policies, split into groups.', descriptionId: 'groupingsBarDescription'},
         {name: 'Status', startHidden: ['Existing', 'New'], ignoreNegatives: false, title: 'Policies being reduced/removed', subtitle: 'Policies which opposition parties have proposed removal or a reduction in spending.', descriptionId: 'removePoliciesDescription'},
-        {name: 'Status', startHidden: ['Existing', 'To remove', 'Removing', 'To reduce', 'Reducing'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'},
+        {name: 'Status', startHidden: ['Existing', 'Planned for removal', 'Removing', 'Planned for reduction', 'Reducing'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'},
         {name: 'Status', startHidden: [], ignoreNegatives: false, title: 'Split of expenditure by policy status', subtitle: 'The proposed expenditure towards housing policies, sorted by status.', descriptionId: 'statusBarDescription'},
     ]
     policiesStackedBar2(graphs[0], partyGroupings, definitions, 'colouredGroupingsBar')
@@ -188,7 +188,6 @@ function wrap(str, len, br='<br>') {
     let row = words[0]
 
     for (var i = 1; i < words.length; i++) {
-        console.log(wrapped + ' & ' + row + ' ' + row.length + ' ' + words[i].length)
         if (row.length + words[i].length > len) {
             wrapped += row + br
             row = words[i]
@@ -197,7 +196,6 @@ function wrap(str, len, br='<br>') {
         }
     }
     wrapped += row
-    console.log(wrapped)
     return wrapped
 }
 
@@ -235,7 +233,6 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
     parties = parties.map((elem) => wrap(elem, 12))
-    console.log(parties)
     let legendGroupings = []
     for (let i = 0; i < policies.length; i++) {
         let groupings = {}
