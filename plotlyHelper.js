@@ -224,7 +224,7 @@ function addArrowButtons(options, divBuilder, ...args) {
         if (graphIndex < options.length-1) {
             divBuilder(options[++graphIndex], ...args)
             prev.style.visibility='visible'
-            if (graphIndex == options.length-2) next.style.visibility='hidden'
+            if (graphIndex == options.length-1) next.style.visibility='hidden'
         }
     })
 }
