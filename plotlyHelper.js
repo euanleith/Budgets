@@ -86,7 +86,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     var layout = {
         title: {
             text: title,
-            x: 0.05,
+            x: 0.05, // todo move this to centre of page?
         },
         xaxis: {
             title: {
