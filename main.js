@@ -6,16 +6,10 @@ async function main() {
     let partyGroupings = await read('grouping_by_party.csv') // todo name
     let definitions = parseDefinitions(await read('definitions.csv'))
 
-    sumsStackedBar(partyGroupings, 'sumsBar');
-    groupsStackedBar(partyGroupings, groupings, definitions, 'groupingBar');
     // todo add graph with all REV items which are in grouping 'new social housing'
-    statusSumStackedBar(partyGroupings, definitions, 'statusBar');
-    statusStackedBar(partyGroupings, definitions, 'To remove', 'toRemoveBar');
-    statusStackedBar(partyGroupings, definitions, 'Removing', 'removingBar'); // todo maybe combine this with 'to remove'
-    // todo should probably add 'new' one too
-    currentCapitalStackedBar(partyGroupings, definitions, 'currentCapitalBar');
-    policiesStackedBar(partyGroupings, definitions, 'policiesBar');
-    policiesTable(partyGroupings, 'policiesTable');
+//    currentCapitalStackedBar(partyGroupings, definitions, 'currentCapitalBar');
+//    policiesStackedBar(partyGroupings, definitions, 'policiesBar');
+//    policiesTable(partyGroupings, 'policiesTable');
 
     // todo should probably structure this as a class
     let graphs = [
@@ -54,6 +48,7 @@ function parseDefinitions(data) {
     return res
 }
 
+// todo can i do this under policiesStackedBar2?
 function sumsStackedBar(groupings, div) {
     let sums = {};
     for (let i = 1; i < groupings.length; i++) {
@@ -83,27 +78,6 @@ function sumsStackedBar(groupings, div) {
     );
 }
 
-function groupsStackedBar(budgets, groupings, definitions, div) {
-    let grouped = sumGroups2(budgets, groupings, ignoreNegatives=true)
-    let parties = getUniqueFromDepthOrderedCol(budgets, 1)
-    let traces = []
-    for (let group in grouped) {
-        traces.push({
-            x: parties,
-            y: grouped[group],
-            name: group,
-        });
-    }
-    plotStackedBar(definitions['Grouping'],
-        traces,
-        div,
-        title='Split of expenditure by party',
-        xaxis='Parties',
-        yaxis='Cost (€)',
-        legendTitle='Groupings'
-    )
-}
-
 // todo replace with old format
 // output format: {'grouping1': [cost1, cost2, ...], 'grouping2': [...], ...}
 // where order of values corresponds to order of parties (i.e. [FFG, SF, ...]) todo assuming these are ordered
@@ -125,85 +99,6 @@ function sumGroups2(data, grouping, ignoreNegatives=false, col=3) {
         }
     }
     return res
-}
-
-function statusSumStackedBar(partyGroupings, definitions, div) {
-    let traces = []
-    let statuses = {}
-    let statusNames = [] // todo or predefine statuses
-    for (let row = 1; row < partyGroupings.length; row++) {
-        let party = partyGroupings[row][1]
-        let statusName = partyGroupings[row][3]
-        if (!(party in statuses)) {
-            statuses[party] = {}
-        }
-        if (!(statusName in statuses[party])) {
-            statuses[party][statusName] = 0
-            if (!statusNames.includes(statusName)) {
-                statusNames.push(statusName)
-            }
-        }
-        statuses[party][statusName] += parseInt(partyGroupings[row][2]) // todo don't hardcode
-    }
-
-    let policies = fields(partyGroupings)
-    for (let i in statusNames) {
-        let statusTotalCosts = Object.values(statuses).map(a => a[statusNames[i]])
-        traces.push({
-            x: Object.keys(statuses),
-            y: statusTotalCosts,
-            name: statusNames[i],
-        });
-    }
-    plotStackedBar(definitions['Status'],
-        traces,
-        div,
-        title='Split of expenditure by policy status',
-        xaxis='Parties',
-        yaxis='Cost (€)',
-        legendTitle='Status',
-        colorScheme=['#f3cec9', '#e7a4b6', '#cd7eaf', '#a262a9', '#6f4d96', '#3d3b72', '#182844']
-    )
-}
-
-// todo with predefined statuses, could set default status=statusNames and allow for displaying of multiple custom statuses instead of just one
-//  though would these be sums or split into policies?
-function statusStackedBar(partyGroupings, definitions, status, div) {
-    let traces = []
-    let statuses = {}
-    for (let row = 1; row < partyGroupings.length; row++) {
-        let party = partyGroupings[row][1]
-        let statusName = partyGroupings[row][3]
-        if (!(party in statuses)) {
-            statuses[party] = {}
-        }
-        if (statusName == status) {
-            statuses[party][partyGroupings[row][0]] = parseInt(partyGroupings[row][2]) // todo don't hardcode
-        }
-    }
-
-    let policies = []
-    for (let party in statuses) {
-        for (let policy in statuses[party]) {
-            if (!policies.includes(policy)) policies.push(policy)
-        }
-    }
-
-    for (let i in policies) {
-        traces.push({
-            x: Object.keys(statuses),
-            y: Object.values(statuses).map(a => a[policies[i]]),
-            name: policies[i],
-        });
-    }
-    plotStackedBar(definitions['Policy'],
-        traces,
-        div,
-        title="Split of expenditure by policy status '" + status + "'",
-        xaxis='Parties',
-        yaxis='Cost (€)',
-        legendTitle='Policy'
-    )
 }
 
 // todo graphs for current/capital;
