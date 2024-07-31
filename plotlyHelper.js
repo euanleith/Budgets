@@ -76,7 +76,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         for (let j in traces[i].x) {
             txt.push(
                 '<br>€' + formatter.format(groupPartySum(traces, traces[i].legendgroup, traces[i].x)[j]) +
-                " - '" + traces[i].name + "' Group Total" +
+                " - '" + traces[i].name + "' Total" +
                 '</br><extra></extra>'
             )
         }
