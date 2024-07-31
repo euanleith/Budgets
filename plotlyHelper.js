@@ -23,8 +23,9 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
             }
         },
         margin: {
+//            l: 50, // todo looks weird when add margins for legend when there is no legend...
+//            r: 250,
             t: 0,
-            // todo add margin to right equal to max length of legend. or just run this chart in plotStackedBar too
         },
         autosize: true,
         hovermode: 'closest',
@@ -61,24 +62,26 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             }
         }
         if (hiddenLabels.includes(traces[i].name)) traces[i].visible = 'legendonly'
-        if (!traces[i].hovertemplate) traces[i].hovertemplate = '€%{y}' // todo get rid of this eventually
-        else {
-            // todo when hovertemplate is too long the hover item's position moves from the top of the trace to above the mouse...
-            // plotly's 'hoverformat' doesn't allow for 'B = billion' notation, so have to do manually
-            const formatter = Intl.NumberFormat("en", {
-                notation: "compact" ,
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 5
-            });
-            // todo or could have separate hover templates for policy and grouping?
-            // todo idk how to format this well...
-            traces[i].hovertemplate = 'Policy: ' + traces[i].hovertemplate +
-                '<br>Grouping total: €' +
-                    formatter.format(groupSum(traces, traces[i].legendgroup)) + // todo this is wrong, its currently showing total across all parties
-                    ' - ' + traces[i].name +
-                '</br><extra></extra>'
-        }
 
+        // todo when hovertemplate is too long the hover item's position moves from the top of the trace to above the mouse...
+        // plotly's 'hoverformat' doesn't allow for 'B = billion' notation, so have to do manually
+        const formatter = Intl.NumberFormat("en", {
+            notation: "compact" ,
+            minimumFractionDigits: 0,
+            maximumFractionDigits: 5
+        });
+        // todo or could have separate hover templates for policy and grouping?
+        // todo idk how to format this well...
+        let txt = []
+        for (let j in traces[i].x) {
+            txt.push(
+                '<br>€' + formatter.format(groupPartySum(traces, traces[i].legendgroup, traces[i].x)[j]) +
+                " - '" + traces[i].name + "' Group Total" +
+                '</br><extra></extra>'
+            )
+        }
+        traces[i].text = txt
+        traces[i].hovertemplate += '%{text}'
     }
 
     sortGroupedTraces(traces)
@@ -87,6 +90,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         xaxis: {
             title: {
                 text: xaxis,
+                standoff: 1,
             },
         },
         yaxis: {
@@ -131,6 +135,20 @@ function groupSum(traces, group) {
         groupSums[group] = traces.filter(trace => trace.legendgroup === group).reduce((acc, val) => acc + arrSum(val.y), 0)
     }
     return groupSums[group]
+}
+
+// todo don't need both groupPartySums and groupSums
+// todo maybe do this on init
+let groupPartySums = {}
+function groupPartySum(traces, group, parties) {
+    if (!(group in groupPartySums)) {
+        groupPartySums[group] = {}
+        let groupTraces = traces.filter(trace => trace.legendgroup === group)
+        for (let i in parties) {
+            groupPartySums[group][parties[i]] = groupTraces.reduce((acc, val) => acc + parseInt(val.y[i]), 0)
+        }
+    }
+    return Object.values(groupPartySums[group])
 }
 
 // sort traces by avg of y values
@@ -240,11 +258,9 @@ function addArrowButtons(options, divBuilder, ...args) {
 
     var mouseOn = false;
     document.getElementById('mainChart').onmouseover = function() {
-        console.log('mouseover');
         mouseOn = true;
     }
     document.getElementById('mainChart').onmouseleave = function() {
-        console.log('mouseleave');
         mouseOn = false;
     }
     document.addEventListener("keydown", function(event) {
