@@ -70,7 +70,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             minimumFractionDigits: 0,
             maximumFractionDigits: 5
         });
-        // todo or could have separate hover templates for policy and grouping?
+        // todo or could have separate hover templates for policy and grouping? - https://stackoverflow.com/questions/68282313/how-to-display-a-extra-hover-text-while-hovering-stacked-bar-graph-in-plotly-js ?
         // todo idk how to format this well...
         let txt = []
         for (let j in traces[i].x) {
@@ -145,7 +145,10 @@ function groupPartySum(traces, group, parties) {
         groupPartySums[group] = {}
         let groupTraces = traces.filter(trace => trace.legendgroup === group)
         for (let i in parties) {
-            groupPartySums[group][parties[i]] = groupTraces.reduce((acc, val) => acc + parseInt(val.y[i]), 0)
+            groupPartySums[group][parties[i]] = groupTraces.reduce((acc, val) => {
+                if (val.y[i]) return acc + parseInt(val.y[i])
+                else return acc
+            }, 0)
         }
     }
     return Object.values(groupPartySums[group])
