@@ -8,9 +8,17 @@ async function main() {
     let definitions = parseDefinitions(await read('definitions.csv'))
 
     // todo add graph with all REV items which are in grouping 'new social housing'
+    // todo maybe add graph with just policies which have differences in spending between parties
 //    currentCapitalStackedBar(partyGroupings, definitions, 'currentCapitalBar');
 //    policiesStackedBar(partyGroupings, definitions, 'policiesBar');
 //    policiesTable(partyGroupings, 'policiesTable');
+
+    // todo 'more detail' charts; (link to these, which contain the graphs & discussions in the main chart, along with additional stuff'
+    // todo maybe add graph showing increasing in spending towards HAP/RAS over time
+    // todo also have a 'new build social housing' group of charts, with;
+    //  projected vs. actual built social housing
+    //  projected vs. actual spending on new build social housing
+    //  number of new plans/constructions for social housing
 
     // todo should probably structure this as a class
     let graphs = [
@@ -330,6 +338,8 @@ function policiesTable(budgets, div) {
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
 }
 
+// todo order sources programatically as well?
+// todo and order inline citations by number
 function enumerateCitations() {
     var citations = document.getElementsByClassName('citation')
     let hrefIds = {}

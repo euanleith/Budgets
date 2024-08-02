@@ -42,3 +42,44 @@ li {
 li:hover {
     display: inline-block;
 }
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+.popup-button {
+    margin: 5px;
+}
+
+.popup-box {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+}
+
+.popup-content {
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #888888;
+    width: 50%;
+    min-height: 60%;
+/*    height: 60%;*/
+/*    overflow-y: scroll;*/
+}
+
+.popup-content button {
+    float: right
+}
+
+.show {
+    display: block;
+}
