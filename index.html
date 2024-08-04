@@ -11,7 +11,8 @@
 </head>
 <body>
 
-<h1>Comparing the 2024 housing budgets of Irish political parties</h1>
+<h1 style="margin-bottom: 3px">Housing Budgets</h1>
+<h3 style="font-weight: normal; margin-top: 0px">A series of graphs comparing the 2024 housing budgets of Irish political parties </h3>
 
 <!--<div class="control-row">
     Grouping: <select class="groupingdata"></select>
@@ -25,7 +26,7 @@
     <p id="chartSubtitle" style="text-align: center"></p> <!--todo maybe not necessary-->
 
     <div class="centred">
-        <div id="colouredGroupingsBar" style="height: 10%;"></div>
+        <div id="colouredGroupingsBar" style="height: 10;"></div>
         <div id="descriptions">
             <div id="totalsDescription" style="display:none">
                 <p>All of the opposition parties are proposing increases in housing expenditure.</p>
@@ -70,8 +71,10 @@
                                 <button class="popup-close">X</button>
                                 <h2>HAP/RAS</h2>
                                 <h3>Summary</h3>
-                                <p>All parties are proposing to significantly reduce expenditure in the long run, as new social housing fulfills those needs. They have all acknowledged the benefits of the scheme. However, the opposition parties note that despite being considered a short term fix, spending has increased significantly over time. The opposition parties claim that the government isn't building enough new social housing to replace these schemes; while the incumbent parties claim that significantly more houses are being built each year, and that the crisis is already starting to be fixed.</p>
-                                <h3>Detail</h3>
+                                <p>All parties are proposing to significantly reduce expenditure in the long run, as new social housing fulfills those needs. They have all acknowledged the benefits of the scheme. However, the opposition parties note that despite being considered a short term fix, spending towards these policies has increased significantly over time. They claim that the government isn't building enough new social housing to replace these schemes; while the incumbent parties claim that significantly more houses are being built each year, and that the crisis is already starting to be fixed.</p>
+
+                                <details>
+                                    <summary>Click for more details</summary>
                                 <p><b>All parties are proposing to significantly reduce expenditure in the long run</b> as new social housing fulfills those housing needs<a class="citation" href="#HousingForAll"></a><a class="citation PBP" href="#PBPHAPVsPublic"></a><a class="citation SF" href="#SFPrivateVsPublic"></a><a class="citation SD" href="#SDBudget"></a><a class="citation LP" href="#LabourHAPVsPublic"></a></p>
                                 <p><b>All parties have acknowledged the benefits of the schemes</b> in directly addressing high rent prices<sup>[citation needed]</sup>. In fact, the opposition parties believe that these policies are currently underfunded, or should be reviewed for underfunding in the short term, as rent prices have increased, meaning fewer tenants can make use of these schemes<a class="citation LP" href="#LPBudget"></a><a class="citation SD" href="#SDManifesto"></a><a class="citation PBP" href="#PBPBudget"></a><a class="citation SF" href="#SFPrivateSector"></a>.</p>
                                 <p><b>However, HAP/RAS are considered only short term measures</b>, to be replaced in the long run with new social housing<a class="citation" href="#HousingForAll"></a>. Since these schemes don't result in any new housing, and a lack of housing is believed to be the most important factor in the increase in house prices, they don't actually solve the underlying problem<a class="citation SF" href="#SFHousing2024"></a><a class="citation LP" href="#LPBudget"></a><a class="citation SD" href="#SDBudget"></a><a class="citation PBP" href="#PBPBudget"></a><sup>[FFG citation needed]</sup>. Furthermore, they are believed to be poor value for money in the long run compared to funding new social housing due to their large ongoing costs<a class="citation" href="#LPBudget"></a><a class="citation" href="#SDBudget"></a><a class="citation" href="#PBPBudget"></a><a class="citation" href="#SFPrivateSector"></a><sup>[FFG citation needed]</sup>.</p>
@@ -100,6 +103,7 @@
                                     <!--                    <li>todo also states there's been 'political consensus' on spending towards these schemes (https://www.irishexaminer.com/news/politics/arid-41400532.html). However, as previously explained, the opposition parties simultaneously support short term increases in HAP/RAS spending, and greater increases in spending towards new social housing than the incumbent parties are proposing, which would allow for reduced HAP/RAS spending in the long run. todo though FFG would just claim that their new social housing spending is sufficient. so its really just a tangential argument about the amount of new social housing spending.</li>-->
                                 </ul>
                                 <p><b>Note that there has been some disagreement within the incumbent parties about the implementation of these schemes</b>. A TD for the Green Party has stated 'there's opposition to what we're doing, even within Government'<a class="citation" href="#GPOpposition"></a> and a TD for Fianna Fáil has called HAP/RAS spending levels 'incredibly poor value for money'<a class="citation" href="#FFBadValue"></a>. As the incumbent parties are in coalition, their combined budget expresses a unified position on the issue. However, the release of each parties' pre-election manifesto in the near future will hopefully clarify any differences.</p>
+                                </details>
                             </div>
                         </div>
                     </div>
@@ -166,29 +170,86 @@
 
 
             <div id="newPoliciesDescription">
+                <nav>
+                    <div class="popup">
+                        <button class="popup-button">Social Housing Stock Response Maintenance Fund</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>Social Housing Stock Response Maintenance Fund</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup">
+                        <button class="popup-button">Tenant empowerment and participation fund</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>Tenant empowerment and participation fund</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup">
+                        <button class="popup-button">Disability inclusion fund</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>Disability inclusion fund</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup">
+                        <button class="popup-button">Housing First for Families</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>New 'Housing First for Families' programme</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup">
+                        <button class="popup-button">Investment in student accommodation</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>Direct state investment in student accomodation</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup">
+                        <button class="popup-button">Compulsory purchase and renovate derelict houses</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>Create fund to compulsory purchase and renovate derelict houses</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="popup">
+                        <button class="popup-button">State construction company</button>
+                        <div class="popup-box">
+                            <div class="popup-content">
+                                <button class="popup-close">X</button>
+                                <h2>Set up state construction company</h2>
+                                <p>todo</p>
+                            </div>
+                        </div>
+                    </div>
+                </nav> <!--todo is it clear that these are clickable?-->
                 <p>All of the opposition parties have proposed new policies in addition to altering existing policies.</p>
                 <p>todo maybe just discuss biggest ones</p>
-                <ul>
-                    <li>Sinn Féin</li>
-                    <ul>
-                        <li>Social Housing Stock Response Maintenance Fund</li>
-                        <li>Tenant empowerment and participation fund</li>
-                        <li>Disability inclusion fund</li>
-                    </ul>
-                    <li>Labour</li>
-                    <ul>
-                        <li>New 'Housing First for Families' programme</li>
-                        <li>Direct state investment in student accomodation</li>
-                    </ul>
-                    <li>Social Democrats</li>
-                    <ul>
-                        <li>Create fund to compulsory purchase and renovate derelict houses</li>
-                    </ul>
-                    <li>People Before Profit</li>
-                    <ul>
-                        <li>Set up state construction company</li>
-                    </ul>
-                </ul>
             </div>
         </div>
     </div>
