@@ -1,4 +1,4 @@
-function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
+function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelColours=[]) {
     var data = [
         {
             x: x,
@@ -31,6 +31,13 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='') {
         hovermode: 'closest',
     };
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
+
+    if (xaxisLabelColours) {
+        var ticks = document.getElementsByClassName('xtick');
+        for (var i = 0; i < ticks.length; i += 1) {
+            ticks[i].getElementsByTagName('text')[0].style.fill = xaxisLabelColours[i % xaxisLabelColours.length];
+        }
+    }
 }
 
 let colorScheme2 = [
@@ -49,7 +56,7 @@ let colorScheme2 = [
     '#bdbdbd',
 ]
 
-function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[], hiddenLabels=[]) {
+function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[], hiddenLabels=[], xaxisLabelColours=[]) {
     div = document.getElementById(div);
 
     for (let i in traces) {
@@ -92,6 +99,9 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 text: xaxis,
                 standoff: 1,
             },
+            tickfont: {
+                size: 11
+            }
         },
         yaxis: {
             title: {
@@ -122,6 +132,13 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
 
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
+
+    if (xaxisLabelColours) {
+        var ticks = document.getElementsByClassName('xtick');
+        for (var i = 0; i < ticks.length; i += 1) {
+            ticks[i].getElementsByTagName('text')[0].style.fill = xaxisLabelColours[i % xaxisLabelColours.length];
+        }
+    }
 }
 
 // todo maybe have global var groupSums {group1: sum, group2: sum, ...} ?

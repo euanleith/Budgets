@@ -1,5 +1,4 @@
 main();
-enumerateCitations()
 
 async function main() {
     let budgets = await read('budgets.csv') //  todo remove
@@ -22,7 +21,7 @@ async function main() {
 
     // todo should probably structure this as a class
     let graphs = [
-        {name: 'Total', startHidden: [], ignoreNegatives: true, title: 'Total expenditure by party', subtitle: 'The total housing expenditure proposed by each party.', descriptionId: 'totalsDescription'},
+        {name: 'Total', startHidden: [], ignoreNegatives: true, title: 'Total housing spending by party', subtitle: 'The total housing expenditure proposed by each party.', descriptionId: 'totalsDescription'},
         {name: 'Groupings', startHidden: [], ignoreNegatives: true, title: 'Split of expenditure', subtitle: 'The proposed expenditure towards housing policies, split into groups.', descriptionId: 'groupingsBarDescription'},
         {name: 'Status', startHidden: ['Existing', 'New'], ignoreNegatives: false, title: 'Policies being reduced/removed', subtitle: 'Policies which opposition parties have proposed removal or a reduction in spending.', descriptionId: 'removePoliciesDescription'},
         {name: 'Status', startHidden: ['Existing', 'Planned for removal', 'Removing', 'Planned for reduction', 'Reducing'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'},
@@ -61,7 +60,7 @@ function parseDefinitions(data) {
 function sumsStackedBar(groupings, div) {
     let sums = {};
     for (let i = 1; i < groupings.length; i++) {
-        let party = wrap(groupings[i][1], 12)
+        let party = bold(wrap(groupings[i][1], 12))
         if (!(party in sums)) sums[party] = 0
         sums[party] += parseInt(groupings[i][2])
     }
@@ -83,7 +82,8 @@ function sumsStackedBar(groupings, div) {
         labels=labels,
         title='Total expenditure by party',
         xaxis='Parties',
-        yaxis='Cost (€)'
+        yaxis='Cost (€)',
+//        xaxisLabelColours=getPartyColours(),
     );
 }
 
@@ -190,6 +190,10 @@ function setDescription(grouping) {
     document.querySelector('#' + grouping.descriptionId).style.display = 'block'
 }
 
+function bold(str) {
+    return '<b>' + str + '</br>'
+}
+
 function wrap(str, len, br='<br>') {
     words = str.split(' ')
     let wrapped = []
@@ -240,7 +244,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
     let parties = getUniqueFromDepthOrderedCol(budgets, 1) // todo don't hardcode
-    parties = parties.map((elem) => wrap(elem, 12))
+    parties = parties.map((elem) => bold(wrap(elem, 12)))
     let legendGroupings = []
     for (let i = 0; i < policies.length; i++) {
         let groupings = {}
@@ -277,7 +281,8 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
         yaxis='Cost (€)',
         legendTitle=grouping.name,
         colorScheme=[],
-        hiddenLabels=grouping.startHidden
+        hiddenLabels=grouping.startHidden,
+//        xaxisLabelColours=getPartyColours(),
     )
 
 }
@@ -336,17 +341,4 @@ function policiesTable(budgets, div) {
         },
     };
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
-}
-
-// todo order sources programatically as well?
-// todo and order inline citations by number
-function enumerateCitations() {
-    var citations = document.getElementsByClassName('citation')
-    let hrefIds = {}
-    let cnt = 1
-    for (let i = 0; i < citations.length; i++) {
-        let href = citations[i].href
-        if (!(href in hrefIds)) hrefIds[href] = cnt++
-        citations[i].innerHTML = ('[' + hrefIds[href] + ']').sup()
-    }
 }
