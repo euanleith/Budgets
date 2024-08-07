@@ -4,17 +4,17 @@ A.2 ADMINISTRATION - NON PAY,Admin,Other,Other,New social housing,New social hou
 A.3 LOCAL AUTHORITY HOUSING,Local Authority Housing,New social housing,New social housing,Cost rental / Affordable purchase,Cost rental / Affordable purchase
 A.4 SOCIAL HOUSING CURRENT EXPENDITURE PROGRAMME,Cost rental,Cost rental / Affordable purchase,Cost rental / Affordable purchase,Subsidies for existing private housing,Private housing subsidies
 A.5 RENTAL ACCOMMODATION SCHEME,Government subsidised private existing housing (rents/mortgages),Subsidies for existing private housing,Private housing subsidies,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups
-A.6 HOUSING ASSISTANCE PAYMENT SCHEME,Government subsidised private existing housing (rents/mortgages),Subsidies for existing private housing,Private housing subsidies,Environment,Voids
-A.7 CAPITAL ASSISTANCE SCHEME,Government funded new build social housing,New social housing,New social housing,Voids,Defects
-A.8 CAPITAL LOANS & SUBSIDY SCHEME,Cost rental,Cost rental / Affordable purchase,Cost rental / Affordable purchase,Defects,PPP new build social housing
-A.9 COMMUNAL FACILITIES,Communal facilities,Other,Other,Subsidies for new build private housing,State construction company
-A.10 MORTGAGE TO RENT,Cost rental,Cost rental / Affordable purchase,Cost rental / Affordable purchase,PPP new build social housing,
+A.6 HOUSING ASSISTANCE PAYMENT SCHEME,Government subsidised private existing housing (rents/mortgages),Subsidies for existing private housing,Private housing subsidies,Environment,Environment
+A.7 CAPITAL ASSISTANCE SCHEME,Government funded new build social housing,New social housing,New social housing,Voids,Voids
+A.8 CAPITAL LOANS & SUBSIDY SCHEME,Cost rental,Cost rental / Affordable purchase,Cost rental / Affordable purchase,Defects,Defects
+A.9 COMMUNAL FACILITIES,Communal facilities,Other,Other,Subsidies for new build private housing,PPP new build social housing
+A.10 MORTGAGE TO RENT,Cost rental,Cost rental / Affordable purchase,Cost rental / Affordable purchase,PPP new build social housing,State construction company
 A.11 CAPITAL ADVANCE LEASING FACILITY,Government funded new build social housing,New social housing,New social housing,State construction company,
 A.12 TRAVELLER ACCOMMODATION & SUPPORT,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
 A.13 ACCOMMODATION FOR HOMELESS,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
 A.14 HOUSING FOR PEOPLE WITH A DISABILITY & OLDER PEOPLE,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
 A.15 ESTATE REGENERATION AND REFURBISHMENT,Government funded new build social housing,New social housing,New social housing,,
-A.16 ENERGY EFFICIENCY - RETROFITTING,Environment,Environment,Other,,
+A.16 ENERGY EFFICIENCY - RETROFITTING,Environment,Environment,Environment,,
 A.17 REPAIR AND LEASING SCHEME,Voids,Voids,Voids,,
 A.18 PRIVATE HOUSING GRANTS,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
 A.19 MORTGAGE ALLOWANCES,Affordable purchase,Cost rental / Affordable purchase,Cost rental / Affordable purchase,,
@@ -36,7 +36,7 @@ A.34 UKRAINE MEASURES,Ukraine,Disadvantaged/vulnerable groups,Disadvantaged/vuln
 A.35 SECURE TENANCY AFFORDABLE RENTAL SCHEME (STAR),Cost rental,Cost rental / Affordable purchase,Cost rental / Affordable purchase,,
 A.36 OTHER SERVICES,Other,Other,Other,,
 Social Housing Stock Response Maintenance Fund,Defects,Defects,Defects,,
-Establish Solar PV Scheme for local authority homes,Environment,Environment,Other,,
+Establish Solar PV Scheme for local authority homes,Environment,Environment,Environment,,
 Participative planning pilot scheme,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
 Tenant empowerment and participation fund,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
 Disability inclusion fund,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,Disadvantaged/vulnerable groups,,
