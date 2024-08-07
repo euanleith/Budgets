@@ -41,6 +41,10 @@ li {
 /*    float: left;*/
 }
 
+.source{
+    margin: 1px;
+}
+
 li:hover {
 /*    display: inline-block;*/
 }
@@ -84,4 +88,18 @@ nav {
 
 .show {
     display: block;
+}
+
+sup{
+    line-height: 0px;
+}
+
+body {
+    font-family: HelveticaNeue-Light, Helvetica Neue Light, Helvetica Neue, Helvetica, Arial, Lucida Grande, sans-serif;
+    font-size: 100%;
+    line-height: 22px;
+}
+
+html {
+    -webkit-font-smoothing: antialiased;
 }

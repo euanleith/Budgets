@@ -1,3 +1,5 @@
+//let font = getComputedStyle(document.body).getPropertyValue('font-family')
+
 function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelColours=[]) {
     var data = [
         {
@@ -29,6 +31,9 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
         },
         autosize: true,
         hovermode: 'closest',
+        font: {
+            family: 'Helvetica Neue'
+        },
     };
     Plotly.newPlot(div, data, layout, {displayModeBar: false});
 
@@ -128,6 +133,9 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         hovermode: 'closest',
         barmode: 'relative',
         colorway: colorScheme2,
+        font: {
+            family: 'Helvetica Neue'
+        },
     };
     Plotly.newPlot(div, traces, layout, {displayModeBar: false});
 
