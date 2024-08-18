@@ -30,8 +30,11 @@ div.legendTooltip {
     background-color: lightgray;
 }
 
-.citation {
+a {
     text-decoration: none;
+}
+
+a.citation {
     target: _self
 }
 
@@ -55,7 +58,11 @@ nav {
     flex-direction: row;
 }
 
-.popup-button {
+button {
+    cursor: pointer;
+}
+
+button.popup-button {
     margin: 5px;
 }
 
@@ -82,8 +89,8 @@ nav {
 /*    overflow-y: scroll;*/
 }
 
-.popup-content button {
-    float: right
+button.popup-close {
+    float: right;
 }
 
 .show {
@@ -102,4 +109,12 @@ body {
 
 html {
     -webkit-font-smoothing: antialiased;
+}
+
+summary {
+    cursor: pointer;
+}
+
+summary:empty:before {
+    content: "Click for more details";
 }
