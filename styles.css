@@ -118,3 +118,8 @@ summary {
 summary:empty:before {
     content: "Click for more details";
 }
+
+.two-column {
+    column-count: 2;
+    column-gap: 40px;
+}
