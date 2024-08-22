@@ -21,10 +21,10 @@ async function main() {
 
     // todo should probably structure this as a class
     let graphs = [
-        {name: 'Total', startHidden: [], ignoreNegatives: true, title: 'Total housing spending by party', subtitle: 'The total housing expenditure proposed by each party.', descriptionId: 'totalsDescription'},
+        {name: 'Total', startHidden: [], ignoreNegatives: true, title: 'Total housing expenditure by party', subtitle: 'The total housing expenditure proposed by each party.', descriptionId: 'totalsDescription'},
         {name: 'Groupings', startHidden: [], ignoreNegatives: true, title: 'Split of expenditure', subtitle: 'The proposed expenditure towards housing policies, split into groups.', descriptionId: 'groupingsBarDescription'},
-        {name: 'Status', startHidden: ['Existing', 'New'], ignoreNegatives: false, title: 'Policies being reduced/removed', subtitle: 'Policies which opposition parties have proposed removal or a reduction in spending.', descriptionId: 'removePoliciesDescription'},
-        {name: 'Status', startHidden: ['Existing', 'Planned for removal', 'Removing', 'Planned for reduction', 'Reducing'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'},
+        {name: 'Status', startHidden: ['Existing', 'New'], ignoreNegatives: false, title: 'Policies proposed for reduction/removal', subtitle: 'Policies which opposition parties have proposed removal or a reduction in spending.', descriptionId: 'removePoliciesDescription'}, // todo maybe just make all of these negative? // todo maybe use quantitative colouring? // or maybe could show rest of data in grey?
+        {name: 'Status', startHidden: ['Existing', 'Planned for removal', 'Removing', 'Planned for reduction', 'Reducing'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'}, // todo only include 'new', and use categorical colouring for policies?
         {name: 'Status', startHidden: [], ignoreNegatives: false, title: 'Split of expenditure by policy status', subtitle: 'The proposed expenditure towards housing policies, sorted by status.', descriptionId: 'statusBarDescription'},
     ]
     policiesStackedBar2(graphs[0], partyGroupings, definitions, 'colouredGroupingsBar')
@@ -239,7 +239,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
 
     let groupingCol = getColFromName(budgets, grouping.name)
     let groups = getUniqueFromCol(budgets, groupingCol)
-    let groupingColours = getGroupingColours(groups)
+    let groupingColours = getGroupingColours(groups) // todo change on insolation? maybe quantitative from existing colour? and maybe keep quantitative while num policies < some amount (mainly for 'remove' chart)
 
     let traces = []
     let policies = getUniqueFromBreadthOrderedCol(budgets, 0) // todo don't hardcode
