@@ -64,6 +64,7 @@ button {
 
 button.popup-button {
     margin: 5px;
+    margin-left: 0px;
 }
 
 .popup-box {
@@ -122,4 +123,23 @@ summary:empty:before {
 .two-column {
     column-count: 2;
     column-gap: 40px;
+}
+
+h3 {
+    margin: 7px;
+    margin-left: 0;
+}
+
+p + h3 {
+    margin: 0px;
+    margin-top: 20px;
+}
+
+h3 ~ nav {
+    margin-top: 10px;
+}
+
+p {
+    margin-top: 7px;
+    margin-bottom: 7px;
 }

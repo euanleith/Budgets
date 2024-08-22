@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h1 style="margin-bottom: 6px">Housing Budgets</h1>
+<h1 style="margin-bottom: 10px">Housing Budgets</h1>
 <h3 style="font-weight: normal; margin-top: 0px">A series of graphs comparing the 2024 housing budgets of Irish political parties </h3>
 
 <!--<div class="control-row">
@@ -28,17 +28,25 @@
         <div id="colouredGroupingsBar" style="height: 10;"></div>
         <div id="descriptions">
             <div id="totalsDescription" style="display:none">
+                <h3>Description</h3>
+                <p>This chart shows the total housing expenditure for each party.</p>
+                <h3>Overview</h3>
                 <p>All of the opposition parties are proposing increases in housing expenditure.</p>
-                <p>The parties can be roughly split into three groups;</p>
-                <ul>
-                    <li>The incumbent parties Fianna Fáil, Fine Gael, and Green Party (FFG) spending around €4B.</li>
-                    <li>Sinn Féin (SF), Labour, and Social Democrats (SD) proposing increases in expenditure of around €1-1.6B.</li>
-                    <li>People Before Profit (PBP) proposing a significantly greater increase in expenditure of around €4.7B.</li>
-                </ul>
-                <p>todo maybe explain these groupings; FFG prefer private market; PBP have state construction company to overcome new build issues. also this fits with idea of parties as centre/centre-left/left</p>
+                <p>The parties can be roughly split into three groups; the incumbent parties Fianna Fáil, Fine Gael, and the Green Party spending around €4B; Sinn Féin, Labour, and the Social Democrats proposing increases in expenditure of around €1.5B; and People Before Profit proposing a significantly greater increase in expenditure of around €4.7B.</p>
+<!--                <ul>-->
+<!--                    <li>The incumbent parties Fianna Fáil, Fine Gael, and the Green Party (FFG) spending around €4B.</li>-->
+<!--                    <li>Sinn Féin (SF), Labour, and the Social Democrats (SD) proposing increases in expenditure of around €1-1.6B.</li>-->
+<!--                    <li>People Before Profit (PBP) proposing a significantly greater increase in expenditure of around €4.7B.</li>-->
+<!--                </ul>-->
+<!--                <p>todo maybe explain these groupings; FFG prefer private market; PBP have state construction company to overcome new build issues. also this fits with idea of parties as centre/centre-left/left</p>-->
             </div>
 
             <div id="groupingsBarDescription" style="display:none">
+                <h3>Description</h3>
+                <p>This chart shows a more detailed view of individual policies, which have been sorted into groups for clarity. Information regarding each policy can be seen be hovering over them with the mouse. Groups can be hidden by clicking their name in the legend, and isolated by double-clicking their name.</p>
+                <h3>Overview</h3>
+                <p>The most significant policy group is new social housing, with both the highest expenditure by all parties, and the greatest difference in expenditure between parties.</p>
+                <h3>Discussion</h3>
                 <nav>
                     <div class="popup">
                         <button class="popup-button">New Social Housing</button>
@@ -48,7 +56,7 @@
                                 <h2>New Social Housing</h2>
                                 <h3>Definition</h3>
                                 <p>Policies which fund the building or acquisition of properties for use as social housing.</p> <!--todo acquisition? refurbishment?-->
-                                <h3>Summary of party disagreements</h3>
+                                <h3>Summary of discussion</h3>
 <!--                                New social housing is the group with both the highest expenditure and highest difference in expenditure between parties. -->
                                 <p>All parties support an increase in social housing to support low-income households and reduce homelessness. However, the opposition parties have also expressed their intention to increase supply as a means to reducing house prices. The opposition parties believe that the current targets for new social housing are too low. Furthermore, they note that targets from previous years haven't been met. The incumbent parties have stated their intention to increase their targets in line with recent reports, and have cited a number of roadblocks which have impeded development. They have also noted that despite this, there has still been a significant increase in delivery of social housing under their government.</p>
                                 <details>
@@ -96,35 +104,40 @@
                             </div>
                         </div>
                     </div>
+
+                    <!--            <h3>Summary of other items</h3>-->
+                    <!--            <p>There appears to be little difference between parties on other spending items, but this is partly because of the high proportion of spending on social housing. You can click on 'New social housing' in the legend to hide it, and make the other differences more apparent. </p>-->
+                    <!--            <p>Items can also be double-clicked on to focus on them.</p>-->
+                    <!--            <ul>-->
+                    <!--                <li><b>Cost rental / affordable purchase</b>: SF +€200m, Labour +€100m.</li>-->
+                    <!--                <li><b>Subsidies for existing private housing</b>: PBP +€100m towards HAP programme in the short term, with plans to reduce funding over time. This plan is common among the opposition parties, and will be detailed in a later section.</li>-->
+                    <!--                <li><b>Disadvantaged groups</b>: Most opposition parties +€100m (increases to traveller accommodation, disability and elderly grants, and homeless services), and SF +€230m (greater spending on homeless services).</li>-->
+                    <!--                <li><b>Defects</b>: Differs a decent amount party to party from €70-190m, but PBP spending significantly more at €510m.</li>-->
+                    <!--                <li><b>State construction company</b>: PBP €500m. This is also being considered by Labour, but isn't currently costed.</li>-->
+                    <!--            </ul>-->
                 </nav>
-                <p>todo maybe add title 'description', 'overview' and 'details'/'policies'/whatever</p>
-                <p>This chart shows a more detailed view of individual policies, which have been combined into groups for clarity. Information regarding each policy can be seen be hovering over them with the mouse. Groups can be hidden by clicking their name in the legend, and isolated by double-clicking their name. todo make this graph subtitle?</p>
-                <p></p>
-    <!--            <h3>Summary of other items</h3>-->
-    <!--            <p>There appears to be little difference between parties on other spending items, but this is partly because of the high proportion of spending on social housing. You can click on 'New social housing' in the legend to hide it, and make the other differences more apparent. </p>-->
-    <!--            <p>Items can also be double-clicked on to focus on them.</p>-->
-    <!--            <ul>-->
-    <!--                <li><b>Cost rental / affordable purchase</b>: SF +€200m, Labour +€100m.</li>-->
-    <!--                <li><b>Subsidies for existing private housing</b>: PBP +€100m towards HAP programme in the short term, with plans to reduce funding over time. This plan is common among the opposition parties, and will be detailed in a later section.</li>-->
-    <!--                <li><b>Disadvantaged groups</b>: Most opposition parties +€100m (increases to traveller accommodation, disability and elderly grants, and homeless services), and SF +€230m (greater spending on homeless services).</li>-->
-    <!--                <li><b>Defects</b>: Differs a decent amount party to party from €70-190m, but PBP spending significantly more at €510m.</li>-->
-    <!--                <li><b>State construction company</b>: PBP €500m. This is also being considered by Labour, but isn't currently costed.</li>-->
-    <!--            </ul>-->
             </div>
 
             <div id="removePoliciesDescription">
+                <h3>Description</h3>
+                <p>This chart shows the savings made on policies which parties have proposed to remove, and proposed expenditure towards policies which parties plan to remove or cut back in the future.</p>
+<!--                <p>Policies which are still being proposed in this year's budget are on the positive side of the chart, as they would still contribute to the total expenditure; and vice versa for policies proposed for removal. Note however that a lack of expenditure from removing a policy is not the same as an increase in income.</p>-->
+                <h3>Overview</h3>
+                <p>All parties have proposed some cut backs or removal of policies, immediately or in the future; with RAS & HAP constituting the highest cost.</p>
+                <p>The opposition parties believe that the money currently spent on these policies would be better used on new social housing, generally due to believed inefficiencies or claims that they don't reduce house prices.</p>
+                <h3>Discussion</h3>
                 <nav>
                     <div class="popup">
                         <button class="popup-button">RAS & HAP</button>
                         <div class="popup-box">
                             <div class="popup-content">
                                 <button class="popup-close">X</button>
-                                <h2>Rental Accommodation Scheme (RAS) and Housing Assistance Payments (HAP) Schemes</h2>
+                                <h2>Rental Accommodation Scheme (RAS) and Housing Assistance Payments (HAP)</h2>
                                 <h3>Definition</h3>
                                 <p>Under these schemes local authorities make a monthly rental payment on the tenant's behalf to their landlord, subject to terms and conditions, including rent limits. In return, the tenant pays a weekly contribution towards the rent to the local authority<a class="citation" href="#RAS"></a><a class="citation" href="#WhatIsHAP"></a>. See here for more info on <a target="_blank" href="https://www.citizensinformation.ie/en/housing/local-authority-and-social-housing/rental-accommodation-scheme/">RAS</a> and <a target="_blank" href="https://www.citizensinformation.ie/en/housing/renting-a-home/help-with-renting/housing-assistance-payment/">HAP</a>.</p>
-                                <h3>Summary of arguments</h3>
+                                <h3>Summary of discussion</h3>
 <!--                                <p>All parties are proposing to significantly reduce expenditure in the long run, as new social housing fulfills those needs. They have all acknowledged the benefits of the scheme. However, the opposition parties note that despite being considered short term measures, spending towards these policies has increased significantly over time. They claim that the government isn't building enough new social housing to replace these schemes; while the incumbent parties claim that significantly more houses are being built each year, and that the crisis is already starting to be fixed.</p>-->
-                                <p>Despite being considered short term measure since they don't reduce house prices, spending towards these schemes has increased significantly over time. The opposition parties claim that the government isn't building enough new social housing to replace these schemes. The incumbent parties disagree, claiming that a significant increase in new social houses being built is starting to fix the crisis, which will presumably relieve dependency on these schemes.</p>
+                                <p>Spending towards these schemes has increased significantly over time, despite being considered short term measure as they don't reduce house prices. The opposition parties claim that the government isn't building enough new social housing to replace these schemes. The incumbent parties disagree, claiming that there has been a significant increase in the delivery of new social housing, which will presumably relieve dependency on these schemes.</p>
 
                                 <details>
                                     <summary></summary>
@@ -157,6 +170,7 @@
                                         <!--                    <li>todo also states there's been 'political consensus' on spending towards these schemes (https://www.irishexaminer.com/news/politics/arid-41400532.html). However, as previously explained, the opposition parties simultaneously support short term increases in HAP/RAS spending, and greater increases in spending towards new social housing than the incumbent parties are proposing, which would allow for reduced HAP/RAS spending in the long run. todo though FFG would just claim that their new social housing spending is sufficient. so its really just a tangential argument about the amount of new social housing spending.</li>-->
                                     </ul>
                                     <p><b>Note that there has been some disagreement within the incumbent parties about the implementation of these schemes</b>. A TD for the Green Party has stated 'there's opposition to what we're doing, even within Government'<a class="citation" href="#GPOpposition"></a> and a TD for Fianna Fáil has called HAP/RAS spending levels 'incredibly poor value for money'<a class="citation" href="#FFBadValue"></a>. As the incumbent parties are in coalition, their combined budget expresses a unified position on the issue. However, the release of each parties' pre-election manifesto in the near future will hopefully clarify any differences.</p>
+<!--                                todo hap limits, and pbp increasing expenditure in sr-->
                                 </details>
                             </div>
                         </div>
@@ -169,8 +183,8 @@
                                 <button class="popup-close">X</button>
                                 <h2>Croí Cónaithe (Cities)</h2>
                                 <h3>Definition</h3>
-                                <p>A fund to support the building of apartments for sale to owner-occupiers, where the cost of development is greater than the market sale price<a class="citation" href="#CroiConaithe"></a>. <a target="_blank" href="https://www.housingagency.ie/CroiConaitheCities">See here</a> for more info.</p>
-                                <h3>Summary of arguments</h3>
+                                <p>A fund to support the building of apartments for sale to owner-occupiers, where the cost of development is greater than the market sale price<a class="citation" href="#CroiConaithe"></a>. See here for more info on <a target="_blank" href="https://www.housingagency.ie/CroiConaitheCities">Croí Cónaithe (Cities)</a>.</p>
+                                <h3>Summary of discussion</h3>
                                 <p>The incumbent parties claim the scheme promotes development; while Sinn Féin, Social Democrats, and Labour take issue with the fact that affordable prices are not a condition of funding, meaning it doesn't fix the underlying price issue of the housing crisis. Labour proposes to add this condition, while Sinn Féin and the Social Democrats believe that the money would be better spent on new social and affordable housing.</p>
                                 <details>
                                     <summary></summary>
@@ -183,7 +197,7 @@
                                     <ul>
                                         <li><b>Sinn Féin, Social Democrats, and Labour take issue with the fact that affordable prices are not a condition of funding</b><a class="citation" href="#SFCroiConaithePressRelease"></a><a class="citation" href="#SDCroiConaithe"></a><a class="citation" href="#LPBudget"></a>. Without this, private developers can receive substantial subsidies while still charging unaffordable prices. Labour proposes to add this condition, while Sinn Féin and the Social Democrats believe that the money would be better spent on new social and affordable housing.</li>
                                         <li><b>Sinn Féin claims that the cost per unit has been greater than estimated</b><a class="citation" href="#SFCroiConaitheArticle"></a>. They claim that in 2022 cost per unit was estimated to be around €80,000; this has increased to €135,000 in 2024. Therefore either funding will have to increase to meet the housing target, or the target will have to be decreased.</li>
-                                        <li><b>Sinn Féin claims that the current progress doesn't seem to be on track to reach targets</b><a class="citation" href="#SFCroiConaitheArticle"></a>. As of July 2024, contracts have been signed for the building of 582 units. However, the target is 5,000 units. Sinn Féin claims that 'given that apartment developments typically take two years to complete, time is running out for contracts to be signed to meet the target'.</li>
+                                        <li><b>Sinn Féin claims that the current progress doesn't seem to be on track to reach targets</b><a class="citation" href="#SFCroiConaitheArticle"></a>. As of July 2024, contracts have been signed for the building of 582 units, while the target is to deliver 5,000 units by 2026. Sinn Féin claims that 'given that apartment developments typically take two years to complete, time is running out for contracts to be signed to meet the target'.</li>
 <!--                                        <li>LP doesn't like it? - https://labour.ie/news/2022/07/07/developer-led-shared-equity-scheme-will-increase-house-prices/</li>-->
                                     </ul>
                                 </details>
@@ -199,7 +213,7 @@
                                 <h2>First Home Shared Equity & Help to Buy Schemes</h2>
                                 <h3>Definitions</h3>
                                 <p>These schemes help residents who are buying or building their first home. Under Help to Buy this is in the form of a tax refund<a class="citation SF" href="#HTB"></a>. And under the First Home Scheme, the government and participating banks pay up to 30% of the cost of the home in return for a stake in it. This stake can be bought back by the resident at any time<a class="citation SF" href="#FHS"></a>. See here for more info on the <a target="_blank" href="https://www.citizensinformation.ie/en/housing/owning-a-home/help-with-buying-a-home/first-home-scheme/">First Home Scheme</a> and <a target="_blank" href="https://www.citizensinformation.ie/en/housing/owning-a-home/help-with-buying-a-home/help-to-buy-scheme/">Help to Buy</a>.</p>
-                                <h3>Summary of arguments</h3>
+                                <h3>Summary of discussion</h3>
                                 <p>The incumbent parties claim that these schemes save buyers money, and help tenants get out of expensive rental accommodation. Sinn Féin, the Social Democrats, and Labour claim they don't reduce the cost of housing, or even cause prices to increase, and therefore don't fix the underlying problem of the housing crisis. They believe therefore that the money would be better spent on new social and affordable housing.</p>
                                 <details>
                                     <summary></summary>
@@ -226,7 +240,7 @@
                                 <h2>Social Housing Public-Private Partnership Programme</h2>
                                 <h3>Definition</h3>
                                 <p>A public-private partnership (PPP) is an arrangement between a public authority and a private partner designed to deliver a public infrastructure project or service under a long-term contract. In the case of this PPP project, the private partner will finance and construct the homes, then provide maintenance and tenancy management services for a 25 year service period with the homes maintained to a pre-defined standard. The homes remain in local authority ownership<a class="citation" href="#PPP"></a>.</p>
-                                <h3>Summary of arguments</h3>
+                                <h3>Summary of discussion</h3>
                                 <p>The opposition parties (todo which ones?) claim that there are various problems (todo list) with the scheme which could all be avoided by just building social housing directly. The incumbent parties disagree, claiming that the scheme produces houses faster while not being worse value than direct builds.</p>
                                 <details>
                                     <summary></summary>
@@ -250,12 +264,15 @@
                         </div>
                     </div>
                 </nav> <!--todo is it clear that these are clickable?-->
-                <p>All of the opposition parties have proposed the removal of, or reduction in spending towards certain policies.</p>
-                <p>Policies which are still being proposed in this year's budget are on the positive side of the chart, as they would still contribute to the total expenditure; and vice versa for policies proposed for removal. Note however that a lack of expenditure from removing a policy is not the same as an increase in income.</p>
 <!--                todo would be nice if hovering over these buttons highlighted items in graph, and vice versa-->
             </div>
 
             <div id="newPoliciesDescription">
+                <h3>Description</h3>
+                <p>This chart shows the proposed expenditure towards new policies put forward by the opposition parties.</p>
+                <h3>Overview</h3>
+                <p>All of the opposition parties have proposed new policies, with People Before Profit's state construction company constituting the highest expenditure.</p>
+                <h3>Discussion</h3>
                 <nav>
                     <div class="popup">
                         <button class="popup-button">Social Housing Stock Response Maintenance Fund</button>
@@ -335,13 +352,11 @@
                         </div>
                     </div>
                 </nav> <!--todo is it clear that these are clickable?-->
-                <p>All of the opposition parties have proposed new policies in addition to altering existing policies.</p>
-                <p>todo maybe just discuss biggest ones</p>
             </div>
 
-            <div id="statusBarDescription" style="display:none">
-                <p>The vast majority of expenditure from all parties is towards existing schemes. However, in the next few sections we will focus on the changes that have been proposed as they provide some interesting insights.</p>
-            </div>
+<!--            <div id="statusBarDescription" style="display:none">-->
+<!--                <p>The vast majority of expenditure from all parties is towards existing schemes.</p>-->
+<!--            </div>-->
         </div>
     </div>
 
