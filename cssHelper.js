@@ -43,7 +43,11 @@ function sortCitations() {
         let content = 'citation needed'
         if (href) {
             if (!(href in hrefIds)) {
-                sortedSources.appendChild(document.querySelector(href))
+                try {
+                    sortedSources.appendChild(document.querySelector(href))
+                } catch (e) {
+                    console.error('Failed to add source ' + href)
+                }
                 hrefIds[href] = cnt++
             }
             content = hrefIds[href]
