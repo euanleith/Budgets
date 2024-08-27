@@ -210,19 +210,22 @@ function addLegendHoverWidget(div, definitions) {
     var tooltip = d3.selectAll('.legendTooltip');
 
     // todo want to be able to click on the popup to expand it / go to definition page
-    items.on('mouseover', async function (d) {
+    items.on('mouseover', async function (legendItem) {
+        if (legendItem[0].trace.visible !== true) return // don't show definition if legend item is hidden
+
         //await new Promise(resolve => setTimeout(resolve, 750)) // todo add delay
         tooltip.transition()
             .duration(200)
             .style("opacity", 1);
 
-        tooltip.html(definitions[d[0].trace.name])
+        let key = Object.keys(definitions).filter(key => Object.keys(definitions[key]).includes(legendItem[0].trace.name))
+        tooltip.html(definitions[key][legendItem[0].trace.name])
 
         // todo if goes off the page swap direction
         var matrix = this.getScreenCTM()
             .translate(this.getAttribute("cx"), this.getAttribute("cy"));
         let xPos = d3.event.pageX - (7*parseInt(tooltip.style('width'))/8)
-        let yPos = window.pageYOffset + matrix.f - parseInt(tooltip.style('height')) - d[0].lineHeight
+        let yPos = window.pageYOffset + matrix.f - parseInt(tooltip.style('height')) - legendItem[0].lineHeight
         tooltip.style("left", xPos + "px")
             .style("top", yPos + "px");
     });
