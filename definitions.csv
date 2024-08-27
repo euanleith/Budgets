@@ -1,64 +1,57 @@
-Name,Definition,Type
-A.1 ADMINISTRATION,mydefinition,Policy
-A.2 ADMINISTRATION - NON PAY,mydefinition,Policy
-A.3 LOCAL AUTHORITY HOUSING,mydefinition,Policy
-A.4 SOCIAL HOUSING CURRENT EXPENDITURE PROGRAMME,mydefinition,Policy
-A.5 RENTAL ACCOMMODATION SCHEME,mydefinition,Policy
-A.6 HOUSING ASSISTANCE PAYMENT SCHEME,mydefinition,Policy
-A.7 CAPITAL ASSISTANCE SCHEME,mydefinition,Policy
-A.8 CAPITAL LOANS & SUBSIDY SCHEME,mydefinition,Policy
-A.9 COMMUNAL FACILITIES,mydefinition,Policy
-A.10 MORTGAGE TO RENT,mydefinition,Policy
-A.11 CAPITAL ADVANCE LEASING FACILITY,mydefinition,Policy
-A.12 TRAVELLER ACCOMMODATION & SUPPORT,mydefinition,Policy
-A.13 ACCOMMODATION FOR HOMELESS,mydefinition,Policy
-A.14 HOUSING FOR PEOPLE WITH A DISABILITY & OLDER PEOPLE,mydefinition,Policy
-A.15 ESTATE REGENERATION AND REFURBISHMENT,mydefinition,Policy
-A.16 ENERGY EFFICIENCY - RETROFITTING,mydefinition,Policy
-A.17 REPAIR AND LEASING SCHEME,mydefinition,Policy
-A.18 PRIVATE HOUSING GRANTS,mydefinition,Policy
-A.19 MORTGAGE ALLOWANCES,mydefinition,Policy
-A.20 AFFORDABLE HOUSING/SHARED OWNERSHIP SUBSIDY,mydefinition,Policy
-A.21 LOCAL INFRASTRUCTURE HOUSING ACTIVATION FUND,mydefinition,Policy
-A.22 DEFECTIVE HOMES REMEDIATION - CASH LIMITED,mydefinition,Policy
-A.23 HOUSING & SUSTAINABLE COMMUNITIES AGENCY,mydefinition,Policy
-A.24 RESIDENTIAL TENANCIES BOARD,mydefinition,Policy
-A.25 RENTED ACCOMMODATION INSPECTION,mydefinition,Policy
-A.26 APPROVED HOUSING BODIES REGULATORY AUTHORITY,mydefinition,Policy
-A.27 PLANNED MAINTENANCE/VOIDS,mydefinition,Policy
-A.28 COST RENTAL EQUITY LOAN,mydefinition,Policy
-A.29 DISABLED PERSONS GRANT SCHEME/IMPROVEMENTS/REMEDIALS,mydefinition,Policy
-A.30 FIRST HOME SCHEME,mydefinition,Policy
-A.31 AFFORDABLE HOUSING FUND,mydefinition,Policy
-A.32 CROÍ CÓNAITHE FUND,mydefinition,Policy
-A.33 SOCIAL HOUSING PPP PROGRAMME,mydefinition,Policy
-A.34 UKRAINE MEASURES,mydefinition,Policy
-A.35 SECURE TENANCY AFFORDABLE RENTAL SCHEME (STAR),mydefinition,Policy
-A.36 OTHER SERVICES,mydefinition,Policy
-Admin,mydefinition,Grouping
-Local Authority Housing,mydefinition,Grouping
-Cost rental,mydefinition,Grouping
-Government subsidised private existing housing (rents/mortgages),mydefinition,Grouping
-Government funded new build social housing,mydefinition,Grouping
-Communal facilities,mydefinition,Grouping
-Government funded new build social housing,mydefinition,Grouping
-Disadvantaged/vulnerable groups,mydefinition,Grouping
-Environment,mydefinition,Grouping
-Voids,mydefinition,Grouping
-Disadvantaged/vulnerable groups,mydefinition,Grouping
-Affordable purchase,mydefinition,Grouping
-Defects,mydefinition,Grouping
-Government subsidised new build private housing,mydefinition,Grouping
-PPP new build,mydefinition,Grouping
-Ukraine,mydefinition,Grouping
-Other,mydefinition,Grouping
-Infrastructure,mydefinition,Grouping
-Existing,Policies that have been proposed by incumbent party(s),Status
-To reduce,Policies that have been planned for expenditure reduction in the future,Status
-To remove,Policies that have been planned for removal in the future,Status
-Removing,"Policies that are to be removed. (Note that this isn't an increase in income, just a lack of expenditure)",Status
-Not proposed,Policies that have not been proposed by this party,Status
-Proposed,Policies that have been proposed but not yet costed,Status
-New,Policies that have not been proposed by the incumbent party(s),Status
-Current,"A single-use purchase (e.g. paying rent, buying groceries).",Terms
-Capital,"The creation or purchasing of an asset where value is maintained or accrued over time (e.g. buying a house, purchasing stock in a company).",Terms
+Name,Definition,Type,MyDefinition,OnlineDefinition,Source,,,,
+Administration,mydefinition,Policy,,,,,,,
+Administration - Non-Pay,mydefinition,Policy,,,,,,,
+Local Authority Housing,mydefinition,Policy,,,,,,,
+Social Housing Current Expenditure Programme,mydefinition,Policy,,Supports the delivery of social housing by providing financial support to local authorities and Approved Housing Bodies for the leasing of houses and apartments. These properties are either privately owned or owned by Approved Housing Bodies. Properties made available under the programme are used to accommodate households from local authority waiting lists.,https://www.gov.ie/en/collection/6060e-overall-social-housing-provision/#social-housing-current-expenditure-programme-shcep,,,,
+Rental Accommodation Scheme,mydefinition,Policy,Long term rent supplement paid by local authorities to the landlord. Will eventually be replaced by HAP.,"Under this scheme local authorities make a monthly rental payment on the tenant's behalf to their landlord, subject to terms and conditions, including rent limits. In return, the tenant pays a weekly contribution towards the rent to the local authority",https://www.citizensinformation.ie/en/housing/local-authority-and-social-housing/rental-accommodation-scheme/,,,,
+Housing Assistance Payment Scheme,mydefinition,Policy,Long term rent supplement paid by local authorities to the landlord. ,"Under this scheme local authorities make a monthly rental payment on the tenant's behalf to their landlord, subject to terms and conditions, including rent limits. In return, the tenant pays a weekly contribution towards the rent to the local authority",https://www.hap.ie/whatishap/,,,,
+Capital Assistance Scheme,mydefinition,Policy,"Capital funding for construction/acquistion of social housing for priority groups (elderly people, homeless, people with disabilities).","Provides a capital funding mechanism through the local authority to AHBs, for the delivery of accommodation, either by construction or acquisition, for priority groups such as elderly people, homeless persons, and people with disabilities",https://assets.gov.ie/244383/bdbb6d9c-250c-4a8e-b26d-8690e3285ae0.pdf,,,,
+Capital Loans & Subsidy Scheme,mydefinition,Policy,,Provides mortgage finance to AHBs by way of loans from the local authorities,https://www.gov.ie/en/collection/6060e-overall-social-housing-provision/#capital-loan-subsidy-scheme-clss,,,,
+Communal Facilities,mydefinition,Policy,,,,,,,
+Mortgage to Rent,mydefinition,Policy,Allows homeowners who can't afford their mortgage arrears to give up ownership of their house and instead pay an affordable rent based on their income.,"Under this scheme, the borrower voluntarily gives up ownership of their home to their mortgage lender. The borrower no longer owns their home but continues to live there as a tenant of the local authority or approved housing body. They pay an affordable rent based on their income.",https://www.gov.ie/en/collection/6060e-overall-social-housing-provision/#repair-and-leasing-scheme-rls,,,,
+Capital Advance Leasing Facility,mydefinition,Policy,Provides funds for the purchasing of private/HFA loans for the construction/acquisition of social housing by AHBs,"The purpose of a capital advance towards a capital project, is to enable the AHBs to secure the remaining finance either by way of loan (from commercial banks or the HFA) or from their own resources",https://assets.gov.ie/244383/bdbb6d9c-250c-4a8e-b26d-8690e3285ae0.pdf,,or ,provides access to private or Housing Finance Agency (HFA) loan finance for the purchase or construction of property that will be made available for Social Housing by an Approved Housing Bodies (AHBs),https://www.sdcc.ie/en/services/housing/calf-capital-advance-leasing-facility/
+Traveller Accomodation & Support,mydefinition,Policy,Funding for Traveller specific accommodation.,,,,,,
+Accomodation for Homeless,mydefinition,Policy,,,,,,,
+Housing for People with a Disability & Older People,mydefinition,Policy,,?,https://www.gov.ie/en/service/6636c-housing-adaptation-grants-for-older-people-and-people-with-a-disability/,,,,
+Estate Regeneration and Refurbishment,mydefinition,Policy,,,,,,,
+Energy Efficiency - Retrofitting,mydefinition,Policy,,,,,,,
+Repair and Leasing Scheme,mydefinition,Policy,"Funds the repairs of privately owned vacant properties, which are then to be used as social housing. The property owner then enters into a lease arrangement where the value of the repairs is offset incrementally from this cost over a defined period, before regaining full ownership of the property.","Subject to the suitability of the property for social housing, the scheme provides for the cost of any necessary repairs to a vacant dwelling to be met upfront by the local authority or AHB. The property owner then enters into a lease arrangement with the local authority or AHB and the value of the repairs is offset incrementally",,,,,
+Private Housing Grants,mydefinition,Policy,,,,,,,
+Morgage Allowances,mydefinition,Policy,,Assists householders who are tenants or tenant purchasers of local authority houses to become owner-occupiers of other dwellings,https://www.gov.ie/en/service/b66ea-mortgage-allowance-scheme/,,,,
+Affordable Housing/Shared Ownership Subsidy,mydefinition,Policy,,,,,,,
+Local Infrastructure Housing Activation Fund,mydefinition,Policy,,,,,,,
+Defective Homes Remediation - Cash Limited,mydefinition,Policy,,Funds work to fix emergency fire safety issues in apartments and duplexes that were built between 1991 and 2013.,https://www.citizensinformation.ie/en/housing/housing-grants-and-schemes/local-authority-housing-grants-and-supports/scheme-to-fix-defects-in-apartments-and-duplexes/,,,,
+Housing & Sustainable Communities Agency,mydefinition,Policy,,,,,,,
+Residential Tenancies Board,mydefinition,Policy,,,,,,,
+Rented Accomodation Inspection,mydefinition,Policy,,,,,,,
+Approved Housing Body Regulatory Authority,mydefinition,Policy,,,,,,,
+Planned Maintenance/Voids,mydefinition,Policy,,,,,,,
+Cost Rental Equity Loan,mydefinition,Policy,,,,,,,
+Disabled Persons Grant Scheme/Improvements/Remedials,mydefinition,Policy,,"Assists people with a disability to have necessary adaptations, repairs or improvement works carried out in order to make their accommodation more suitable for their needs.",https://www.gov.ie/en/service/6636c-housing-adaptation-grants-for-older-people-and-people-with-a-disability/,,,,
+First Home Scheme,mydefinition,Policy,Funding to aid first time buyers and self-builders of private houses.,"Aims to bridge the gap for eligible purchasers between their deposit and mortgage, and the price of new home sold through the private market",,,,,
+Affordable Housing Fund,mydefinition,Policy,,,,,,,
+Croí Cónaithe Fund,mydefinition,Policy,Funding to support the building of private apartments for sale to owner-occupiers.,"A fund to support the building of apartments for sale to owner-occupiers, where the cost of development is greater than the market sale price.",https://www.gov.ie/en/publication/883b1-croi-conaithe-cities-scheme/,,,,
+Social Housing PPP Programme,mydefinition,Policy,"Under the social housing PPP programme, local authorities enter into an agreement with private developers where new properties will be built, fully funded by the private developer, and rented out to the loval authorities. These properties will then be used for social housing. After a set time, ownership of these properties changes to the local authority, who will no longer have to pay rent.","A public-private partnership (PPP) is an arrangement between a public authority and a private partner designed to deliver a public infrastructure project or service under a long-term contract. In the case of this PPP project, the private partner will finance and construct the homes, then provide maintenance and tenancy management services for a 25 year service period with the homes maintained to a pre-defined standard. The homes remain in local authority ownership",https://www.gov.ie/en/press-release/c2535-almost-650-new-social-homes-across-dublin-city-galway-limerick-and-wexford-to-be-delivered-in-new-phase-of-ppp-programme/,,,,
+Ukraine Measures,mydefinition,Policy,,,,,,,
+Secure Tenancy Affordable Rental Scheme (STAR),mydefinition,Policy,,,,,,,
+Other Services,mydefinition,Policy,,,,,,,
+New social housing,Policies which fund the building or acquisition of properties for use as social housing.,Grouping,Policies which fund the building or acquisition of properties for use as social housing.,,,,,,
+Cost rental / Affordable purchase,Policies which fund the building or acquisition of properties for rent or sale at cost,Grouping,Policies which fund the building or acquisition of properties for rent or sale at cost,,,,,,
+Private housing subsidies,Policies which fund rent supplements paid to private landlords,Grouping,Rent supplement paid by local authorities to the landlord,,,,,,
+Disadvantaged/vulnerable groups,Policies which provide support for disadvantaged groups such as homeless or disabled individuals,Grouping,Policies which aid disadvantaged groups such as homeless or disabled individuals,,,,,,
+Environment,Policies which aim to reduce environmental impact of housing,Grouping,Policies which aim to reduce environmental impact of houses,,,,,,
+Voids,Policies which fund the refurbishment of void units to bring them back into use,Grouping,Policies which fund the refurbishment of void units to bring them back to use,,,,,,
+Defects,Policies which fund the remediation of construction defects,Grouping,Policies which fund the remediation of construction defects,,,,,,
+Subsidies for new build private housing,Policies which support the construction of private housing,Grouping,Policies which support the construction of private housing,,,,,,
+PPP new build social housing,Policies which fund the construction of new social housing through an arrangement between a public authority and a private partner,Grouping,Policies which fund the construction of new social housing through an arrangement between a public authority and a private partner,,,,,,
+State construction company,Funding towards the creation of a public construction company,Grouping,Funding towards the creation of a public construction company,,,,,,
+Other,Miscellaneous policies,Grouping,Miscellaneous policies,,,,,,
+Existing,Policies that have been proposed by the incumbent parties,Status,Policies that have been proposed by the incumbent party(s),,,,,,
+Planned for reduction,Policies that have been planned for a reduction in expenditure in the future,Status,Policies that have been planned for a reduction in expenditure in the future,,,,,,
+Planned for removal,Policies that have been planned for removal in the future,Status,Policies that have been planned for removal in the future,,,,,,
+Removing,"Policies that are to be removed (Note that this is a lack of expenditure, not a reduction)",Status,"Policies that are to be removed (Note that this is a lack of expenditure, not a reduction)",,,,,,
+Not proposed,Policies that have not been proposed by this party,Status,Policies that have not been proposed by this party,,,,,,
+Proposed,Policies that have been proposed but not yet costed,Status,Policies that have been proposed but not yet costed,,,,,,
+New,Policies that have not been proposed by the incumbent parties,Status,Policies that have not been proposed by the incumbent party(s),,,,,,
+Current,"A single-use purchase (e.g. paying rent, buying groceries).",Terms,,,,,,,
+Capital,"The creation or purchasing of an asset where value can vary over time (e.g. buying a house, purchasing stock in a company).",Terms,,,,,,,
