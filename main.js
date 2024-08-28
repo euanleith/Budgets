@@ -259,7 +259,7 @@ function policiesStackedBar2(grouping, budgets, definitions, div) {
                 x: parties,
                 y: groupings[group],
                 name: group,
-                hovertemplate: '€%{y} - ' + policies[i], // todo also show total sum for grouping... maybe could do after traces is fully created? like traces[i].hovertemplate = traces[i].hovertemplate + sum(traces[i].grouping)
+                hovertemplate: '[Policy] €%{y} - ' + policies[i], // todo move to plotlyHelper.js?
                 marker: {
                     color: groupingColours[group]
                 },

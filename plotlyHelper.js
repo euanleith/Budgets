@@ -8,6 +8,7 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
             type: 'bar',
             text: labels,
             textposition: 'auto',
+//            hovertemplate: '€%{y} - %{x}<extra></extra>',
         }
     ];
 
@@ -30,7 +31,10 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
             t: 0,
         },
         autosize: true,
-        hovermode: 'closest',
+        hovermode: !1,
+//        hoverlabel: {
+//            align: 'left',
+//        },
         font: {
             family: 'Helvetica Neue'
         },
@@ -87,8 +91,8 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         let txt = []
         for (let j in traces[i].x) {
             txt.push(
-                '<br>€' + formatter.format(groupPartySum(traces, traces[i].legendgroup, traces[i].x)[j]) +
-                " - '" + traces[i].name + "' Total" +
+                '<br>[Group] €' + formatter.format(groupPartySum(traces, traces[i].legendgroup, traces[i].x)[j]) +
+                " - '" + traces[i].name +
                 '</br><extra></extra>'
             )
         }
@@ -131,6 +135,9 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             traceorder: 'normal',
         },
         hovermode: 'closest',
+        hoverlabel: {
+            align: 'left',
+        },
         barmode: 'relative',
         colorway: colorScheme2,
         font: {
