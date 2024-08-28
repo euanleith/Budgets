@@ -219,7 +219,8 @@ function addLegendHoverWidget(div, definitions) {
             .style("opacity", 1);
 
         let key = Object.keys(definitions).filter(key => Object.keys(definitions[key]).includes(legendItem[0].trace.name))
-        tooltip.html(definitions[key][legendItem[0].trace.name])
+        let definition = '<b>' + legendItem[0].trace.name + '</b><br>' + definitions[key][legendItem[0].trace.name]
+        tooltip.html(definition)
 
         // todo if goes off the page swap direction
         var matrix = this.getScreenCTM()
