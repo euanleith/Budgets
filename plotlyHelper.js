@@ -65,13 +65,17 @@ let colorScheme2 = [
     '#bdbdbd',
 ]
 
+// from https://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browsers
+// Safari 3.0+ "[object HTMLElementConstructor]" // todo use feature detection instead
+var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
+
 function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[], hiddenLabels=[], xaxisLabelColours=[]) {
     div = document.getElementById(div);
 
     for (let i in traces) {
         traces[i].type = 'bar'
         traces[i].textposition = 'bottom'
-        if (traces[i].marker) { // todo move colour to here
+        if (traces[i].marker && !isSafari) { // safari doesn't allow for as much variation in width, so default to smaller// todo move colour to here
             traces[i].marker.line = {
                 width: 0.05,
                 color: '#fff'
@@ -122,7 +126,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         margin: {
             l: 50,
             r: 250,
-            t: 0
+            t: 0,
         },
         legend: {
             font: {
