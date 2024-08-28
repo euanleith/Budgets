@@ -144,7 +144,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             family: 'Helvetica Neue'
         },
     };
-    Plotly.newPlot(div, traces, layout, {displayModeBar: false});
+    Plotly.newPlot(div, traces, layout, {displayModeBar: false, showTips: false});
 
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
 
