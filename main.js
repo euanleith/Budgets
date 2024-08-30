@@ -25,7 +25,7 @@ async function main() {
         {name: 'Groupings', startHidden: [], ignoreNegatives: true, title: 'Split of expenditure', subtitle: 'The proposed expenditure towards housing policies, split into groups.', descriptionId: 'groupingsBarDescription'},
         {name: 'Status', startHidden: ['Existing', 'New', 'Not proposed'], ignoreNegatives: false, title: 'Policies proposed for reduction/removal', subtitle: 'Policies which opposition parties have proposed removal or a reduction in spending.', descriptionId: 'removePoliciesDescription'}, // todo maybe just make all of these negative? // todo maybe use quantitative colouring? // or maybe could show rest of data in grey?
         {name: 'Status', startHidden: ['Existing', 'Planned for removal', 'Removing', 'Planned for reduction', 'Reducing', 'Not proposed'], ignoreNegatives: true, title: 'New policies being proposed', subtitle: 'New policies proposed by opposition parties.', descriptionId: 'newPoliciesDescription'}, // todo only include 'new', and use categorical colouring for policies?
-        {name: 'Status', startHidden: [], ignoreNegatives: false, title: 'Split of expenditure by policy status', subtitle: 'The proposed expenditure towards housing policies, sorted by status.', descriptionId: 'statusBarDescription'},
+//        {name: 'Status', startHidden: [], ignoreNegatives: false, title: 'Split of expenditure by policy status', subtitle: 'The proposed expenditure towards housing policies, sorted by status.', descriptionId: 'statusBarDescription'},
     ]
     policiesStackedBar2(graphs[0], partyGroupings, definitions, 'colouredGroupingsBar')
 
