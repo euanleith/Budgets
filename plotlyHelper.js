@@ -1,6 +1,9 @@
 //let font = getComputedStyle(document.body).getPropertyValue('font-family')
 window.dispatchEvent(new Event('resize'));
 function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelColours=[]) {
+    for (let i in x) {
+        x[i] = setCustomFontSize(x[i], '100.5%')
+    }
     var data = [
         {
             x: x,
@@ -17,12 +20,12 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
     var layout = {
         xaxis: {
             title: {
-                text: xaxis,
+                text: setCustomFontSize(xaxis, '110%'),
             },
         },
         yaxis: {
             title: {
-                text: yaxis,
+                text: setCustomFontSize(yaxis, '110%'),
             }
         },
         margin: {
