@@ -304,10 +304,10 @@ function addArrowButtons(options, divBuilder, ...args) {
     })
 
     var mouseOn = false;
-    document.getElementById('mainChart').onmouseover = function() {
+    document.getElementsByClassName('chart-page')[0].onmouseover = function() {
         mouseOn = true;
     }
-    document.getElementById('mainChart').onmouseleave = function() {
+    document.getElementsByClassName('chart-page')[0].onmouseleave = function() {
         mouseOn = false;
     }
     document.addEventListener("keydown", function(event) {

@@ -50,12 +50,12 @@ div.legendTooltip {
 }
 
 .chart {
-    width: 65%;
+    width: 60%;
     height: 100%;
 }
 
 .chart-description-list {
-    width: 35%;
+    width: 40%;
     overflow-y: scroll;
     margin-bottom: 2%;
     margin-right: 1%;
