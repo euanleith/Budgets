@@ -1,5 +1,5 @@
 //let font = getComputedStyle(document.body).getPropertyValue('font-family')
-
+window.dispatchEvent(new Event('resize'));
 function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelColours=[]) {
     var data = [
         {
@@ -28,7 +28,10 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
         margin: {
 //            l: 50, // todo looks weird when add margins for legend when there is no legend...
 //            r: 250,
+//            l: 5,
+//            r: 5,
             t: 0,
+            b: 100,
         },
         autosize: true,
         hovermode: !1,
@@ -39,7 +42,7 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
             family: 'Helvetica Neue'
         },
     };
-    Plotly.newPlot(div, data, layout, {displayModeBar: false});
+    Plotly.newPlot(div, data, layout, {displayModeBar: false, responsive: true});
 
     if (xaxisLabelColours) {
         var ticks = document.getElementsByClassName('xtick');
@@ -121,12 +124,13 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 text: yaxis,
             }
         },
-        autosize: false,
+        autosize: true,
         barmode: 'stack',
         margin: {
             l: 50,
             r: 250,
             t: 0,
+            b: 100,
         },
         legend: {
             font: {
@@ -148,7 +152,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
             family: 'Helvetica Neue'
         },
     };
-    Plotly.newPlot(div, traces, layout, {displayModeBar: false, showTips: false});
+    Plotly.newPlot(div, traces, layout, {displayModeBar: false, showTips: false, responsive: true});
 
     div.once('plotly_afterplot', () => addLegendHoverWidget(div, definitions));
 

@@ -10,38 +10,38 @@
 </head>
 <body>
 
-<h1 style="margin-bottom: 10px">Housing Budgets</h1>
-<h3 style="font-weight: normal; margin-top: 0px">A series of graphs comparing the 2024 housing budgets of Irish political parties </h3>
+<div class="chart-page">
+    <h1 style="margin-bottom: 10px">Housing Budgets</h1>
+    <h3 style="font-weight: normal; margin-top: 0px">A series of graphs comparing the 2024 housing budgets of Irish political parties </h3>
 
-<!--<div class="control-row">
-    Grouping: <select class="groupingdata"></select>
-</div>-->
-<div id="mainChart">
+    <!--<div class="control-row">
+        Grouping: <select class="groupingdata"></select>
+    </div>-->
     <div class="centred">
         <button id="prevArrow" style="margin: 10px">&#11013;</button>
-        <h2 id="chartTitle" class="centred" style="text-align: center; width: 250px; height: 50px"></h2>
+        <h2 id="chartTitle" class="centred chart-title"></h2>
         <button id="nextArrow" style="margin: 10px">&#x2B95;</button>
     </div>
     <p id="chartSubtitle" style="text-align: center"></p> <!--todo maybe not necessary-->
 
-    <div class="centred">
-        <div id="colouredGroupingsBar" style="height: 10;"></div>
-        <div id="descriptions">
-            <div id="totalsDescription" style="display:none">
+    <div class="chart-and-description">
+        <div id="colouredGroupingsBar" class="chart"></div>
+        <div id="descriptions" class="chart-description-list">
+            <div id="totalsDescription" class="chart-description">
                 <h3>Description</h3>
                 <p>This chart shows the total housing expenditure for each party.</p>
                 <h3>Overview</h3>
                 <p>All of the opposition parties are proposing increases in housing expenditure.</p>
                 <p>The parties can be roughly split into three groups; the incumbent parties Fianna Fáil, Fine Gael, and the Green Party spending around €4B; Sinn Féin, Labour, and the Social Democrats proposing increases in expenditure of around €1.5B; and People Before Profit proposing a significantly greater increase in expenditure of around €4.7B.</p>
-<!--                <ul>-->
-<!--                    <li>The incumbent parties Fianna Fáil, Fine Gael, and the Green Party (FFG) spending around €4B.</li>-->
-<!--                    <li>Sinn Féin (SF), Labour, and the Social Democrats (SD) proposing increases in expenditure of around €1-1.6B.</li>-->
-<!--                    <li>People Before Profit (PBP) proposing a significantly greater increase in expenditure of around €4.7B.</li>-->
-<!--                </ul>-->
-<!--                <p>todo maybe explain these groupings; FFG prefer private market; PBP have state construction company to overcome new build issues. also this fits with idea of parties as centre/centre-left/left</p>-->
+                <!--                <ul>-->
+                <!--                    <li>The incumbent parties Fianna Fáil, Fine Gael, and the Green Party (FFG) spending around €4B.</li>-->
+                <!--                    <li>Sinn Féin (SF), Labour, and the Social Democrats (SD) proposing increases in expenditure of around €1-1.6B.</li>-->
+                <!--                    <li>People Before Profit (PBP) proposing a significantly greater increase in expenditure of around €4.7B.</li>-->
+                <!--                </ul>-->
+                <!--                <p>todo maybe explain these groupings; FFG prefer private market; PBP have state construction company to overcome new build issues. also this fits with idea of parties as centre/centre-left/left</p>-->
             </div>
 
-            <div id="groupingsBarDescription" style="display:none">
+            <div id="groupingsBarDescription" class="chart-description">
                 <h3>Description</h3>
                 <p>This chart shows a more detailed view of individual policies, which have been sorted into groups for clarity. Information regarding each policy can be seen be hovering over them with the mouse. Groups can be hidden by clicking their name in the legend, and isolated by double-clicking their name.</p>
                 <h3>Overview</h3>
@@ -57,7 +57,7 @@
                                 <h3>Definition</h3>
                                 <p>Policies which fund the building or acquisition of properties for use as social housing.</p> <!--todo acquisition? refurbishment?-->
                                 <h3>Summary of discussion</h3>
-<!--                                New social housing is the group with both the highest expenditure and highest difference in expenditure between parties. -->
+                                <!--                                New social housing is the group with both the highest expenditure and highest difference in expenditure between parties. -->
                                 <p>All parties support an increase in social housing to support low-income households and reduce homelessness. However, the opposition parties have also expressed their intention to increase supply as a means to reducing house prices. The opposition parties believe that the current targets for new social housing are too low. Furthermore, they note that targets from previous years haven't been met. The incumbent parties have stated their intention to increase their targets in line with recent reports, and have cited a number of roadblocks which have impeded development. They have also noted that despite this, there has still been a significant increase in delivery of social housing under their government.</p>
                                 <details>
                                     <summary></summary>
@@ -65,30 +65,30 @@
                                     <ul>
                                         <li><b>Meets the needs of low-income families and is a key enabler of people moving out of homelessness</b><a class="citation" href="#HousingForAll"></a><a class="citation">[opposition citations needed?]</a>. Without sufficient social housing, those who can't afford housing will be forced into homelessness, and low-income households won't have enough income to fulfill their other needs after paying their rent or mortgage. This benefit is also expressed by the opposition parties<a class="citation"></a>.</li>
                                         <li><b>The opposition parties have also expressed their intention to increase social housing as a means to reducing house prices</b><a class="citation" href="#SFCBMissTargets"></a><a class="citation" href="#LPBuildHomes"></a><a class="citation" href="#PBPHousing"></a><a class="citation">[SD citation needed]</a>. This follows the logic that increasing supply relative to demand will cause prices to fall. The incumbent parties haven't explicitly cited social housing as a means to reducing house prices. Furthermore they have expressed concerns regarding the reduction of house prices at a fast rate<a class="citation" href="#FGHousePrices"></a><a class="citation" href="#FFHousePrices"></a>; preferring a case where 'incomes rise faster than house prices'.</li> <!--todo is this what these citations say?--> <!--todo link to further discussion-->
-<!--                                        <li>gets people out of insecure renting.</li>-->
-<!--                                        <li>gives people more money in their pockets.</li>-->
-<!--                                        <li>'ensure that housing is available to the most vulnerable in society.' or 'ensuring that households, who do not have sufficient resources to meet their housing needs, are provided with social housing supports'. and the overall plan for housing for all is for 'everyone in the State should have access to a home to purchase or rent at an affordable price'</li>-->
-<!--                                        <li>are they just claiming that there's not enough supply for the number of people, not considering prices?</li>-->
+                                        <!--                                        <li>gets people out of insecure renting.</li>-->
+                                        <!--                                        <li>gives people more money in their pockets.</li>-->
+                                        <!--                                        <li>'ensure that housing is available to the most vulnerable in society.' or 'ensuring that households, who do not have sufficient resources to meet their housing needs, are provided with social housing supports'. and the overall plan for housing for all is for 'everyone in the State should have access to a home to purchase or rent at an affordable price'</li>-->
+                                        <!--                                        <li>are they just claiming that there's not enough supply for the number of people, not considering prices?</li>-->
                                     </ul>
-<!--                                    <p>todo how to organise this?</p>-->
+                                    <!--                                    <p>todo how to organise this?</p>-->
                                     <p><b>However, the opposition parties believe that the targets set by the incumbent parties are too low</b>, each party having proposed higher targets in their budgets. And more recently, various parties have also cited reports from independent bodies which have proposed higher targets, such as <a target="_blank" href="https://www.gov.ie/pdf/?file=https://assets.gov.ie/294018/e1aae1ed-07c4-473d-811e-3426756321ee.pdf#page=null">The Housing Commission</a><a class="citation" href="#SFArticleHousingIreland"></a><a class="citation" href="#SDTargets"></a><a class="citation" href="#LPHousing"></a>, <a target="_blank" href="https://assets.gov.ie/296388/ca2f6f05-225d-4281-b77b-0eb92ed22ec4.pdf">The Department of Finance (DoF)</a><a class="citation" href="#SFDOFTargets"></a>, and the <a target="_blank" href="https://www.esri.ie/publications/the-national-development-plan-in-2023-priorities-and-capacity">Economic and Social Research Institute (ESRI)</a><a class="citation" href="#SFESRITargets"></a><a class="citation" href="#LPESRITargets"></a>.</p>
                                     <ul>
                                         <li><b>The incumbent parties have since stated that they plan to update targets in accordance with a more recent <a target="_blank" href="https://www.esri.ie/publications/population-projections-the-flow-of-new-households-and-structural-housing-demand">ESRI report</a></b><a class="citation" href="#FFGESRITargets"></a>; although their proposed targets are lower than the those determined by the Housing Commission and the DoF.</li>
-<!--                                        todo including figures: <li><b>And more recently, various parties have also cited reports from independent bodies which have proposed higher targets</b>, such as <a target="_blank" href="https://www.gov.ie/pdf/?file=https://assets.gov.ie/294018/e1aae1ed-07c4-473d-811e-3426756321ee.pdf#page=null">The Housing Commission</a><a class="citation" href="#SFArticleHousingIreland"></a><a class="citation" href="#SDTargets"></a><a class="citation" href="#LPHousing"></a>, <a target="_blank" href="https://assets.gov.ie/296388/ca2f6f05-225d-4281-b77b-0eb92ed22ec4.pdf">The Department of Finance (DoF)</a><a class="citation" href="#SFDOFTargets"></a>, and the <a target="_blank" href="https://www.esri.ie/publications/the-national-development-plan-in-2023-priorities-and-capacity">Economic and Social Research Institute (ESRI)</a><a class="citation" href="#SFESRITargets"></a><a class="citation" href="#LPESRITargets"></a>. The DoF and The Housing Commission both provided specific targets for annual public and private housing delivery up to 2030, proposing an increase from 33,000 to 50,000 and 60,000 respectively.</li>-->
-<!--                                        todo including figures: <li><b>The incumbent parties have since stated that they plan to update targets in accordance with the <a target="_blank" href="https://www.esri.ie/publications/population-projections-the-flow-of-new-households-and-structural-housing-demand">ESRI report</a></b><a class="citation" href="#FFGESRITargets"></a>. These new targets represent an increase in public and private housing from 33,000 to 44,000 yearly up to 2030, which is lower than the targets determined by the Housing Commission and the DoF.</li>-->
+                                        <!--                                        todo including figures: <li><b>And more recently, various parties have also cited reports from independent bodies which have proposed higher targets</b>, such as <a target="_blank" href="https://www.gov.ie/pdf/?file=https://assets.gov.ie/294018/e1aae1ed-07c4-473d-811e-3426756321ee.pdf#page=null">The Housing Commission</a><a class="citation" href="#SFArticleHousingIreland"></a><a class="citation" href="#SDTargets"></a><a class="citation" href="#LPHousing"></a>, <a target="_blank" href="https://assets.gov.ie/296388/ca2f6f05-225d-4281-b77b-0eb92ed22ec4.pdf">The Department of Finance (DoF)</a><a class="citation" href="#SFDOFTargets"></a>, and the <a target="_blank" href="https://www.esri.ie/publications/the-national-development-plan-in-2023-priorities-and-capacity">Economic and Social Research Institute (ESRI)</a><a class="citation" href="#SFESRITargets"></a><a class="citation" href="#LPESRITargets"></a>. The DoF and The Housing Commission both provided specific targets for annual public and private housing delivery up to 2030, proposing an increase from 33,000 to 50,000 and 60,000 respectively.</li>-->
+                                        <!--                                        todo including figures: <li><b>The incumbent parties have since stated that they plan to update targets in accordance with the <a target="_blank" href="https://www.esri.ie/publications/population-projections-the-flow-of-new-households-and-structural-housing-demand">ESRI report</a></b><a class="citation" href="#FFGESRITargets"></a>. These new targets represent an increase in public and private housing from 33,000 to 44,000 yearly up to 2030, which is lower than the targets determined by the Housing Commission and the DoF.</li>-->
                                         <li><b>Despite this, Sinn Féin and the Social Democrats still take issue with these new targets</b><a class="citation" href="#SFESRITargetsDeficit"></a><a class="citation" href="#SDESRITargetsDeficit"></a>. The target for new housing is determined in part by the predicted housing demand over time. These parties claim that this calculation in the report doesn't take into account the current shortage of housing for the existing population, and only considers future increases in demand from an increase in population.</li>
-<!--                                    todo government targets have been determined by hnda and esri by considering factors such as x and y. opposition takes issue with this bc of their own methods of determining targets. todo is it that they didn't consider existing deficit? or are they proposing a higher proportion of social vs. private housing? why?-->
-<!--                                    todo housing commission report says should increase total target (social and private), and increase target for proportion of social vs. private housing. but i'd need to do some maths to get the actual average annual figure :( maybe they don't give it because they're proposing a higher rate of new social houses for the next few years, so the average will miss this nuance. does HFA give a proposed proportion of social housing? HFA also says 90,000 social homes to 2030. SF says its half social housing-->
-<!--                                    todo maybe i just give overview here, then more detail in its own section? ill just do the data i have for now without maths or anything-->
+                                        <!--                                    todo government targets have been determined by hnda and esri by considering factors such as x and y. opposition takes issue with this bc of their own methods of determining targets. todo is it that they didn't consider existing deficit? or are they proposing a higher proportion of social vs. private housing? why?-->
+                                        <!--                                    todo housing commission report says should increase total target (social and private), and increase target for proportion of social vs. private housing. but i'd need to do some maths to get the actual average annual figure :( maybe they don't give it because they're proposing a higher rate of new social houses for the next few years, so the average will miss this nuance. does HFA give a proposed proportion of social housing? HFA also says 90,000 social homes to 2030. SF says its half social housing-->
+                                        <!--                                    todo maybe i just give overview here, then more detail in its own section? ill just do the data i have for now without maths or anything-->
                                     </ul>
                                     <p><b>Furthermore, the opposition parties note that current targets aren't being met<a class="citation">[opposition citations needed?]</a>.</b> Every year since 2020 the targets for new social housing have been missed<a class="citation" href="#TargetsMissed"></a>. And the opposition parties have expressed concerns about meeting this year's targets, with only 158 of the targeted 9,300 units built<a class="citation" href="#Targets2024"></a>.</p>
                                     <ul>
-    <!--                                    todo maybe include in detailed section - The opposition parties have also claimed that the incumbent parties are on track to miss the targets for this year as well, due to the low rate of delivery in the first quarter of the year<a class="citation"></a>. To this claim the incumbent parties respond that a significant part of social housing builds traditionally occur in the second half of the year<a class="citation"></a>.-->
+                                        <!--                                    todo maybe include in detailed section - The opposition parties have also claimed that the incumbent parties are on track to miss the targets for this year as well, due to the low rate of delivery in the first quarter of the year<a class="citation"></a>. To this claim the incumbent parties respond that a significant part of social housing builds traditionally occur in the second half of the year<a class="citation"></a>.-->
                                         <li><b>The incumbent parties have cited a number of roadblocks which have impeded development</b>, such as labour shortages and supply issues due to Covid-19<a class="citation" href="#HousingForAll"></a>. Such problems present more complexity than simply increasing capital funding, and can take time to fix. For more info see <a target="_blank" href="https://www.gov.ie/pdf/?file=https://assets.gov.ie/197160/73418abb-cbf3-4e9a-afdd-0f7e8b89dc33.pdf#page=null">Section 3 of the incumbent parties' housing plan</a>.</li> <!--todo also see detailed section-->
                                         <li><b>Despite this, they claim that they are still delivering a significant amount of social housing</b><a class="citation" href="#ReportQ12024"></a>. They claim that 'the strongest national delivery of social housing since 1975 was recorded in 2022 [...], and this record was exceeded again in 2023'. In response, Sinn Féin have claimed that since the 70's 'the population has doubled, and the level of need has increased'<a class="citation" href="#SFArticleHousingIreland"></a>.</li>
                                         <li><b>They also claim that they will reach their targets this year</b><a class="citation" href="#Targets2024"></a>. As of July 2024 there are '26,000 social homes at various different stages of construction'. They have also assuaged criticism of the low figures in the first quarter of the year, claiming that construction is 'heavily weighted towards the last quarter'.</li>
                                     </ul>
-<!--                                    todo pbp probably criticise other parties for their targets still being too low-->
+                                    <!--                                    todo pbp probably criticise other parties for their targets still being too low-->
                                 </details>
                             </div>
                         </div>
@@ -118,10 +118,10 @@
                 </nav>
             </div>
 
-            <div id="removePoliciesDescription">
+            <div id="removePoliciesDescription" class="chart-description">
                 <h3>Description</h3>
                 <p>This chart shows the savings made on policies which parties have proposed to remove, and proposed expenditure towards policies which parties plan to remove or cut back in the future.</p>
-<!--                <p>Policies which are still being proposed in this year's budget are on the positive side of the chart, as they would still contribute to the total expenditure; and vice versa for policies proposed for removal. Note however that a lack of expenditure from removing a policy is not the same as an increase in income.</p>-->
+                <!--                <p>Policies which are still being proposed in this year's budget are on the positive side of the chart, as they would still contribute to the total expenditure; and vice versa for policies proposed for removal. Note however that a lack of expenditure from removing a policy is not the same as an increase in income.</p>-->
                 <h3>Overview</h3>
                 <p>All parties have proposed some cut backs or removal of policies, immediately or in the future; with RAS & HAP constituting the highest cost.</p>
                 <p>The opposition parties believe that the money currently spent on these policies would be better used on new social housing, generally due to believed inefficiencies or claims that they don't reduce market house prices.</p>
@@ -134,17 +134,17 @@
                                 <button class="popup-close">X</button>
                                 <h2>Rental Accommodation Scheme (RAS) and Housing Assistance Payments (HAP)</h2>
                                 <h3>Definition</h3>
-<!--                                <p>Under these schemes local authorities make a monthly rental payment on the tenant's behalf to their landlord, subject to terms and conditions, including rent limits. In return, the tenant pays a weekly contribution towards the rent to the local authority<a class="citation" href="#RAS"></a><a class="citation" href="#WhatIsHAP"></a>. See here for more info on <a target="_blank" href="https://www.citizensinformation.ie/en/housing/local-authority-and-social-housing/rental-accommodation-scheme/">RAS</a> and <a target="_blank" href="https://www.citizensinformation.ie/en/housing/renting-a-home/help-with-renting/housing-assistance-payment/">HAP</a>.</p>-->
+                                <!--                                <p>Under these schemes local authorities make a monthly rental payment on the tenant's behalf to their landlord, subject to terms and conditions, including rent limits. In return, the tenant pays a weekly contribution towards the rent to the local authority<a class="citation" href="#RAS"></a><a class="citation" href="#WhatIsHAP"></a>. See here for more info on <a target="_blank" href="https://www.citizensinformation.ie/en/housing/local-authority-and-social-housing/rental-accommodation-scheme/">RAS</a> and <a target="_blank" href="https://www.citizensinformation.ie/en/housing/renting-a-home/help-with-renting/housing-assistance-payment/">HAP</a>.</p>-->
                                 <p>Long term rent supplement paid by local authorities to the landlord. See here for more info on <a target="_blank" href="https://www.citizensinformation.ie/en/housing/local-authority-and-social-housing/rental-accommodation-scheme/">RAS</a> and <a target="_blank" href="https://www.citizensinformation.ie/en/housing/renting-a-home/help-with-renting/housing-assistance-payment/">HAP</a>.</p>
                                 <h3>Summary of discussion</h3>
-<!--                                <p>All parties are proposing to significantly reduce expenditure in the long run, as new social housing fulfills those needs. They have all acknowledged the benefits of the scheme. However, the opposition parties note that despite being considered short term measures, spending towards these policies has increased significantly over time. They claim that the government isn't building enough new social housing to replace these schemes; while the incumbent parties claim that significantly more houses are being built each year, and that the crisis is already starting to be fixed.</p>-->
+                                <!--                                <p>All parties are proposing to significantly reduce expenditure in the long run, as new social housing fulfills those needs. They have all acknowledged the benefits of the scheme. However, the opposition parties note that despite being considered short term measures, spending towards these policies has increased significantly over time. They claim that the government isn't building enough new social housing to replace these schemes; while the incumbent parties claim that significantly more houses are being built each year, and that the crisis is already starting to be fixed.</p>-->
                                 <p>Spending towards these schemes has increased significantly over time, despite being considered short term measures, as they don't reduce house prices. The opposition parties claim that the government isn't building enough new social housing to replace these schemes. The incumbent parties disagree, claiming that there has been a significant increase in the delivery of new social housing, which will presumably relieve dependency on these schemes.</p>
 
                                 <details>
                                     <summary></summary>
-<!--                                    <p><b>todo remove? All parties are proposing to significantly reduce expenditure in the long run</b> as new social housing fulfills those housing needs<a class="citation" href="#HousingForAll"></a><a class="citation PBP" href="#PBPHAPVsPublic"></a><a class="citation SF" href="#SFPrivateVsPublic"></a><a class="citation SD" href="#SDBudget"></a><a class="citation LP" href="#LabourHAPVsPublic"></a></p>-->
+                                    <!--                                    <p><b>todo remove? All parties are proposing to significantly reduce expenditure in the long run</b> as new social housing fulfills those housing needs<a class="citation" href="#HousingForAll"></a><a class="citation PBP" href="#PBPHAPVsPublic"></a><a class="citation SF" href="#SFPrivateVsPublic"></a><a class="citation SD" href="#SDBudget"></a><a class="citation LP" href="#LabourHAPVsPublic"></a></p>-->
                                     <p><b>All parties have acknowledged the benefits of the schemes</b> in directly addressing high rent prices<a class="citation"></a>. In fact, the opposition parties believe that these policies are currently underfunded, or should be reviewed for underfunding in the short term, as rent prices have increased, meaning fewer tenants can make use of these schemes<a class="citation LP" href="#LPBudget"></a><a class="citation SD" href="#SDManifesto"></a><a class="citation PBP" href="#PBPBudget"></a><a class="citation SF" href="#SFPrivateSector"></a>.</p>
-<!--                                     todo im not sure ffg would agree with this phrasing of 'short term', from HFA: as new social housing increases, HAP reliance will be reduced. however, in HFA they also refer to HAP as an 'immediate support' as contrasted with new social housing. ffg also say in HFA 'Long-term leasing will be ended'-->
+                                    <!--                                     todo im not sure ffg would agree with this phrasing of 'short term', from HFA: as new social housing increases, HAP reliance will be reduced. however, in HFA they also refer to HAP as an 'immediate support' as contrasted with new social housing. ffg also say in HFA 'Long-term leasing will be ended'-->
                                     <p><b>However, HAP/RAS are considered only short term measures</b>, to be replaced in the long run with new social housing<a class="citation" href="#HousingForAll"></a>. Since these schemes don't result in any new housing, and a lack of housing is believed to be the most important factor in the increase in house prices, they don't actually solve the underlying problem<!--todo shouldn't these citations just be FFG? <a class="citation SF" href="#SFHousing2024"></a><a class="citation LP" href="#LPBudget"></a><a class="citation SD" href="#SDBudget"></a><a class="citation PBP" href="#PBPBudget"></a>--><a class="citation">[FFG citation needed]</a>. Furthermore, they are believed to be poor value for money in the long run compared to funding new social housing due to their large ongoing costs<!-- todo shoudn't these citations just be FFG? <a class="citation" href="#LPBudget"></a><a class="citation" href="#SDBudget"></a><a class="citation" href="#PBPBudget"></a><a class="citation" href="#SFPrivateSector"></a>--><a class="citation">[FFG citation needed]</a>.</p>
                                     <!--                <p>The opposition parties believe that FFG have depended on these schemes for too long<a class="citation"></a>. Spending towards these schemes has only increased since their creation 10 and 20 years ago respectively<a class="citation"></a>; money which could have been spent on new social housing.</p>-->
                                     <p><b>The opposition parties take issue with the implementation of these schemes;</b></p>
@@ -172,7 +172,7 @@
                                         <!--                    <li>todo also states there's been 'political consensus' on spending towards these schemes (https://www.irishexaminer.com/news/politics/arid-41400532.html). However, as previously explained, the opposition parties simultaneously support short term increases in HAP/RAS spending, and greater increases in spending towards new social housing than the incumbent parties are proposing, which would allow for reduced HAP/RAS spending in the long run. todo though FFG would just claim that their new social housing spending is sufficient. so its really just a tangential argument about the amount of new social housing spending.</li>-->
                                     </ul>
                                     <p><b>Note that there has been some disagreement within the incumbent parties about the implementation of these schemes</b>. A TD for the Green Party has stated 'there's opposition to what we're doing, even within Government'<a class="citation" href="#GPOpposition"></a> and a TD for Fianna Fáil has called HAP/RAS spending levels 'incredibly poor value for money'<a class="citation" href="#FFBadValue"></a>. As the incumbent parties are in coalition, their combined budget expresses a unified position on the issue. However, the release of each parties' pre-election manifesto in the near future will hopefully clarify any differences.</p>
-<!--                                todo hap limits, and pbp increasing expenditure in sr-->
+                                    <!--                                todo hap limits, and pbp increasing expenditure in sr-->
                                 </details>
                             </div>
                         </div>
@@ -190,17 +190,17 @@
                                 <p>The incumbent parties claim the scheme promotes development; while Sinn Féin, Social Democrats, and Labour take issue with the fact that affordable prices are not a condition of funding, meaning it doesn't fix the underlying price issue of the housing crisis. Labour proposes to add this condition, while Sinn Féin and the Social Democrats believe that the money would be better spent on new social and affordable housing.</p>
                                 <details>
                                     <summary></summary>
-<!--                                    <p>Incumbent parties' arguments;</p>-->
-<!--                                    <ul>-->
-                                        <p><b>The incumbent parties claim that this scheme increases development in cities by bridging the gap between the cost of development and the sale price</b><a class="citation" href="#CroiConaithe"></a>. Without bridging this gap, fewer developers will be willing to build new houses. And more houses in cities will 'help to tackle climate change, reduce vacancy and dereliction and help to meet the strong demand for urban living'.</p>
-                                        <!--                                    todo has cost of development increased?-->
-<!--                                    </ul>-->
+                                    <!--                                    <p>Incumbent parties' arguments;</p>-->
+                                    <!--                                    <ul>-->
+                                    <p><b>The incumbent parties claim that this scheme increases development in cities by bridging the gap between the cost of development and the sale price</b><a class="citation" href="#CroiConaithe"></a>. Without bridging this gap, fewer developers will be willing to build new houses. And more houses in cities will 'help to tackle climate change, reduce vacancy and dereliction and help to meet the strong demand for urban living'.</p>
+                                    <!--                                    todo has cost of development increased?-->
+                                    <!--                                    </ul>-->
                                     <p><b>Opposition arguments;</b></p>
                                     <ul>
                                         <li><b>Sinn Féin, Social Democrats, and Labour take issue with the fact that affordable prices are not a condition of funding</b><a class="citation" href="#SFCroiConaithePressRelease"></a><a class="citation" href="#SDCroiConaithe"></a><a class="citation" href="#LPBudget"></a>. Without this, private developers can receive substantial subsidies while still charging unaffordable prices. Labour proposes to add this condition, while Sinn Féin and the Social Democrats believe that the money would be better spent on new social and affordable housing.</li>
                                         <li><b>Sinn Féin claims that the cost per unit has been greater than estimated</b><a class="citation" href="#SFCroiConaitheArticle"></a>. They claim that in 2022 cost per unit was estimated to be around €80,000; this has increased to €135,000 in 2024. Therefore either funding will have to increase to meet the housing target, or the target will have to be decreased.</li>
                                         <li><b>Sinn Féin claims that the current progress doesn't seem to be on track to reach targets</b><a class="citation" href="#SFCroiConaitheArticle"></a>. As of July 2024, contracts have been signed for the building of 582 units, while the target is to deliver 5,000 units by 2026. Sinn Féin claims that 'given that apartment developments typically take two years to complete, time is running out for contracts to be signed to meet the target'.</li>
-<!--                                        <li>LP doesn't like it? - https://labour.ie/news/2022/07/07/developer-led-shared-equity-scheme-will-increase-house-prices/</li>-->
+                                        <!--                                        <li>LP doesn't like it? - https://labour.ie/news/2022/07/07/developer-led-shared-equity-scheme-will-increase-house-prices/</li>-->
                                     </ul>
                                 </details>
                             </div>
@@ -223,9 +223,9 @@
                                     <p><b>Opposition arguments;</b></p>
                                     <ul>
                                         <li><b>Sinn Féin, the Social Democrats, and Labour claim that the schemes don't address problem of house prices</b><a class="citation LP" href="#LPFHS"></a><a class="citation SF" href="#SFFHSHTB"></a><a class="citation SD" href="#SDFHS"></a>. Since the schemes don't increase supply of housing, and a lack of housing is believed to be the most important factor in the increase in house prices<a class="citation SF" href="#SFHousing2024"></a><a class="citation LP" href="#LPBudget"></a><a class="citation SD" href="#SDBudget"></a>, they don't actually solve the underlying problem. These parties therefore believe that the money would be better spent on new social and affordable housing.</li>
-<!--                                        todo also 'increase pricing pressures' - is this because of increase in available funds, or a lack of increase in new housing, or something else?-->
+                                        <!--                                        todo also 'increase pricing pressures' - is this because of increase in available funds, or a lack of increase in new housing, or something else?-->
                                         <li><b>In fact, Sinn Féin, the Social Democrats, and Labour claim that the First Home scheme pushes up house prices</b><a class="citation SF" href="#SFFHSHTB"></a><a class="citation LP" href="#LPFHS"></a><a class="citation SD" href="#SDFHS"></a>. They cite reports from the Central Bank of Ireland and London School of Economics, which have shown that a similar scheme in England has increased house prices<a class="citation" href="#CBFHS"></a><a class="citation" href="#LSEFHS"></a>. These reports conclude that the scheme has mostly helped middle-income households buy more expensive houses than they would otherwise, rather than helping low-income renting households to get a mortgage, since house prices are still too high even with government assistance. This means that buyers spend more while demand for new houses doesn't increase, which causes 'upward price pressures' for the wider market. Sinn Féin also claims that according to experts, the same is the case for the Help to Buy scheme<a class="citation SF" href="#FHSHTBArticle"></a>.</li>
-<!--                                        <li><b>Sinn Féin also claims that according to experts, the Help to Buy scheme also pushes up house prices</b><a class="citation SF" href="#FHSHTBArticle"></a></li>&lt;!&ndash;todo why?&ndash;&gt;-->
+                                        <!--                                        <li><b>Sinn Féin also claims that according to experts, the Help to Buy scheme also pushes up house prices</b><a class="citation SF" href="#FHSHTBArticle"></a></li>&lt;!&ndash;todo why?&ndash;&gt;-->
                                         <li><b>Sinn Féin claim that the Help to Buy scheme is available to buyers who don't need the support</b><a class="citation SF" href="#SFFHS"></a>. They claim that according to an Oireachtas Budgetary Services report<a class="citation SF" href="#OireachtasHTB"></a>, a third of recipients did not need the scheme to meet their 10% mortgage deposit requirement, and could instead use the scheme to create larger deposits<a class="citation SF" href="#FHSHTBArticle"></a>.</li>
                                         <li><b>Sinn Féin has expressed concerns with the level of interest on loans under the First Home scheme</b><a class="citation SF" href="#SFFHS"></a>. They claim that 'over a 30-year period the cost of the debt will amount to €23,800 on a €50,000 equity loan'.</li>
                                     </ul>
@@ -234,7 +234,7 @@
                         </div>
                     </div>
 
-<!--                    todo honestly just hide this for now; its complicated and i want a finished viable product-->
+                    <!--                    todo honestly just hide this for now; its complicated and i want a finished viable product-->
                     <div class="popup" style="visibility: hidden">
                         <button class="popup-button">Social Housing PPP Programme</button>
                         <div class="popup-box">
@@ -263,14 +263,14 @@
                                         <li>will become fully owned by state after 25 years - 'public housing on public land'</li>
                                     </ul>
                                     <p><b>Sinn Féin has stated that their not against PPP in concept</b>, believing 'there are potential merits from a management point of view if there is value for money'<a class="citation" href="#PPPInquirer"></a></p>
-<!--                                    <p><b>however, they take issue with the particular approach taken</b></p>-->
-<!--                                    <ul>-->
-<!--                                        <li><b>Sinn Féin have expressed doubts regarding the value for money.</b> They claim that the model is 'six times more expensive than a not-for-profit structure'<a class="citation" href="#PPPRTE"></a>. also have to include companies' profit margins, ffg disagrees etc. etc.</li>-->
-<!--                                        <li>worry about risk. worry about repeat of projects in the past which failed due to developers going bust</li>-->
-<!--                                        <li>'[government] don't have to pay for it upfront', so it looks cheaper than it is</li>-->
-<!--                                        <li>'cumbersome and complex' given the number of groups involved</li>-->
-<!--                                        <li>there's been problems with transparency</li>-->
-<!--                                    </ul>-->
+                                    <!--                                    <p><b>however, they take issue with the particular approach taken</b></p>-->
+                                    <!--                                    <ul>-->
+                                    <!--                                        <li><b>Sinn Féin have expressed doubts regarding the value for money.</b> They claim that the model is 'six times more expensive than a not-for-profit structure'<a class="citation" href="#PPPRTE"></a>. also have to include companies' profit margins, ffg disagrees etc. etc.</li>-->
+                                    <!--                                        <li>worry about risk. worry about repeat of projects in the past which failed due to developers going bust</li>-->
+                                    <!--                                        <li>'[government] don't have to pay for it upfront', so it looks cheaper than it is</li>-->
+                                    <!--                                        <li>'cumbersome and complex' given the number of groups involved</li>-->
+                                    <!--                                        <li>there's been problems with transparency</li>-->
+                                    <!--                                    </ul>-->
                                     <p><b>However, they believe that the current approach is bad value for money.</b> They claim that the model is 'six times more expensive than a not-for-profit structure'<a class="citation" href="#PPPRTE"></a>. also have to include companies' risk, and profit margins, ffg disagrees etc. etc.</p>
                                     <p>FFG say SF's 'six times more expensive', 'not comparing like with like' - 'The PPP figure accommodates costs that would not feature in an Approved Housing Body operational cost.' then SF disagrees, FFG disagrees<a class="citation" href="#PPPRTE"></a></p>
                                     <p>todo do they also worry about risk? why? are they more risky than other development see ucd person?</p>
@@ -279,10 +279,10 @@
                         </div>
                     </div>
                 </nav> <!--todo is it clear that these are clickable?-->
-<!--                todo would be nice if hovering over these buttons highlighted items in graph, and vice versa-->
+                <!--                todo would be nice if hovering over these buttons highlighted items in graph, and vice versa-->
             </div>
 
-            <div id="newPoliciesDescription">
+            <div id="newPoliciesDescription" class="chart-description">
                 <h3>Description</h3>
                 <p>This chart shows the proposed expenditure towards new policies put forward by the opposition parties.</p>
                 <h3>Overview</h3>
@@ -369,9 +369,9 @@
                 </nav> <!--todo is it clear that these are clickable?-->
             </div>
 
-<!--            <div id="statusBarDescription" style="display:none">-->
-<!--                <p>The vast majority of expenditure from all parties is towards existing schemes.</p>-->
-<!--            </div>-->
+            <!--            <div id="statusBarDescription" style="display:none">-->
+            <!--                <p>The vast majority of expenditure from all parties is towards existing schemes.</p>-->
+            <!--            </div>-->
         </div>
     </div>
 
@@ -381,7 +381,6 @@
 
     <div id="policiesTable" style="width:50%"></div>
 </div>
-
 <h3>Sources</h3>
 <ol id="sources" class="two-column">
 <!--    todo somehow mention which page as well, since budgets are v big-->
