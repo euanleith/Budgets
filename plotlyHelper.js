@@ -2,7 +2,7 @@
 window.dispatchEvent(new Event('resize'));
 function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelColours=[]) {
     for (let i in x) {
-        x[i] = setCustomFontSize(x[i], '100.5%')
+        x[i] = setCustomFontSize(x[i], '100.4%')
     }
     var data = [
         {
@@ -111,7 +111,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 " - " + traces[i].name +
                 '</br><extra></extra>'
             )
-            traces[i].x[j] = setCustomFontSize(traces[i].x[j], '100.5%')
+            traces[i].x[j] = setCustomFontSize(traces[i].x[j], '100.4%')
         }
         traces[i].text = txt
         traces[i].hovertemplate += '%{text}'

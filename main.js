@@ -191,7 +191,7 @@ function setDescription(grouping) {
 }
 
 function bold(str) {
-    return '<b>' + str + '</br>'
+    return '<b style="color: ' + getComputedStyle(document.querySelector('b')).color + '">' + str + '</br>'
 }
 
 function wrap(str, len, br='<br>') {
