@@ -72,6 +72,12 @@ let colorScheme2 = [
 // Safari 3.0+ "[object HTMLElementConstructor]" // todo use feature detection instead
 var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && window['safari'].pushNotification));
 
+function setCustomFontSize(str, size='100%') {
+    let prefix = '<span style="font-size: ' + size + ';">'
+    let suffix = '</span>'
+    return prefix + str + suffix
+}
+
 function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', legendTitle='', colorScheme=[], hiddenLabels=[], xaxisLabelColours=[]) {
     div = document.getElementById(div);
 
@@ -102,9 +108,11 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 " - " + traces[i].name +
                 '</br><extra></extra>'
             )
+            traces[i].x[j] = setCustomFontSize(traces[i].x[j], '100.5%')
         }
         traces[i].text = txt
         traces[i].hovertemplate += '%{text}'
+        traces[i].name = setCustomFontSize(traces[i].name, '110%')
     }
 
     sortGroupedTraces(traces)
@@ -112,7 +120,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
     var layout = {
         xaxis: {
             title: {
-                text: xaxis,
+                text: setCustomFontSize(xaxis, '110%'),
                 standoff: 1,
             },
             tickfont: {
@@ -121,7 +129,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
         },
         yaxis: {
             title: {
-                text: yaxis,
+                text: setCustomFontSize(yaxis, '110%'),
             }
         },
         autosize: true,
