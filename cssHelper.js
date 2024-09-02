@@ -22,13 +22,18 @@ function setupPopupButtons() {
             box.classList.add("show")
         })
         window.addEventListener("click", (event) => {
-            if (event.target == box || event.target == close || event.target.closest("a")) {
+            if (event.target == box || event.target == close || (event.target.closest("a") && hrefIsInternal(event.target.closest("a").getAttribute('href')))) {
                 box.classList.remove(
                     "show"
                 )
             }
         })
     }
+}
+
+// returns true if href points to within the current page, otherwise false
+function hrefIsInternal(href) {
+    return href[0] === '#'
 }
 
 // todo sort citations inline as well (e.g. change [28][1][29] to [1][28][29])
