@@ -94,7 +94,7 @@ function plotStackedBar(definitions, traces, div, title='', xaxis='', yaxis='', 
                 color: '#fff'
             }
         }
-        if (hiddenLabels.includes(traces[i].name)) traces[i].visible = 'legendonly'
+        if (hiddenLabels.includes(traces[i].name)) traces[i].visible = false // todo or 'legendonly' if want to remain in legend, but greyed out
 
         // todo when hovertemplate is too long the hover item's position moves from the top of the trace to above the mouse...
         // plotly's 'hoverformat' doesn't allow for 'B = billion' notation, so have to do manually
