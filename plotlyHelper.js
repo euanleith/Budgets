@@ -228,6 +228,12 @@ function arrAvg(arr) {
     return arrSum(arr) / arr.length
 }
 
+function stripHTML(str) {
+    let div = document.createElement("div");
+    div.innerHTML = str;
+    return div.textContent || div.innerText || "";
+}
+
 // todo shouldn't have to include definitions as parameter
 function addLegendHoverWidget(div, definitions) {
     var d3 = Plotly.d3;
@@ -245,8 +251,9 @@ function addLegendHoverWidget(div, definitions) {
             .duration(200)
             .style("opacity", 1);
 
-        let key = Object.keys(definitions).filter(key => Object.keys(definitions[key]).includes(legendItem[0].trace.name))
-        let definition = '<b>' + legendItem[0].trace.name + '</b><br>' + definitions[key][legendItem[0].trace.name]
+        let name = stripHTML(legendItem[0].trace.name)
+        let key = Object.keys(definitions).filter(key => Object.keys(definitions[key]).includes(name))
+        let definition = '<b>' + name + '</b><br>' + definitions[key][name]
         tooltip.html(definition)
 
         // todo if goes off the page swap direction
