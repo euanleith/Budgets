@@ -2,7 +2,7 @@
 window.dispatchEvent(new Event('resize'));
 function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelColours=[]) {
     for (let i in x) {
-        x[i] = setCustomFontSize(x[i], '100.4%')
+        x[i] = setCustomFontSize(x[i], '100.4%') // todo this isnt working?
     }
     var data = [
         {
@@ -41,6 +41,7 @@ function plotBar(div, x, y, labels=[], title='', xaxis='', yaxis='', xaxisLabelC
 //        hoverlabel: {
 //            align: 'left',
 //        },
+        colorway: [colorScheme2[1]], // todo not great, idk why red isn't first
         font: {
             family: 'Helvetica Neue'
         },
